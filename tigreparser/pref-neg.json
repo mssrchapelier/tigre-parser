@@ -1,7 +1,0 @@
-[
-    {
-        "comment": "negation",
-        "regex": "^(?<art>>i)(?<stem>.+)$",
-        "replace": "${art}:NEG-\\[${stem}\\]:#"
-    }
-]
