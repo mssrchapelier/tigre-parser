@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 import java.util.Map.Entry;
 
 public class VerbParadigmBuilder {
-	// Same as VerbParadigm.paradigm, but stores cells in Set rather than in a List, for duplicate management when parsing the paradigm file.
-	// Sets of cells must be converted to Lists when creating a VerbParadigm object, for subsequent efficient iteration.
+	// Same as VerbParadigm.paradigm, but stores cells in Set rather than in a List, for management of duplicates when parsing the paradigm file.
+	// Sets of cells must be converted to Lists when creating a VerbParadigm object, for efficient subsequent iteration.
 	LinkedHashMap<
 					Integer, LinkedHashMap< // number of radicals
 											VerbType, LinkedHashMap< // verb type (A, B, C, D)
@@ -80,6 +80,8 @@ public class VerbParadigmBuilder {
 	
 	private void readSingleParadigm () throws ParseException { // return true when done
 		this.currentLineNum++;
+
+		// e. g. {"3", "A", "ASTA"} -> 3-radical, type A, prefix ASTA
 		String[] paradigmHeaderTriple = this.readParadigmHeader(this.lineIterator.next());
 		
 		int curNumRadicals;
@@ -160,6 +162,8 @@ public class VerbParadigmBuilder {
 	}
 	
 	private String[] readParadigmHeader(String line) throws ParseException {
+		// $radicals:3,type:A,prefix:ASTA => {"3", "A", "ASTA"}
+
 		String[] headerTriple = new String[3];
 		
 		Pattern p = Pattern.compile("^\\$radicals\\:(?<rad>[345]),type\\:(?<type>[ABCD]),prefix\\:(?<prefix>0|A|T|AT|ATTA|AN|AS|ATTAN|ATTAS|ASTA)$");
