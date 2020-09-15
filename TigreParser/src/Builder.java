@@ -22,6 +22,7 @@ public class Builder {
 	private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
 	
 	static String[] patternFilePaths = { "pref-coord.json", "pref-relz.json", "pref-neg.json", "pref-iobj.json", "suf-expl.json", "suf-pron.json", "pau_2.json", "pass-ptcp-deriv-pref.json", "nominal-stem.json", "lexicon.json" };
+	static String romanizationMapFilePath = "romanization-map.file";
 
 	public Builder () {
 		try {
@@ -32,7 +33,7 @@ public class Builder {
 			// ə in map file stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
 			// The actual [ə] sound may or may not occur in that position; this is determined by phonotactics.
 			// The ə symbol MUST be removed from any fields of GeezAnalysisPair objects immediately after generating geminated variants.
-			this.transliterator = new Transliterator("romanization-map.file");
+			this.transliterator = new Transliterator(romanizationMapFilePath);
 		} catch (IOException | ParseException e) { e.printStackTrace(); }
 	}
 	
