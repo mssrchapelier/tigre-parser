@@ -60,6 +60,8 @@ public class VerbParadigmBuilder {
 			}
 		}
 		
+		// convert this.paradigm (paradigms in Sets)  to VerbParadigm.paradigm (paradigms in ArrayLists)
+		
 		VerbParadigm paradigmObject = new VerbParadigm();
 		
 		for (Entry<Integer, LinkedHashMap<VerbType, LinkedHashMap<VerbPreformative, LinkedHashSet<VerbParadigmCell>>>> typeMap : this.paradigm.entrySet()) {
@@ -247,7 +249,7 @@ public class VerbParadigmBuilder {
 			curMorphemeLex = lexIterator.next();
 			String[] rootSurfaceParts = curMorphemeSurface.split("_"); // i. e. "aa_121" -> {"aa", "121"}
 			int[] gemPattern = new int[rootSurfaceParts[1].length()];
-			for (int i = 0; i < rootSurfaceParts[1].length(); i++) {
+			for (int i = 0; i < gemPattern.length; i++) {
 				gemPattern[i] = Integer.parseInt(rootSurfaceParts[1].substring(i, i+1));
 			}
 			cell.vowelPattern = new MorphemeDescriptionPair(rootSurfaceParts[0], curMorphemeLex);

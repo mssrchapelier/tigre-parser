@@ -21,6 +21,8 @@ public class Builder {
 	private static String unprocessedPartRegex = ".*\\[(?<unprocessed>.*)\\].*";
 	private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
 	
+	static String[] patternFilePaths = { "pref-coord.json", "pref-relz.json", "pref-neg.json", "pref-iobj.json", "suf-expl.json", "suf-pron.json", "pau_2.json", "pass-ptcp-deriv-pref.json", "nominal-stem.json", "lexicon.json" };
+
 	public Builder () {
 		try {
 			this.verbParadigm = new VerbParadigmBuilder().build("paradigm.txt");
@@ -36,8 +38,6 @@ public class Builder {
 	
 	private static ArrayList<ArrayList<PatternReplacePair>> readPatterns () throws IOException {
 		ArrayList<ArrayList<PatternReplacePair>> patternList = new ArrayList<>();
-		
-		String[] patternFilePaths = { "pref-coord.json", "pref-relz.json", "pref-neg.json", "pref-iobj.json", "suf-expl.json", "suf-pron.json", "pau_2.json", "pass-ptcp-deriv-pref.json", "nominal-stem.json", "lexicon.json" };
 		
 		for (String path : patternFilePaths) {
 			JsonReader reader = new JsonReader (new InputStreamReader(new FileInputStream(path), "UTF-8"));
