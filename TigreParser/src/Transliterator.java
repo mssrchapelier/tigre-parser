@@ -24,12 +24,12 @@ public class Transliterator {
 		this.romanizationMap = new HashMap<>();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(romanizationMapFilePath), "UTF-8"));
 		String currentLine;
-		Pattern pPair = Pattern.compile("^(.)\\t(.+)$");
+		Pattern pPair = Pattern.compile("^(?<geez>.)\\t(?<romanized>.+)$");
 		Matcher mPair;
 		while ((currentLine = reader.readLine()) != null) {
 			mPair = pPair.matcher(currentLine);
 			if (mPair.find() && mPair.groupCount() == 2) {
-				this.romanizationMap.put(mPair.group(1).charAt(0), mPair.group(2));
+				this.romanizationMap.put(mPair.group("geez").charAt(0), mPair.group("romanized"));
 			}
 		}
 		reader.close();
