@@ -74,6 +74,7 @@ public class Transliterator {
 		
 		orthoVariants.add(ungemWordWithSchwas.replaceAll("ə", ""));
 		
+		// Determine positions of geminable consonants.
 		// the first letter is always a consonant; the first consonant can never be geminated
 		// the second letter is a vowel or a schwa in ungemWordWithSchwas
 		for (int i = 2; i < ungemWordWithSchwas.length(); i++) {
@@ -84,37 +85,44 @@ public class Transliterator {
 			}
 		}
 		
+		// Generate all possible ortho variants with respect to gemination
 		for (int k = 1; k <= geminablePositions.size(); k++) {
 			Iterator<int[]> combinationsIterator = CombinatoricsUtils.combinationsIterator(geminablePositions.size(), k);
 			while (combinationsIterator.hasNext()) {
 				// e. g. {2, 4}
 				int[] combination = combinationsIterator.next();
 				ArrayList<Integer> curGeminatedPositions = new ArrayList<>();
-				// e. g. combination == {2, 4}; geminablePositions == {2, 3, 5, 7, 8}; => curGeminatedPositions == {5, 8}
+				// e. g. combination == {2, 4} and geminablePositions == {2, 3, 5, 7, 8} => curGeminatedPositions == {5, 8}
 				for (int i = 0; i < combination.length; i++) {
 					curGeminatedPositions.add(geminablePositions.get(combination[i]));
 				}
-				String curOrthoVariant = "";
-				Iterator<Integer> gemPosIterator = curGeminatedPositions.iterator();
-				int curPosToGeminate = gemPosIterator.next();
-				for (int i = 0; i < ungemWordWithSchwas.length(); i++) {
-					char curChar = ungemWordWithSchwas.charAt(i);
-					if (!LetterType.isSchwa(curChar)) {
-						curOrthoVariant += curChar;
-					}
-					if (i == curPosToGeminate) {
-						if (!LetterType.isSchwa(curChar)) {
-							curOrthoVariant += curChar;
-						}
-						if (gemPosIterator.hasNext()) {
-							curPosToGeminate = gemPosIterator.next();
-						}
-					}
-				}
-				orthoVariants.add(curOrthoVariant);
+				// start
+				orthoVariants.add(generateGeminatedOrtho(ungemWordWithSchwas, curGeminatedPositions));
+				// end
 			}
 		}
 		return orthoVariants;
+	}
+
+	private static String generateGeminatedOrtho (String ungeminatedWordWithSchwas, ArrayList<Integer> geminatedPositions) {
+		String geminatedOrtho = "";
+		Iterator<Integer> gemPosIterator = geminatedPositions.iterator();
+		int curPosToGeminate = gemPosIterator.next();
+		for (int i = 0; i < ungeminatedWordWithSchwas.length(); i++) {
+			char curChar = ungeminatedWordWithSchwas.charAt(i);
+			if (!LetterType.isSchwa(curChar)) {
+				geminatedOrtho += curChar;
+			}
+			if (i == curPosToGeminate) {
+				if (!LetterType.isSchwa(curChar)) {
+					geminatedOrtho += curChar;
+				}
+				if (gemPosIterator.hasNext()) {
+					curPosToGeminate = gemPosIterator.next();
+				}
+			}
+		}
+		return geminatedOrtho;	
 	}
 	
 	// takes a line of text in Ge'ez as input
