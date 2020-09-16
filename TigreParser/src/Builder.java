@@ -70,20 +70,8 @@ public class Builder {
 	}
 	
 	public void processFile (String inputPath, String outputPath, int numAnalysesToShow) throws IllegalArgumentException, IOException {
-		if (numAnalysesToShow < 1) {
-			throw new IllegalArgumentException("Illegal argument: number of analyses to show should be a positive integer.");
-		} else {
-			buildFile (inputPath, outputPath, numAnalysesToShow);
-		}
-	}
-	
-	public void processFile (String inputPath, String outputPath) throws IOException {
-		buildFile (inputPath, outputPath, 0);
-	}
-	
-	private void buildFile (String inputPath, String outputPath, int numAnalysesToShow) throws IllegalArgumentException, IOException {
 		
-		if (numAnalysesToShow < 0) { throw new IllegalArgumentException("numAnalysesToShow must be a non-negative integer; 0 for showing all analyses"); }
+		if (numAnalysesToShow < 0) { throw new IllegalArgumentException("Illegal argument: number of analyses to show must be a non-negative integer; 0 for showing all analyses"); }
 		
 		BufferedReader textReader = new BufferedReader(new InputStreamReader(new FileInputStream(inputPath), "UTF-8"));
 		PrintWriter writer = new PrintWriter(outputPath, "UTF-8");

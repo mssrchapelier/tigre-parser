@@ -27,9 +27,7 @@ public class Launcher {
 	public void run () {
 		
 		try {
-			if (numAnalysesToShow == 0) {
-				new Builder().processFile(inputFilePath, outputFilePath);
-			} else if (numAnalysesToShow > 0) {
+			if (numAnalysesToShow >= 0) {
 				new Builder().processFile(inputFilePath, outputFilePath, numAnalysesToShow);
 			} else {
 				throw new IllegalArgumentException("-numanalyses must be a non-negative integer (0 to show all analyses)");
