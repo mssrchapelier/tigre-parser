@@ -130,14 +130,14 @@ public class Transliterator {
 		for (String token : tokens) {
 			token = token.replaceAll(punctuationMarks, "");
 			if (!token.isEmpty() && isInGeez(token)) {
-				GeezAnalysisPair curObj = new GeezAnalysisPair();
-				curObj.geezWord = token;
+				GeezAnalysisPair curGeezAnalysisPair = new GeezAnalysisPair();
+				curGeezAnalysisPair.geezWord = token;
 				String ungemOrthoWithSchwas = this.romanizeLine(token);
-				curObj.geminatedOrthos = generateGeminatedVariants(ungemOrthoWithSchwas);
+				curGeezAnalysisPair.geminatedOrthos = generateGeminatedVariants(ungemOrthoWithSchwas);
 				
 				// remove schwa and assign to ungeminatedOrtho. Schwas already not present in geminatedOrthos.
-				curObj.ungeminatedOrtho = ungemOrthoWithSchwas.replaceAll("ə", "");
-				list.add(curObj);
+				curGeezAnalysisPair.ungeminatedOrtho = ungemOrthoWithSchwas.replaceAll("ə", "");
+				list.add(curGeezAnalysisPair);
 			}
 		}
 		return list;
