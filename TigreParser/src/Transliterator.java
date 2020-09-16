@@ -96,9 +96,7 @@ public class Transliterator {
 				for (int i = 0; i < combination.length; i++) {
 					curGeminatedPositions.add(geminablePositions.get(combination[i]));
 				}
-				// start
 				orthoVariants.add(generateGeminatedOrtho(ungemWordWithSchwas, curGeminatedPositions));
-				// end
 			}
 		}
 		return orthoVariants;
