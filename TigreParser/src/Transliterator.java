@@ -13,23 +13,23 @@ import java.util.regex.Pattern;
 import org.apache.commons.math3.util.CombinatoricsUtils;
 
 public class Transliterator {
-	// ə in the map stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
+	// ə in values of romanizationMap stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
 	// The actual [ə] sound may or may not occur in that position; this is determined by phonotactics.
 	// The ə symbol MUST be removed from any fields of GeezAnalysisPair objects immediately after generating geminated variants.
-	HashMap<Character, String> map;
+	HashMap<Character, String> romanizationMap;
 	
 	static String punctuationMarks = "[፠፡።፣፤፥፦፧፨\\.!,\\-\\:;\"'/\\\\\\|‒–—―‘’“”\\(\\)\\[\\]<>\\{\\}]";
 	
-	public Transliterator (String mapFilePath) throws IOException {
-		this.map = new HashMap<>();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(mapFilePath), "UTF-8"));
+	public Transliterator (String romanizationMapFilePath) throws IOException {
+		this.romanizationMap = new HashMap<>();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(romanizationMapFilePath), "UTF-8"));
 		String currentLine;
 		Pattern pPair = Pattern.compile("^(.)\\t(.+)$");
 		Matcher mPair;
 		while ((currentLine = reader.readLine()) != null) {
 			mPair = pPair.matcher(currentLine);
 			if (mPair.find() && mPair.groupCount() == 2) {
-				this.map.put(mPair.group(1).charAt(0), mPair.group(2));
+				this.romanizationMap.put(mPair.group(1).charAt(0), mPair.group(2));
 			}
 		}
 		reader.close();
@@ -56,8 +56,8 @@ public class Transliterator {
 		char curChar;
 		for (int i = 0; i < geezLine.length(); i++) {
 			curChar = geezLine.charAt(i);
-			if (this.map.containsKey(curChar)) {
-				romanizedLine += this.map.get(curChar);
+			if (this.romanizationMap.containsKey(curChar)) {
+				romanizedLine += this.romanizationMap.get(curChar);
 			} else {
 				romanizedLine += curChar;
 			}
