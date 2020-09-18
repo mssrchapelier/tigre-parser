@@ -7,12 +7,12 @@ import org.apache.commons.math3.util.CombinatoricsUtils;
 public class RootListGenerator {
 	
 	String word;
-	LinkedHashSet<Root> possibleRootCons; // mikattaqAla -> myktql; mykt2ql; myktqAl; myk2qAl
+	LinkedHashSet<Root> consonantCombinations; // mikattaqAla -> myktql; mykt2ql; myktqAl; myk2qAl
 	LinkedHashSet<Root> roots; // myktql -> myk; myt; myq; myl; ...; mykt; mykq; ...; myktq, myktl, mktql.
 	
 	public RootListGenerator (String word) {
 		this.word = word;
-		this.possibleRootCons = new LinkedHashSet<>();
+		this.consonantCombinations = new LinkedHashSet<>();
 		this.roots = new LinkedHashSet<>();
 	}
 	
@@ -20,7 +20,7 @@ public class RootListGenerator {
 		
 		generateConsonantCombinations(new Root(new ArrayList<ConsDescription>()), this.word, 0);
 		
-		for (Root consSet : this.possibleRootCons) {
+		for (Root consSet : this.consonantCombinations) {
 			this.roots.addAll(generatePossibleRootsNew(consSet));
 		}
 		
@@ -38,7 +38,7 @@ public class RootListGenerator {
 			Letter lastLetter = Letter.newInstance(rootCandidate.consTemplate.get(rootCandidate.size() - 1).consonant);
 			
 			if (nextPos == sourceWord.length()) {
-				this.possibleRootCons.add(Root.newInstance(rootCandidate));
+				this.consonantCombinations.add(Root.newInstance(rootCandidate));
 			} else {
 				Letter letterToAdd = new Letter(sourceWord.charAt(nextPos));
 				
