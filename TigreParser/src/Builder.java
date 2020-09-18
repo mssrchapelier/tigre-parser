@@ -156,12 +156,12 @@ public class Builder {
 		return analysisList;
 	}
 	
-	private ArrayList<WordGlossPair> analyzeAsVerb (WordGlossPair line) {
-		ArrayList<WordGlossPair> analysesList = new ArrayList<>();
+	private ArrayList<WordGlossPair> analyzeAsVerb (WordGlossPair wgPair) {
+		ArrayList<WordGlossPair> analysisList = new ArrayList<>();
 		// add the same unprocessed part as a variant to newLinesSet
-		analysesList.add(WordGlossPair.newInstance(line));
+		analysisList.add(WordGlossPair.newInstance(wgPair));
 		// extract the part to be processed
-		String lineToProcess = extractUnprocessedPart(line);
+		String lineToProcess = extractUnprocessedPart(wgPair);
 		lineToProcess = lineToProcess.replaceAll("[\\[\\]]", "");
 		// run all patterns from this level on the unprocessed part of the current analysis
 		RootListGenerator builder = new RootListGenerator(lineToProcess);
@@ -194,13 +194,13 @@ public class Builder {
 				ArrayList<WordGlossPair> formList = new ArrayList<>(formSet);
 				for (WordGlossPair form : formList) {
 					if (form.getRawWord().equals(lineToProcess)) {
-						analysesList.add(constructVerbWgPair(line, form));
+						analysisList.add(constructVerbWgPair(wgPair, form));
 					}
 				}
 			} catch (IllegalArgumentException e) {}
 		}
 		
-		return analysesList;
+		return analysisList;
 	}
 	
 	private static String extractUnprocessedPart (WordGlossPair wgPair) {
