@@ -124,7 +124,7 @@ public class Transliterator {
 	}
 	
 	// takes a line of text in Ge'ez as input, returns an ArrayList<GeezAnalysisPair> with ungeminated transliterations and their geminated orthos to be analysed
-	public ArrayList<GeezAnalysisPair> buildListFromLine (String inputLine) {
+	public ArrayList<GeezAnalysisPair> buildWordListFromLine (String inputLine) {
 		ArrayList<GeezAnalysisPair> list = new ArrayList<>();
 		String[] tokens = inputLine.split("[ \\-]");
 		for (String token : tokens) {

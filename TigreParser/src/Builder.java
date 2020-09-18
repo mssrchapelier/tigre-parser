@@ -98,7 +98,7 @@ public class Builder {
 			
 			System.out.printf("Processing line: %d out of %d%n", counter, lines.size());
 			
-			ArrayList<GeezAnalysisPair> wordList = transliterator.buildListFromLine(line);
+			ArrayList<GeezAnalysisPair> wordList = transliterator.buildWordListFromLine(line);
 			for (GeezAnalysisPair word : wordList) {
 				
 				writer.printf("* * * * * * *%n%nWord: %s%nAnalyses:%n%n", word.geezWord);
