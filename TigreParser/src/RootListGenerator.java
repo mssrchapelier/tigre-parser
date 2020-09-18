@@ -18,7 +18,7 @@ public class RootListGenerator {
 	
 	public void buildRootList () {
 		
-		generatePossibleRootConsNew_2(new Root(new ArrayList<ConsDescription>()), this.word, 0);
+		generateConsonantCombinations(new Root(new ArrayList<ConsDescription>()), this.word, 0);
 		
 		for (Root consSet : this.possibleRootCons) {
 			this.roots.addAll(generatePossibleRootsNew(consSet));
@@ -26,7 +26,7 @@ public class RootListGenerator {
 		
 	}
 	
-	private boolean generatePossibleRootConsNew_2 (Root rootCandidate, String sourceWord, int nextPos) {
+	private boolean generateConsonantCombinations (Root rootCandidate, String sourceWord, int nextPos) {
 		ArrayList<Root> forks = new ArrayList<>();
 		
 		if (sourceWord.isEmpty()) {
@@ -93,7 +93,7 @@ public class RootListGenerator {
 		}
 		
 		for (Root fork : forks) {
-			generatePossibleRootConsNew_2(fork, sourceWord, nextPos + 1);
+			generateConsonantCombinations(fork, sourceWord, nextPos + 1);
 		}
 		
 		return true;
