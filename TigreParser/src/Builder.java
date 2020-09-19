@@ -165,11 +165,11 @@ public class Builder {
 		String lineToProcess = extractUnprocessedPart(wgPair);
 		lineToProcess = lineToProcess.replaceAll("[\\[\\]]", "");
 		// run all patterns from this level on the unprocessed part of the current analysis
-		RootListGenerator builder = new RootListGenerator(lineToProcess);
+		RootListGenerator rootListGenerator = new RootListGenerator(lineToProcess);
 		try {
-			builder.buildRootList();
+			rootListGenerator.buildRootList();
 		} catch (IllegalArgumentException e) {}
-		for (Root root : builder.roots) {
+		for (Root root : rootListGenerator.roots) {
 			LinkedHashSet<WordGlossPair> formSet = new LinkedHashSet<>();
 			try {
 				VerbStem baseStem = new VerbStem(root);
@@ -216,14 +216,21 @@ public class Builder {
 		WordGlossPair newWgPair = new WordGlossPair();
 		boolean isFinalAnalysis = true;
 		
+		/*
 		String newSurfaceForm = oldWgPair.surfaceForm;
 		newSurfaceForm = newSurfaceForm.replaceAll("\\[.*\\]", stemAnalysis.surfaceForm);
 		newWgPair.surfaceForm = newSurfaceForm;
-		
+		*/
+
+		newWgPair.surfaceForm = oldWgPair.surfaceForm.replaceAll("\\[.*\\]", stemAnalysis.surfaceForm);
+
+		/*
 		String newLexForm = oldWgPair.lexicalForm;
 		newLexForm = newLexForm.replaceAll("#", stemAnalysis.lexicalForm);
 		newWgPair.lexicalForm = newLexForm;
-		
+		*/
+		newWgPair.lexicalForm = oldWgPair.lexicalForm.replaceAll("#", stemAnalysis.lexicalForm);
+
 		newWgPair.isFinalAnalysis = isFinalAnalysis;
 		
 		return newWgPair;
