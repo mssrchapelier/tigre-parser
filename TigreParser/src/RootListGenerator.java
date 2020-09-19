@@ -21,7 +21,7 @@ public class RootListGenerator {
 		generateConsonantCombinations(new Root(new ArrayList<ConsDescription>()), this.word, 0);
 		
 		for (Root consSet : this.consonantCombinations) {
-			this.roots.addAll(generatePossibleRootsNew(consSet));
+			this.roots.addAll(generatePossibleRoots(consSet));
 		}
 		
 	}
@@ -91,7 +91,7 @@ public class RootListGenerator {
 		return true;
 	}
 	
-	private LinkedHashSet<Root> generatePossibleRootsNew (Root consSet) {
+	private LinkedHashSet<Root> generatePossibleRoots (Root consSet) {
 		LinkedHashSet<Root> rootList = new LinkedHashSet<>();
 		
 		// Roots containing 3 to 5 consonants are considered.
