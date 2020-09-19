@@ -16,23 +16,23 @@ public class RegexIterator {
 		this.processorMatcher = this.processorPattern.matcher("");
 	}
 	
-	public ArrayList<WordGlossPair> processLevel (ArrayList<WordGlossPair> lines,
+	public ArrayList<WordGlossPair> processLevel (ArrayList<WordGlossPair> inputWGPairs,
 			ArrayList<PatternReplacePair> patterns) {
 		LinkedHashSet<WordGlossPair> newLinesSet = new LinkedHashSet<>();
-		for (WordGlossPair line : lines) {
+		for (WordGlossPair inputWGPair : inputWGPairs) {
 			// add the same unprocessed part as a variant to newLinesSet
-			newLinesSet.add(WordGlossPair.newInstance(line));
+			newLinesSet.add(WordGlossPair.newInstance(inputWGPair));
 			// extract the part to be processed
-			if (!line.isFinalAnalysis) {
-				String lineToProcess = extractUnprocessedPart(line);
+			if (!inputWGPair.isFinalAnalysis) {
+				String wordToProcess = extractUnprocessedPart(inputWGPair);
 				// run all patterns from this level on the unprocessed part of the current analysis
 				for (PatternReplacePair pattern : patterns) {
 					this.processorPattern = Pattern.compile(pattern.matchPattern);
-					this.processorMatcher = this.processorPattern.matcher(lineToProcess);
+					this.processorMatcher = this.processorPattern.matcher(wordToProcess);
 					if (this.processorMatcher.find()) {
 						String replacement = this.processorMatcher.replaceAll(pattern.replacePattern);
 						// add the replacement to newLinesSet
-						newLinesSet.add(constructWgPair(line, replacement));
+						newLinesSet.add(constructWgPair(inputWGPair, replacement));
 					}
 				}
 			}
@@ -49,16 +49,17 @@ public class RegexIterator {
 		return "";
 	}
 	
-	static WordGlossPair constructWgPair (WordGlossPair oldWgPair, String analysis) throws IllegalArgumentException {
+	// Replaces the unanalysed part of oldWgPair with the analysis specified in replacement (possibly non-final). Returns a WordGlossPair with the new analysis included.
+	static WordGlossPair constructWgPair (WordGlossPair oldWgPair, String replacement) throws IllegalArgumentException {
 		WordGlossPair newWgPair = new WordGlossPair();
-		String[] morphemes = analysis.split("\\-");
+		String[] morphemes = replacement.split("\\-");
 		String analysisSurface = "";
 		String analysisLex = "";
 		boolean isFinalAnalysis = true;
 		for (int i = 0; i < morphemes.length; i++) {
 			String morpheme = morphemes[i];
 			String[] morphemeParts = morpheme.split("\\:");
-			if (morphemeParts.length != 2) { throw new IllegalArgumentException("analysis is not formatted properly"); }
+			if (morphemeParts.length != 2) { throw new IllegalArgumentException("replacement is not formatted properly"); }
 			if (morphemeParts[0].charAt(0) == '[' && morphemeParts[1].charAt(0) == '#') {
 				// unanalyzed part -> the returned WGPair is not a final analysis
 				isFinalAnalysis = false;
