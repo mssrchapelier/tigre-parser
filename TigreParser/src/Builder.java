@@ -22,7 +22,7 @@ public class Builder {
 	private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
 	
 	// NB: The order of file names in patternFilePaths is NOT arbitrary (the levels generated are processed in this order).
-	static String[] patternFilePaths = { "pref-coord.json", "pref-relz.json", "pref-neg.json", "pref-iobj.json", "suf-expl.json", "suf-pron.json", "pau_2.json", "pass-ptcp-deriv-pref.json", "nominal-stem.json", "lexicon.json" };
+	static String[] patternFilePaths = { "patterns/pref-coord.json", "patterns/pref-relz.json", "patterns/pref-neg.json", "patterns/pref-iobj.json", "patterns/suf-expl.json", "patterns/suf-pron.json", "patterns/pau_2.json", "patterns/pass-ptcp-deriv-pref.json", "patterns/nominal-stem.json", "patterns/lexicon.json" };
 	static String romanizationMapFilePath = "romanization-map.file";
 
 	public Builder () {
