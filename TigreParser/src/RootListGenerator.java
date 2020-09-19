@@ -35,7 +35,7 @@ public class RootListGenerator {
 			rootCandidate.consTemplate.add(new ConsDescription(sourceWord.charAt(0), false, false));
 			forks.add(Root.newInstance(rootCandidate));
 		} else { // has 1 item at least
-			Letter lastLetter = Letter.newInstance(rootCandidate.consTemplate.get(rootCandidate.size() - 1).consonant);
+			Letter lastLetter = Letter.newInstance(rootCandidate.consTemplate.get(rootCandidate.size() - 1).consonant); // copy of the last letter in rootCandidate
 			
 			if (nextPos == sourceWord.length()) {
 				this.consonantCombinations.add(Root.newInstance(rootCandidate));
@@ -54,33 +54,25 @@ public class RootListGenerator {
 					// Two forks: 1. Verb of type C or D, long A is penultimate vowel belonging to the root. 2. Long A is part of a prefix/suffix.
 					
 					// Fork 1: update last ConsDescription in rootCandidate: followed by long A
-					Root fork1 = new Root(new ArrayList<>());
-					for (ConsDescription cd : rootCandidate.consTemplate) {
-						fork1.consTemplate.add(ConsDescription.newInstance(cd));
-					}
-					
+					Root fork1 = Root.newInstance(rootCandidate);
+
+					// update lastConsDescription in fork1: followed by long A
 					ConsDescription cd_A = ConsDescription.newInstance(fork1.consTemplate.get(fork1.consTemplate.size() - 1));
 					cd_A.followedByLongA = true;
 					fork1.consTemplate.remove(fork1.consTemplate.size() - 1);
 					fork1.consTemplate.add(cd_A);
 					
 					// Fork 2: long A is a part of a prefix/suffix; do not add to root description.
-					Root fork2 = new Root(new ArrayList<>());
-					for (ConsDescription cd : rootCandidate.consTemplate) {
-						fork2.consTemplate.add(ConsDescription.newInstance(cd));
-					}
-					
+					Root fork2 = Root.newInstance(rootCandidate);
+
 					forks.add(fork1);
 					forks.add(fork2);
 				} else if (letterToAdd.isConsonant()) {
 					if (letterToAdd.equals(lastLetter) &&
 							!rootCandidate.consTemplate.get(rootCandidate.size() - 1).followedByLongA) {
 						// update last ConsDescription in rootCandidate: geminated
-						Root fork1 = new Root(new ArrayList<>());
-						for (ConsDescription cd : rootCandidate.consTemplate) {
-							fork1.consTemplate.add(ConsDescription.newInstance(cd));
-						}
-						
+						Root fork1 = Root.newInstance(rootCandidate);
+
 						fork1.consTemplate.remove(fork1.consTemplate.size() - 1);
 						fork1.consTemplate.add(new ConsDescription(lastLetter, true, false));
 						forks.add(fork1);
