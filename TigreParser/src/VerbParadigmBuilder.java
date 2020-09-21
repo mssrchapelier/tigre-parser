@@ -86,14 +86,14 @@ public class VerbParadigmBuilder {
 		// e. g. {"3", "A", "ASTA"} -> 3-radical, type A, prefix ASTA
 		String[] paradigmHeaderTriple = this.readParadigmHeader(this.lineIterator.next());
 		
-		int curNumRadicals;
-		VerbType curType;
-		VerbPreformative curDerivPrefix;
+		int numRadicals;
+		VerbType verbType;
+		VerbPreformative derivPrefix;
 		
 		try {
-			curNumRadicals = Integer.parseInt(paradigmHeaderTriple[0]);
-			curType = VerbType.parseVerbType(paradigmHeaderTriple[1]);
-			curDerivPrefix = VerbPreformative.parseVerbPreformative(paradigmHeaderTriple[2]);
+			numRadicals = Integer.parseInt(paradigmHeaderTriple[0]);
+			verbType = VerbType.parseVerbType(paradigmHeaderTriple[1]);
+			derivPrefix = VerbPreformative.parseVerbPreformative(paradigmHeaderTriple[2]);
 		} catch (IllegalArgumentException e) {
 			throw new ParseException(String.format(e.getMessage() + "Error in paradigm header at line %s. Paradigm not read.", this.currentLineNum), this.currentLineNum);
 		}
@@ -126,7 +126,7 @@ public class VerbParadigmBuilder {
 			this.currentLineNum++;
 			if (lineHasContent(line)) {
 				try {
-					cellsAsSet.add(this.buildCellFromLine(line, curNumRadicals, curType, curDerivPrefix));
+					cellsAsSet.add(this.buildCellFromLine(line, numRadicals, verbType, derivPrefix));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
@@ -139,27 +139,27 @@ public class VerbParadigmBuilder {
 		// If it doesn't, create a new set.
 		
 		LinkedHashSet<VerbParadigmCell> curParadigm;
-		if (this.paradigm.containsKey(curNumRadicals) &&
-			this.paradigm.get(curNumRadicals).containsKey(curType) &&
-			this.paradigm.get(curNumRadicals).get(curType).containsKey(curDerivPrefix)) {
-			curParadigm = this.paradigm.get(curNumRadicals).get(curType).get(curDerivPrefix); // get existing paradigm
+		if (this.paradigm.containsKey(numRadicals) &&
+			this.paradigm.get(numRadicals).containsKey(verbType) &&
+			this.paradigm.get(numRadicals).get(verbType).containsKey(derivPrefix)) {
+			curParadigm = this.paradigm.get(numRadicals).get(verbType).get(derivPrefix); // get existing paradigm
 			curParadigm.addAll(cellsAsList); // add non-duplicate entries
-			this.paradigm.get(curNumRadicals).get(curType).put(curDerivPrefix, curParadigm); // put the updated paradigm back
-		} else if (this.paradigm.containsKey(curNumRadicals) &&
-					this.paradigm.get(curNumRadicals).containsKey(curType) &&
-					!this.paradigm.get(curNumRadicals).get(curType).containsKey(curDerivPrefix)) {
-			paradigm.get(curNumRadicals).get(curType).put(curDerivPrefix, cellsAsSet);
-		} else if (this.paradigm.containsKey(curNumRadicals) &&
-					!this.paradigm.get(curNumRadicals).containsKey(curType)) {
+			this.paradigm.get(numRadicals).get(verbType).put(derivPrefix, curParadigm); // put the updated paradigm back
+		} else if (this.paradigm.containsKey(numRadicals) &&
+					this.paradigm.get(numRadicals).containsKey(verbType) &&
+					!this.paradigm.get(numRadicals).get(verbType).containsKey(derivPrefix)) {
+			paradigm.get(numRadicals).get(verbType).put(derivPrefix, cellsAsSet);
+		} else if (this.paradigm.containsKey(numRadicals) &&
+					!this.paradigm.get(numRadicals).containsKey(verbType)) {
 			LinkedHashMap<VerbPreformative, LinkedHashSet<VerbParadigmCell>> derivPrefixMap = new LinkedHashMap<>();
-			derivPrefixMap.put(curDerivPrefix, cellsAsSet);
-			this.paradigm.get(curNumRadicals).put(curType, derivPrefixMap);
-		} else { // if !paradigm.containsKey(curNumRadicals)
+			derivPrefixMap.put(derivPrefix, cellsAsSet);
+			this.paradigm.get(numRadicals).put(verbType, derivPrefixMap);
+		} else { // if !paradigm.containsKey(numRadicals)
 			LinkedHashMap<VerbPreformative, LinkedHashSet<VerbParadigmCell>> derivPrefixMap = new LinkedHashMap<>();
-			derivPrefixMap.put(curDerivPrefix, cellsAsSet);
+			derivPrefixMap.put(derivPrefix, cellsAsSet);
 			LinkedHashMap<VerbType, LinkedHashMap<VerbPreformative, LinkedHashSet<VerbParadigmCell>>> typeMap = new LinkedHashMap<>();
-			typeMap.put(curType, derivPrefixMap);
-			this.paradigm.put(curNumRadicals, typeMap);
+			typeMap.put(verbType, derivPrefixMap);
+			this.paradigm.put(numRadicals, typeMap);
 		}
 	}
 	
