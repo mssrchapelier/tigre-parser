@@ -109,8 +109,8 @@ public class VerbParadigmBuilder {
 				curParadigmLine.charAt(0) == '$') {
 				break;
 			}
-			
-			curParadigmLines.add(curParadigmLine); // including empty lines and comments
+		
+			if (lineHasContent(curParadigmLine)) { curParadigmLines.add(curParadigmLine); }	
 		}
 		
 		if (this.lineIterator.hasNext()) {
@@ -124,13 +124,9 @@ public class VerbParadigmBuilder {
 		LinkedHashSet<VerbParadigmCell> cellsAsSet = new LinkedHashSet<>();
 		for (String line : curParadigmLines) {
 			this.currentLineNum++;
-			if (lineHasContent(line)) {
-				try {
-					cellsAsSet.add(this.buildCellFromLine(line, numRadicals, verbType, derivPrefix));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			}
+			try {
+				cellsAsSet.add(this.buildCellFromLine(line, numRadicals, verbType, derivPrefix));
+			} catch (ParseException e) { e.printStackTrace(); }
 		}
 		ArrayList<VerbParadigmCell> cellsAsList = new ArrayList<>(cellsAsSet);
 		
