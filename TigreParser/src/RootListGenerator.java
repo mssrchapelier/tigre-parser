@@ -35,22 +35,22 @@ public class RootListGenerator {
 			rootCandidate.consTemplate.add(new ConsDescription(sourceWord.charAt(0), false, false));
 			forks.add(Root.newInstance(rootCandidate));
 		} else { // has 1 item at least
-			Letter lastLetter = Letter.newInstance(rootCandidate.consTemplate.get(rootCandidate.size() - 1).consonant); // copy of the last letter in rootCandidate
+			char lastLetter = rootCandidate.consTemplate.get(rootCandidate.size() - 1).consonant; // last letter in rootCandidate
 			
 			if (nextPos == sourceWord.length()) {
 				this.consonantCombinations.add(Root.newInstance(rootCandidate));
 			} else {
-				Letter letterToAdd = new Letter(sourceWord.charAt(nextPos));
+				char letterToAdd = sourceWord.charAt(nextPos);
 				
-				if (letterToAdd.isVowel() && !letterToAdd.isLongA()) {
-					if (letterToAdd.character == 'o' || letterToAdd.character == 'u') {
+				if (LetterType.isVowel(letterToAdd) && !LetterType.isLongA(letterToAdd)) {
+					if (letterToAdd == 'o' || letterToAdd == 'u') {
 						rootCandidate.consTemplate.add(new ConsDescription('w', false, false));
-					} else if (letterToAdd.character == 'e' || letterToAdd.character == 'i') {
+					} else if (letterToAdd == 'e' || letterToAdd == 'i') {
 						rootCandidate.consTemplate.add(new ConsDescription('y', false, false));
 					}
 					
 					forks.add(Root.newInstance(rootCandidate));
-				} else if (letterToAdd.isLongA()) {
+				} else if (LetterType.isLongA(letterToAdd)) {
 					// Two forks: 1. Verb of type C or D, long A is penultimate vowel belonging to the root. 2. Long A is part of a prefix/suffix.
 					
 					// Fork 1: update last ConsDescription in rootCandidate: followed by long A
@@ -67,8 +67,8 @@ public class RootListGenerator {
 
 					forks.add(fork1);
 					forks.add(fork2);
-				} else if (letterToAdd.isConsonant()) {
-					if (letterToAdd.equals(lastLetter) &&
+				} else if (LetterType.isConsonant(letterToAdd)) {
+					if (letterToAdd== lastLetter &&
 							!rootCandidate.consTemplate.get(rootCandidate.size() - 1).followedByLongA) {
 						// update last ConsDescription in rootCandidate: geminated
 						Root fork1 = Root.newInstance(rootCandidate);

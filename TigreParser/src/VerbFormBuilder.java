@@ -45,13 +45,13 @@ public class VerbFormBuilder {
 		
 		for (int radIndex = 0; radIndex < stem.getNumRadicals(); radIndex++) {
 			// geminate if applicable
-			char consToAdd = stem.getRootConsonant(radIndex).character;
+			char consToAdd = stem.getRootConsonant(radIndex);
 			
 			if (cell.geminationPattern[radIndex] > 0) {
 				word.surfaceForm += consToAdd;
 			}
 			
-			if (cell.geminationPattern[radIndex] == 2 && stem.getRootConsonant(radIndex).isSubjectToGemination()) {
+			if (cell.geminationPattern[radIndex] == 2 && LetterType.isSubjectToGemination(stem.getRootConsonant(radIndex))) {
 				word.surfaceForm += consToAdd;
 			}
 			// append vowel if applicable

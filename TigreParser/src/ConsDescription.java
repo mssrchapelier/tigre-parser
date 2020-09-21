@@ -4,27 +4,19 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class ConsDescription {
 	// tArm -> {t, true}, {r, false}, {m, false}
 	
-	Letter consonant;
+	char consonant;
 	boolean isGeminated;
 	boolean followedByLongA;
 	
-	public ConsDescription(char consonant, boolean isGeminated, boolean followedByLongA) throws IllegalArgumentException {
-		
-		Letter letter = new Letter(consonant);
-		
+	public ConsDescription(char letter, boolean isGeminated, boolean followedByLongA) throws IllegalArgumentException {
+		if (!LetterType.isConsonant(letter)) { throw new IllegalArgumentException("Illegal parameter: char consonant must be a consonant."); }
 		this.consonant = letter;
 		this.isGeminated = isGeminated;
 		this.followedByLongA = followedByLongA;
 	}
 	
-	public ConsDescription(Letter consonantLetter, boolean isGeminated, boolean followedByLongA) throws IllegalArgumentException {
-		this.consonant = consonantLetter;
-		this.isGeminated = isGeminated;
-		this.followedByLongA = followedByLongA;
-	}
-	
 	public static ConsDescription newInstance (ConsDescription cd) {
-		return new ConsDescription(Letter.newInstance(cd.consonant), cd.isGeminated, cd.followedByLongA);
+		return new ConsDescription(cd.consonant, cd.isGeminated, cd.followedByLongA);
 	}
 	
 	@Override

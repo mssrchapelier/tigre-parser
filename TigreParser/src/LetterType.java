@@ -37,5 +37,9 @@ public enum LetterType {
 	static boolean isSchwa (char c) {
 		return c == schwa ? true : false;
 	}
-	
+
+	static boolean isSubjectToGemination (char c) {
+		// laryngeals and semivowels are never geminated
+		return !(isLaryngeal(c) || isSemivowel(c));
+	}
 }

@@ -31,7 +31,7 @@ public class Root {
 		String output = "";
 		for (ConsDescription radical : this.consTemplate) {
 			String toAppend = "";
-			toAppend += radical.consonant.character;
+			toAppend += radical.consonant;
 			if (radical.isGeminated) { toAppend += "(2)"; }
 			if (radical.followedByLongA) { toAppend += "(A)"; }
 			output += toAppend;
