@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -9,7 +8,6 @@ public class VerbParadigmCell {
 	VerbType acceptedVerbType;
 	VerbPreformative acceptedDerivPrefix;
 	
-	// In inverse order. E. g.: l+a+naggf; prefixes.get(0).surfaceForm == "a"; prefixes.get(1).surfaceForm == "l".
 	ArrayList<MorphemeDescriptionPair> prefixes;
 	MorphemeDescriptionPair vowelPattern;
 	int[] geminationPattern;

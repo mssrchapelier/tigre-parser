@@ -24,13 +24,13 @@ public class VerbFormBuilder {
 		
 		// appending prefixes
 		
-		it = cell.prefixes.listIterator(cell.prefixes.size());
+		it = cell.prefixes.listIterator();
 		
-		while (it.hasPrevious()) {
-			curMorpheme = it.previous();
+		while (it.hasNext()) {
+			curMorpheme = it.next();
 			word.surfaceForm += curMorpheme.surfaceForm;
 			word.lexicalForm += curMorpheme.lexicalForm;
-			if (it.hasPrevious()) {
+			if (it.hasNext()) {
 				word.surfaceForm += "-";
 				word.lexicalForm += "-";
 			}

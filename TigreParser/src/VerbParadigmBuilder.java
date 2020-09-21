@@ -218,7 +218,6 @@ public class VerbParadigmBuilder {
 			// *** read surfacepattern and lexpattern ***
 			ArrayList<String> surfacePatternParts = new ArrayList<>(Arrays.asList(lineParts[1].split("\\+")));
 			ArrayList<String> lexPatternParts = new ArrayList<>(Arrays.asList(lineParts[2].split("\\+")));
-			// prefixes: in linear order
 			
 			ListIterator<String> surfaceIterator = surfacePatternParts.listIterator();
 			ListIterator<String> lexIterator = lexPatternParts.listIterator();
@@ -237,9 +236,8 @@ public class VerbParadigmBuilder {
 					break;
 				}
 				
-				// comply with the inverse ordering of prefixes in MorphemeDescriptionPair.prefixes
 				if (!curMorphemeSurface.matches("0")) {
-					cell.prefixes.add(0, new MorphemeDescriptionPair(curMorphemeSurface, curMorphemeLex));
+					cell.prefixes.add(new MorphemeDescriptionPair(curMorphemeSurface, curMorphemeLex));
 				}
 			}
 			
