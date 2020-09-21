@@ -179,11 +179,11 @@ public class VerbParadigmBuilder {
 	// NB: The cell being returned has the following fields empty: acceptedNumRadicals; acceptedVerbType; acceptedDerivPrefix.
 	// Manipulate the cell accordingly in the calling method before adding this cell to paradigm.
 	
-	private VerbParadigmCell buildCellFromLine (String line, int curNumRadicals, VerbType curType, VerbPreformative curDerivPrefix) throws ParseException {
+	private VerbParadigmCell buildCellFromLine (String line, int numRadicals, VerbType verbType, VerbPreformative derivPrefix) throws ParseException {
 		VerbParadigmCell cell = new VerbParadigmCell();
-		cell.acceptedNumRadicals = curNumRadicals;
-		cell.acceptedVerbType = curType;
-		cell.acceptedDerivPrefix = curDerivPrefix;
+		cell.acceptedNumRadicals = numRadicals;
+		cell.acceptedVerbType = verbType;
+		cell.acceptedDerivPrefix = derivPrefix;
 		
 		try {
 			Pattern p = Pattern.compile("^(?<grammemeset>.+)\\t(?<surfacepattern>.+)\\t(?<lexpattern>.+)$");
