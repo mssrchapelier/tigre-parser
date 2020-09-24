@@ -1,22 +1,77 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
+import com.google.gson.stream.JsonReader;
 
 public class RegexIterator {
 	// everything inside square brackets
 	private static String unprocessedPartRegex = ".*\\[(?<unprocessed>.*)\\].*";
 	private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
 	
+	private static ArrayList<ArrayList<PatternReplacePair>> patternCascade;
+	
+	// initialising patternCascade: reading patterns from files
+	public static void readPatterns (String[] patternFilePaths) {
+		patternCascade = new ArrayList<>();
+		for (String path : patternFilePaths) {
+			try (JsonReader reader = new JsonReader (new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+				ArrayList<PatternReplacePair> curPatterns = new ArrayList<>();
+				reader.beginArray();
+				while (reader.hasNext()) {
+					reader.beginObject();
+					while (reader.hasNext()) {
+						// skip comment
+						reader.nextName();
+						reader.nextString();
+						// read regex
+						reader.nextName();
+						String regex = reader.nextString();
+						// read replacement
+						reader.nextName();
+						String replacement = reader.nextString();
+						// create new PRPair
+						curPatterns.add(new PatternReplacePair(regex, replacement));
+					}
+					reader.endObject();
+				}
+				reader.endArray();
+				patternCascade.add(curPatterns);
+			} catch (IOException e) {
+				System.out.printf("Pattern file %s not read, level not added: %s%n", path, e.getMessage());
+			}
+			
+		}
+	}
+
 	private Pattern processorPattern;
 	private Matcher processorMatcher;
-	
-	public RegexIterator() {
+		
+	public RegexIterator() throws NullPointerException {
+		if (patternCascade == null) {
+			throw new NullPointerException("No patterns have been read yet: RegexIterator.patternCascade is null");
+		}
 		this.processorPattern = Pattern.compile("");
 		this.processorMatcher = this.processorPattern.matcher("");
 	}
 	
-	public ArrayList<WordGlossPair> processLevel (ArrayList<WordGlossPair> inputWGPairs,
+	public ArrayList<WordGlossPair> analyseList (final ArrayList<WordGlossPair> oldList) {
+		ArrayList<WordGlossPair> levelInputList = oldList;
+		for (ArrayList<PatternReplacePair> curPatterns : patternCascade) {
+			ArrayList<WordGlossPair> levelOutputList = this.processLevel(levelInputList, curPatterns);
+			levelInputList.clear();
+			for (WordGlossPair analysis : levelOutputList) {
+				levelInputList.add(WordGlossPair.newInstance(analysis));
+			}
+		}
+		return levelInputList;
+	}
+	
+	private ArrayList<WordGlossPair> processLevel (ArrayList<WordGlossPair> inputWGPairs,
 			ArrayList<PatternReplacePair> patterns) {
 		LinkedHashSet<WordGlossPair> newLinesSet = new LinkedHashSet<>();
 		for (WordGlossPair inputWGPair : inputWGPairs) {

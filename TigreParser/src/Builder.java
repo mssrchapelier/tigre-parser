@@ -10,11 +10,8 @@ import java.util.LinkedHashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.google.gson.stream.JsonReader;
-
 public class Builder {
 	VerbParadigm verbParadigm;
-	ArrayList<ArrayList<PatternReplacePair>> patternCascade;
 	RegexIterator regexIterator;
 	Transliterator transliterator;
 	
@@ -22,53 +19,21 @@ public class Builder {
 	private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
 	
 	// NB: The order of file names in patternFilePaths is NOT arbitrary (the levels generated are processed in this order).
-	static String[] patternFilePaths = { "configs/patterns/pref-coord.json", "configs/patterns/pref-relz.json", "configs/patterns/pref-neg.json", "configs/patterns/pref-iobj.json", "configs/patterns/suf-expl.json", "configs/patterns/suf-pron.json", "configs/patterns/pau_2.json", "configs/patterns/pass-ptcp-deriv-pref.json", "configs/patterns/nominal-stem.json", "configs/patterns/lexicon.json" };
 	static String romanizationMapFilePath = "configs/romanization-map.file";
 	static String verbParadigmFilePath = "configs/verb-paradigm.txt";
 
+	private static String[] patternFilePaths = { "configs/patterns/pref-coord.json", "configs/patterns/pref-relz.json", "configs/patterns/pref-neg.json", "configs/patterns/pref-iobj.json", "configs/patterns/suf-expl.json", "configs/patterns/suf-pron.json", "configs/patterns/pau_2.json", "configs/patterns/pass-ptcp-deriv-pref.json", "configs/patterns/nominal-stem.json", "configs/patterns/lexicon.json" };
+	
 	public Builder () {
 		try {
+			RegexIterator.readPatterns(patternFilePaths);
 			this.verbParadigm = new VerbParadigmBuilder().build(verbParadigmFilePath);
-			this.patternCascade = readPatterns();
 			this.regexIterator = new RegexIterator();
-			
 			// ə in map file stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
 			// The actual [ə] sound may or may not occur in that position; this is determined by phonotactics.
 			// The ə symbol MUST be removed from any fields of GeezAnalysisPair objects immediately after generating geminated variants.
 			this.transliterator = new Transliterator(romanizationMapFilePath);
-		} catch (IOException | ParseException e) { e.printStackTrace(); }
-	}
-	
-	private static ArrayList<ArrayList<PatternReplacePair>> readPatterns () throws IOException {
-		ArrayList<ArrayList<PatternReplacePair>> patternList = new ArrayList<>();
-		
-		for (String path : patternFilePaths) {
-			JsonReader reader = new JsonReader (new InputStreamReader(new FileInputStream(path), "UTF-8"));
-			ArrayList<PatternReplacePair> curPatterns = new ArrayList<>();
-			reader.beginArray();
-			while (reader.hasNext()) {
-				reader.beginObject();
-				while (reader.hasNext()) {
-					// skip comment
-					reader.nextName();
-					reader.nextString();
-					// read regex
-					reader.nextName();
-					String regex = reader.nextString();
-					// read replacement
-					reader.nextName();
-					String replacement = reader.nextString();
-					// create new PRPair
-					curPatterns.add(new PatternReplacePair(regex, replacement));
-				}
-				reader.endObject();
-			}
-			reader.endArray();
-			reader.close();
-			patternList.add(curPatterns);
-		}
-		
-		return patternList;
+		} catch (IOException | ParseException | NullPointerException e) { e.printStackTrace(); }
 	}
 	
 	public void processFile (String inputPath, String outputPath, int numAnalysesToShow) throws IllegalArgumentException, IOException {
@@ -136,13 +101,7 @@ public class Builder {
 	private ArrayList<WordGlossPair> analyzeLine (String line) {
 		ArrayList<WordGlossPair> analysisList = new ArrayList<>();
 		analysisList.add(new WordGlossPair("[" + line + "]", "#", false));
-		for (ArrayList<PatternReplacePair> curPatterns : patternCascade) {
-			ArrayList<WordGlossPair> newAnalysisList = regexIterator.processLevel(analysisList, curPatterns);
-			analysisList.clear();
-			for (WordGlossPair analysis : newAnalysisList) {
-				analysisList.add(WordGlossPair.newInstance(analysis));
-			}
-		}
+		analysisList = this.regexIterator.analyseList(analysisList); 
 		ArrayList<WordGlossPair> analyzedVerbs = new ArrayList<>();
 		for (WordGlossPair analysis : analysisList) {
 			if (!analysis.isFinalAnalysis) {
