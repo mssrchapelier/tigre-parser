@@ -22,12 +22,13 @@ public class Builder {
 	private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
 	
 	// NB: The order of file names in patternFilePaths is NOT arbitrary (the levels generated are processed in this order).
-	static String[] patternFilePaths = { "patterns/pref-coord.json", "patterns/pref-relz.json", "patterns/pref-neg.json", "patterns/pref-iobj.json", "patterns/suf-expl.json", "patterns/suf-pron.json", "patterns/pau_2.json", "patterns/pass-ptcp-deriv-pref.json", "patterns/nominal-stem.json", "patterns/lexicon.json" };
-	static String romanizationMapFilePath = "romanization-map.file";
+	static String[] patternFilePaths = { "configs/patterns/pref-coord.json", "configs/patterns/pref-relz.json", "configs/patterns/pref-neg.json", "configs/patterns/pref-iobj.json", "configs/patterns/suf-expl.json", "configs/patterns/suf-pron.json", "configs/patterns/pau_2.json", "configs/patterns/pass-ptcp-deriv-pref.json", "configs/patterns/nominal-stem.json", "configs/patterns/lexicon.json" };
+	static String romanizationMapFilePath = "configs/romanization-map.file";
+	static String verbParadigmFilePath = "configs/verb-paradigm.txt";
 
 	public Builder () {
 		try {
-			this.verbParadigm = new VerbParadigmBuilder().build("paradigm.txt");
+			this.verbParadigm = new VerbParadigmBuilder().build(verbParadigmFilePath);
 			this.patternCascade = readPatterns();
 			this.regexIterator = new RegexIterator();
 			
