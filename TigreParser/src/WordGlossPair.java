@@ -1,11 +1,15 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class WordGlossPair {
 
-	public static String unanalysedSurfacePartBeginningDelimiter = "[";
-	public static String unanalysedSurfacePartEndDelimiter = "]";
-	public static String unanalysedLexPartSymbol = "#";
+	private static String unprocessedPartRegex = ".*\\[(?<unprocessed>.*)\\].*";
+	private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
+	
+	private static String emptyAnalysisRegex = "^\\[(?<unprocessed>.*)\\]$";
+	private static Pattern emptyAnalysisPattern = Pattern.compile(emptyAnalysisRegex);
 
 	public String surfaceForm;
 	public String lexicalForm;
@@ -18,11 +22,32 @@ public class WordGlossPair {
 	}
 
 	public static WordGlossPair createWithEmptyAnalysis (String surfaceForm) {
-		return new WordGlossPair (
-			unanalysedSurfacePartBeginningDelimiter + surfaceForm + unanalysedSurfacePartEndDelimiter,
-			unanalysedLexPartSymbol,
-			false
-		);
+		return new WordGlossPair ("[" + surfaceForm + "]", "#",	false);
+	}
+
+	public boolean isEmptyAnalysis () {
+		Matcher m = emptyAnalysisPattern.matcher(this.surfaceForm);
+		return ( !this.isFinalAnalysis && this.lexicalForm == "#" && m.find() );
+	}
+
+	public String getUnanalysedPart () {
+		Matcher m = unprocessedExtractorPattern.matcher(this.surfaceForm);
+		if (m.find()) {
+			return m.group("unprocessed")
+				.replaceAll("[\\[\\]]", "");
+		} else { return ""; }
+	}
+
+	public WordGlossPair insertInto (WordGlossPair pairToChange) {
+		
+		// Inserts this pair into the unanalysed part of pairToChange.
+		WordGlossPair outputPair = new WordGlossPair();
+		
+		outputPair.surfaceForm = pairToChange.surfaceForm.replaceAll("\\[.*\\]", this.surfaceForm);
+		outputPair.lexicalForm = pairToChange.lexicalForm.replaceAll("#", this.lexicalForm);
+		outputPair.isFinalAnalysis = true;
+		
+		return outputPair;
 	}
 	
 	public WordGlossPair() {
@@ -31,8 +56,8 @@ public class WordGlossPair {
 		this.isFinalAnalysis = false;
 	}
 	
-	public static WordGlossPair newInstance(WordGlossPair wdPair) {
-		return new WordGlossPair(wdPair.surfaceForm, wdPair.lexicalForm, wdPair.isFinalAnalysis);
+	public static WordGlossPair newInstance(WordGlossPair wgPair) {
+		return new WordGlossPair(wgPair.surfaceForm, wgPair.lexicalForm, wgPair.isFinalAnalysis);
 	}
 	
 	public String getRawWord () {

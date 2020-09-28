@@ -8,66 +8,29 @@ import java.io.InputStreamReader;
 
 import com.google.gson.stream.JsonReader;
 
-public class RegexIterator {
-	// everything inside square brackets
-	private static String unprocessedPartRegex = ".*\\[(?<unprocessed>.*)\\].*";
-	private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
+public class PatternProcessor {
+	final private static String unprocessedPartRegex = ".*\\[(?<unprocessed>.*)\\].*";
+	final private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
 	
 	private ArrayList<ArrayList<PatternReplacePair>> patternCascade;
-	
-	private RegexIterator() {}
 
-	public static RegexIterator createWithPatterns (String[] patternFilePaths) throws IOException {
-		RegexIterator regexIterator = new RegexIterator();
-		regexIterator.readPatterns(patternFilePaths);
-		return regexIterator;
+	private PatternProcessor (ArrayList<ArrayList<PatternReplacePair>> patternCascade) {
+		this.patternCascade = patternCascade;
 	}
 
-	// initialising patternCascade: reading patterns from files
-	public void readPatterns (String[] patternFilePaths) throws IOException {
-		this.patternCascade = new ArrayList<>();
-		for (String path : patternFilePaths) {
-			try (JsonReader reader = new JsonReader (new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
-				ArrayList<PatternReplacePair> curPatterns = new ArrayList<>();
-				reader.beginArray();
-				while (reader.hasNext()) {
-					reader.beginObject();
-					while (reader.hasNext()) {
-						// skip comment
-						reader.nextName();
-						reader.nextString();
-						// read regex
-						reader.nextName();
-						String regex = reader.nextString();
-						// read replacement
-						reader.nextName();
-						String replacement = reader.nextString();
-						// create new PRPair
-						curPatterns.add(new PatternReplacePair(regex, replacement));
-					}
-					reader.endObject();
-				}
-				reader.endArray();
-				this.patternCascade.add(curPatterns);
-			} catch (IOException e) { throw e; }
+	public ArrayList<WordGlossPair> processWord (final String transliteratedVariant) {
+		ArrayList<WordGlossPair> analysisList = new ArrayList<>();
+
+		WordGlossPair inputWgPair = WordGlossPair.createWithEmptyAnalysis(transliteratedVariant);
+		analysisList.add(inputWgPair);
+
+		for (ArrayList<PatternReplacePair> level : this.patternCascade) {
+			analysisList = processLevel(analysisList, level);
 		}
+		return analysisList;
 	}
 	
-	public ArrayList<WordGlossPair> analyseWord (final WordGlossPair inputWgPair) throws IllegalArgumentException {
-		if (inputWgPair.isFinalAnalysis) { throw new IllegalArgumentException("Argument must be a non-final analysis"); }
-		ArrayList<WordGlossPair> levelInputList = new ArrayList<>();
-		levelInputList.add(WordGlossPair.newInstance(inputWgPair));
-		for (ArrayList<PatternReplacePair> curPatterns : this.patternCascade) {
-			ArrayList<WordGlossPair> levelOutputList = this.processLevel(levelInputList, curPatterns);
-			levelInputList.clear();
-			for (WordGlossPair analysis : levelOutputList) {
-				levelInputList.add(WordGlossPair.newInstance(analysis));
-			}
-		}
-		return levelInputList;
-	}
-	
-	private ArrayList<WordGlossPair> processLevel (ArrayList<WordGlossPair> inputWGPairs,
+	private static ArrayList<WordGlossPair> processLevel (ArrayList<WordGlossPair> inputWGPairs,
 			ArrayList<PatternReplacePair> patternLevel) {
 		LinkedHashSet<WordGlossPair> newLinesSet = new LinkedHashSet<>();
 		for (WordGlossPair inputWGPair : inputWGPairs) {
@@ -128,4 +91,42 @@ public class RegexIterator {
 		return newWgPair;
 	}
 	
+	public static class PatternProcessorBuilder {
+		private ArrayList<ArrayList<PatternReplacePair>> patternCascade;
+
+		public PatternProcessorBuilder () { this.patternCascade = new ArrayList<>(); }
+
+		public PatternProcessorBuilder readFrom (String[] patternFilePaths) throws IOException {
+			for (String path : patternFilePaths) {
+				try (JsonReader reader = new JsonReader (new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
+				ArrayList<PatternReplacePair> curPatterns = new ArrayList<>();
+				reader.beginArray();
+				while (reader.hasNext()) {
+					reader.beginObject();
+					while (reader.hasNext()) {
+						// skip comment
+						reader.nextName();
+						reader.nextString();
+						// read regex
+						reader.nextName();
+						String regex = reader.nextString();
+						// read replacement
+						reader.nextName();
+						String replacement = reader.nextString();
+						// create new PRPair
+						curPatterns.add(new PatternReplacePair(regex, replacement));
+					}
+					reader.endObject();
+				}
+				reader.endArray();
+				this.patternCascade.add(curPatterns);
+				} catch (IOException e) {
+					throw new IOException("Failed to read pattern file %s");
+				}
+			}
+			return this;
+		}
+		
+		public PatternProcessor build () { return new PatternProcessor(this.patternCascade); }
+	}
 }

@@ -11,12 +11,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Builder {
-	Conjugator conjugator;
-	RegexIterator regexIterator;
+	PatternProcessor patternProcessor;
+	VerbProcessor verbProcessor;
 	Transliterator transliterator;
-	
-	private static String unprocessedPartRegex = ".*\\[(?<unprocessed>.*)\\].*";
-	private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
 	
 	// NB: The order of file names in patternFilePaths is NOT arbitrary (the levels generated are processed in this order).
 	static String romanizationMapFilePath = "configs/romanization-map.file";
@@ -26,11 +23,14 @@ public class Builder {
 	
 	public Builder () {
 		try {
-			this.regexIterator = RegexIterator.createWithPatterns(patternFilePaths);
+			this.patternProcessor = new PatternProcessor.PatternProcessorBuilder()
+				.readFrom(patternFilePaths)
+				.build();
 			VerbParadigm verbParadigm = new VerbParadigm.VerbParadigmBuilder()
 				.readFrom(verbParadigmFilePath)
 				.build();
-			this.conjugator = new Conjugator(verbParadigm);
+			Conjugator conjugator = new Conjugator(verbParadigm);
+			this.verbProcessor = new VerbProcessor(conjugator);
 
 			// ə in map file stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
 			// The actual [ə] sound may or may not occur in that position; this is determined by phonotactics.
@@ -72,10 +72,9 @@ public class Builder {
 				
 				writer.printf("* * * * * * *%n%nWord: %s%nAnalyses:%n%n", word.geezWord);
 				for (String gemOrtho : word.geminatedOrthos) {
-					word.analysisList.addAll(this.analyseGeminatedOrtho(gemOrtho));
+					word.analysisList.addAll(this.analyseWord(gemOrtho));
 				}
 				Collections.sort(word.analysisList, Collections.reverseOrder(new WordGlossPairComparator()));
-				
 				
 				int curNumAnalysesToPrint;
 				// numAnalysesToShow >= 0: checked in the beginning of this method
@@ -100,72 +99,38 @@ public class Builder {
 		writer.close();
 	}
 	
-	private ArrayList<WordGlossPair> analyseGeminatedOrtho (String geminatedOrtho) {
-		ArrayList<WordGlossPair> analysisList;
-		WordGlossPair unanalysedWord = WordGlossPair.createWithEmptyAnalysis(geminatedOrtho);
-		analysisList = this.regexIterator.analyseWord(unanalysedWord); 
+	private ArrayList<WordGlossPair> analyseWord (String transliteratedVariant) {
+		ArrayList<WordGlossPair> analysisList = this.patternProcessor.processWord(transliteratedVariant); 
+		analysisList = this.parseVerbsInList(analysisList);
+		analysisList = removeEmptyAnalyses(analysisList);
+		analysisList = removeDuplicates(analysisList);
+		return analysisList;
+	}
 
-		ArrayList<WordGlossPair> analyzedVerbs = new ArrayList<>();
-		for (WordGlossPair analysis : analysisList) {
-			if (!analysis.isFinalAnalysis) {
-				ArrayList<WordGlossPair> verbAnalysisList = this.analyzeAsVerb(analysis);
+	private ArrayList<WordGlossPair> parseVerbsInList (ArrayList<WordGlossPair> inputList) {
+		ArrayList<WordGlossPair> outputList = new ArrayList<>();
+		for (WordGlossPair inputAnalysis : inputList) {
+			outputList.add(WordGlossPair.newInstance(inputAnalysis));
+			if (!inputAnalysis.isFinalAnalysis) {
+				ArrayList<WordGlossPair> verbAnalysisList = this.verbProcessor.processWord(inputAnalysis.getUnanalysedPart());
 				for (WordGlossPair verbAnalysis : verbAnalysisList) {
-					analyzedVerbs.add(WordGlossPair.newInstance(verbAnalysis));
+					outputList.add(verbAnalysis.insertInto(inputAnalysis));
 				}
-			}
+			} else { outputList.add(WordGlossPair.newInstance(inputAnalysis)); }
 		}
-		analysisList.addAll(analyzedVerbs);
-		LinkedHashSet<WordGlossPair> analysisSet = new LinkedHashSet<>(analysisList);
-		analysisList = new ArrayList<>(analysisSet);
-		return analysisList;
+		return outputList;
 	}
-	
-	private ArrayList<WordGlossPair> analyzeAsVerb (WordGlossPair wgPair) {
-		ArrayList<WordGlossPair> analysisList = new ArrayList<>();
-		// add the same unprocessed part as a variant to newLinesSet
-		analysisList.add(WordGlossPair.newInstance(wgPair));
-		// extract the part to be processed
-		String lineToProcess = extractUnprocessedPart(wgPair);
-		// run all patterns from this level on the unprocessed part of the current analysis
-		ArrayList<Root> roots = RootListGenerator.getRoots(lineToProcess);
 
-		for (Root root : roots) {
-			LinkedHashSet<WordGlossPair> formSet = new LinkedHashSet<>();
-			try {
-				ArrayList<VerbStem> derivedStems = VerbStem.generateWithPossiblePrefixes(root);
- 				for (VerbStem stem : derivedStems) {
-					try {
-						formSet.addAll(this.conjugator.conjugate(stem));
-					} catch (NullPointerException e) { e.printStackTrace(); }
-				}
-				ArrayList<WordGlossPair> formList = new ArrayList<>(formSet);
-				for (WordGlossPair form : formList) {
-					if (form.getRawWord().equals(lineToProcess)) {
-						analysisList.add(constructVerbWgPair(wgPair, form));
-					}
-				}
-			} catch (IllegalArgumentException e) {  }
+	private static ArrayList<WordGlossPair> removeEmptyAnalyses (ArrayList<WordGlossPair> inputList) {
+		ArrayList<WordGlossPair> outputList = new ArrayList<>();
+		for (WordGlossPair pair : inputList) {
+			if (!pair.isEmptyAnalysis()) { outputList.add(WordGlossPair.newInstance(pair)); }
 		}
-		
-		return analysisList;
+		return outputList;
 	}
 	
-	private static String extractUnprocessedPart (WordGlossPair wgPair) {
-		Matcher m = unprocessedExtractorPattern.matcher(wgPair.surfaceForm);
-		if (m.find()) {
-			return m.group("unprocessed")
-				.replaceAll("[\\[\\]]", "");
-		} else { return ""; }
+	private static ArrayList<WordGlossPair> removeDuplicates (ArrayList<WordGlossPair> inputList) {
+		LinkedHashSet<WordGlossPair> outputSet = new LinkedHashSet<>(inputList);
+		return new ArrayList<>(outputSet);
 	}
-	
-	private static WordGlossPair constructVerbWgPair (WordGlossPair oldWgPair, WordGlossPair stemAnalysis) {
-		WordGlossPair newWgPair = new WordGlossPair();
-		
-		newWgPair.surfaceForm = oldWgPair.surfaceForm.replaceAll("\\[.*\\]", stemAnalysis.surfaceForm);
-		newWgPair.lexicalForm = oldWgPair.lexicalForm.replaceAll("#", stemAnalysis.lexicalForm);
-		newWgPair.isFinalAnalysis = true;
-		
-		return newWgPair;
-	}
-	
 }

@@ -25,7 +25,6 @@ public class Launcher {
 	}
 	
 	public void run () {
-		
 		try {
 			if (numAnalysesToShow >= 0) {
 				new Builder().processFile(inputFilePath, outputFilePath, numAnalysesToShow);
@@ -34,6 +33,5 @@ public class Launcher {
 			}
 			
 		} catch (IOException e) { e.printStackTrace(); }
-		
 	}
 }
