@@ -72,7 +72,7 @@ public class PatternProcessor {
 			String[] morphemeParts = morpheme.split("\\:");
 			if (morphemeParts.length != 2) { throw new IllegalArgumentException("replacement is not formatted properly"); }
 			if (morphemeParts[0].charAt(0) == '[' && morphemeParts[1].charAt(0) == '#') {
-				// unanalyzed part -> the returned WGPair is not a final analysis
+				// unanalysed part -> the returned WGPair is not a final analysis
 				isFinalAnalysis = false;
 			}
 			analysisSurface += morphemeParts[0];
@@ -99,29 +99,29 @@ public class PatternProcessor {
 		public PatternProcessorBuilder readFrom (String[] patternFilePaths) throws IOException {
 			for (String path : patternFilePaths) {
 				try (JsonReader reader = new JsonReader (new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
-				ArrayList<PatternReplacePair> curPatterns = new ArrayList<>();
-				reader.beginArray();
-				while (reader.hasNext()) {
-					reader.beginObject();
+					ArrayList<PatternReplacePair> curPatterns = new ArrayList<>();
+					reader.beginArray();
 					while (reader.hasNext()) {
-						// skip comment
-						reader.nextName();
-						reader.nextString();
-						// read regex
-						reader.nextName();
-						String regex = reader.nextString();
-						// read replacement
-						reader.nextName();
-						String replacement = reader.nextString();
-						// create new PRPair
-						curPatterns.add(new PatternReplacePair(regex, replacement));
+						reader.beginObject();
+						while (reader.hasNext()) {
+							// skip comment
+							reader.nextName();
+							reader.nextString();
+							// read regex
+							reader.nextName();
+							String regex = reader.nextString();
+							// read replacement
+							reader.nextName();
+							String replacement = reader.nextString();
+							// create new PRPair
+							curPatterns.add(new PatternReplacePair(regex, replacement));
+						}
+						reader.endObject();
 					}
-					reader.endObject();
-				}
-				reader.endArray();
-				this.patternCascade.add(curPatterns);
+					reader.endArray();
+					this.patternCascade.add(curPatterns);
 				} catch (IOException e) {
-					throw new IOException("Failed to read pattern file %s");
+					throw new IOException(String.format("Failed to read pattern file %s", path));
 				}
 			}
 			return this;

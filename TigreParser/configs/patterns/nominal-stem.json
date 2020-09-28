@@ -157,17 +157,17 @@
     {
         "comment": "suffixed singulative: final a deletion (Cewa -> Cewat)",
         "regex": "^(?<root>.+[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>(at))$",
-        "replace": "\\[${root}\\]:#a-${suf}:SG.F"
+        "replace": "\\[${root}\\a]:#-${suf}:SG.F"
     },
     {
         "comment": "suffixed singulative: final a deletion",
         "regex": "^(?<root>.+[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>(Ay))$",
-        "replace": "\\[${root}\\]:#a-${suf}:SG.M"
+        "replace": "\\[${root}\\a]:#-${suf}:SG.M"
     },
     {
         "comment": "suffixed singulative: final a deletion",
         "regex": "^(?<root>.+[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>(Ay))$",
-        "replace": "\\[${root}\\]:#a-${suf}:SG.F"
+        "replace": "\\[${root}\\a]:#-${suf}:SG.F"
     },
     {
         "comment": "suffixed singulative: -Ay 0 -> e (kstAn -> kstenAy, kstenAyt)",

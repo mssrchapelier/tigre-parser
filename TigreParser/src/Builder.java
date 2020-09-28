@@ -116,7 +116,7 @@ public class Builder {
 				for (WordGlossPair verbAnalysis : verbAnalysisList) {
 					outputList.add(verbAnalysis.insertInto(inputAnalysis));
 				}
-			} else { outputList.add(WordGlossPair.newInstance(inputAnalysis)); }
+			}
 		}
 		return outputList;
 	}
