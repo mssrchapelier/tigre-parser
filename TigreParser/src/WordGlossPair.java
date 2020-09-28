@@ -2,14 +2,27 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class WordGlossPair {
-	String surfaceForm;
-	String lexicalForm;
-	boolean isFinalAnalysis;
+
+	public static String unanalysedSurfacePartBeginningDelimiter = "[";
+	public static String unanalysedSurfacePartEndDelimiter = "]";
+	public static String unanalysedLexPartSymbol = "#";
+
+	public String surfaceForm;
+	public String lexicalForm;
+	public boolean isFinalAnalysis;
 	
 	public WordGlossPair(String surfaceForm, String lexicalForm, boolean isFinalAnalysis) {
 		this.surfaceForm = surfaceForm;
 		this.lexicalForm = lexicalForm;
 		this.isFinalAnalysis = isFinalAnalysis;
+	}
+
+	public static WordGlossPair createWithEmptyAnalysis (String surfaceForm) {
+		return new WordGlossPair (
+			unanalysedSurfacePartBeginningDelimiter + surfaceForm + unanalysedSurfacePartEndDelimiter,
+			unanalysedLexPartSymbol,
+			false
+		);
 	}
 	
 	public WordGlossPair() {

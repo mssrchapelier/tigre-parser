@@ -10,7 +10,7 @@ public class Launcher {
 	@Parameter(names = { "-o", "-output" }, description = "output file path")
 	String outputFilePath = "output.txt";
 	
-	@Parameter(names = "-numanalyses", description = "number of analyses to show (non-negative integer; 0 to show all analyses; or don't specify this paramenter)")
+	@Parameter(names = "-numanalyses", description = "number of analyses to show (non-negative integer; 0 to show all analyses; defaults to 0)")
 	int numAnalysesToShow = 0;
 	
 	public static void main(String[] args) {

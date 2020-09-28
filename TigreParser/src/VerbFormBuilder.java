@@ -5,9 +5,9 @@ public class VerbFormBuilder {
 	VerbStem stem;
 	
 	public VerbFormBuilder (VerbParadigmCell cell, VerbStem stem) throws IllegalArgumentException {
-		if (stem.getRoot().length != cell.acceptedNumRadicals ||
-				stem.getVerbType() != cell.acceptedVerbType ||
-				stem.getDerivationalPrefix() != cell.acceptedDerivPrefix) {
+		if (stem.rootAsLetters.size() != cell.acceptedNumRadicals ||
+				stem.verbType != cell.acceptedVerbType ||
+				stem.derivationalPrefix != cell.acceptedDerivPrefix) {
 			throw new IllegalArgumentException ("Stem does not correspond to paradigm cell.");
 		}
 		
@@ -43,26 +43,26 @@ public class VerbFormBuilder {
 		
 		// appending root
 		
-		for (int radIndex = 0; radIndex < stem.getNumRadicals(); radIndex++) {
+		for (int radIndex = 0; radIndex < stem.numRadicals; radIndex++) {
 			// geminate if applicable
-			char consToAdd = stem.getRootConsonant(radIndex);
+			char consToAdd = stem.rootAsLetters.get(radIndex);
 			
 			if (cell.geminationPattern[radIndex] > 0) {
 				word.surfaceForm += consToAdd;
 			}
 			
-			if (cell.geminationPattern[radIndex] == 2 && LetterType.isSubjectToGemination(stem.getRootConsonant(radIndex))) {
+			if (cell.geminationPattern[radIndex] == 2 && LetterType.isSubjectToGemination(stem.rootAsLetters.get(radIndex))) {
 				word.surfaceForm += consToAdd;
 			}
 			// append vowel if applicable
-			if (radIndex != stem.getNumRadicals() - 1) {
+			if (radIndex != stem.numRadicals - 1) {
 				char charToAppend = cell.vowelPattern.surfaceForm.charAt(radIndex);
 				if (charToAppend != '0') {
 					word.surfaceForm += charToAppend;
 				}
 			}
 		}
-		word.lexicalForm += stem.getRootAsString() + ":";
+		word.lexicalForm += stem.rootAsString + ":";
 		word.lexicalForm += cell.vowelPattern.lexicalForm;
 		
 		// appending suffixes

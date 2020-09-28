@@ -1,120 +1,52 @@
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VerbStem {
 	
-	private char[] rootAsLetters;
-	private VerbPreformative derivationalPrefix;
-	private VerbType verbType;
-	private int numRadicals;
+	final public ArrayList<Character> rootAsLetters;
+	final public VerbPreformative derivationalPrefix;
+	final public VerbType verbType;
+	final public int numRadicals;
 	
-	// Warning: Not updated if rootAsLetters or verbType are changed.
-	private String rootAsString;
+	final public String rootAsString;
 	
 	private VerbStem (VerbStem originalStem) {
-		this.rootAsLetters = Arrays.copyOf(originalStem.rootAsLetters, originalStem.rootAsLetters.length);
+		this.rootAsLetters = new ArrayList<>(originalStem.rootAsLetters);
 		this.rootAsString = originalStem.rootAsString;
 		this.numRadicals = originalStem.numRadicals;
 		this.derivationalPrefix = originalStem.derivationalPrefix;
 		this.verbType = originalStem.verbType;
 	}
 	
-	public VerbStem (Root root) throws IllegalArgumentException {
-		if (root.size() < 3 || root.size() > 5) {
-			throw new IllegalArgumentException("Root length must be between 3 and 5 consonants.");
-		}
-		
-		int longACount = 0;
-		for (ConsDescription cd : root.consTemplate) {
-			if (cd.followedByLongA) { longACount++; }
-			if (longACount > 1) { throw new IllegalArgumentException("Root cannot contain more than two consonants followed by [a:] (long A)."); }
-		}
+	private VerbStem (Root root, VerbPreformative derivationalPrefix) throws IllegalArgumentException {
 		
 		this.rootAsString = root.toString();
 		
-		this.rootAsLetters = new char[root.size()];
-		for (int i = 0; i < root.size(); i++) { this.rootAsLetters[i] = root.consTemplate.get(i).consonant; }
+		ArrayList<Character> rootAsLetters = new ArrayList<>();
+		for (int i = 0; i < root.size(); i++) {
+			rootAsLetters.add(root.consTemplate.get(i).consonant);
+		}
+		this.rootAsLetters = rootAsLetters;
 		
-		this.verbType = determineVerbType(root);
-		this.derivationalPrefix = VerbPreformative.NO_PREFORMATIVE;
-		this.numRadicals = this.rootAsLetters.length;
+		this.verbType = root.determineVerbType();
+		this.derivationalPrefix = derivationalPrefix;
+		this.numRadicals = this.rootAsLetters.size();
+	}
+
+	public VerbStem createWithNoPrefix (Root root) throws IllegalArgumentException {
+		return new VerbStem(root, VerbPreformative.NO_PREFORMATIVE);
+	}
+
+	public static ArrayList<VerbStem> generateWithPossiblePrefixes (Root root) throws IllegalArgumentException {
+		ArrayList<VerbStem> stemList = new ArrayList<>();
+		for (VerbPreformative prefix : VerbPreformative.values()) {
+			if (root.combinesWithPrefix(prefix)) { stemList.add(new VerbStem(root, prefix)); }
+		}
+		return stemList;
 	}
 	
 	public static VerbStem newInstance (VerbStem stem) {
 		return new VerbStem(stem);
-	}
-	
-	public char[] getRoot() {
-		return this.rootAsLetters;
-	}
-	
-	public String getRootAsString () {
-		return this.rootAsString;
-	}
-
-	public VerbPreformative getDerivationalPrefix() {
-		return this.derivationalPrefix;
-	}
-
-	public VerbType getVerbType() {
-		return this.verbType;
-	}
-	
-	public int getNumRadicals () {
-		return this.numRadicals;
-	}
-	
-	public char getRootConsonant (int i) throws IllegalArgumentException {
-		if (i < 0 || i > this.rootAsLetters.length - 1) {
-			throw new IllegalArgumentException("Argument must be between 0 and this root's length.");
-		} else {
-			return this.rootAsLetters[i];
-		}
-	}
-	
-	public boolean setDerivationalPrefix (VerbPreformative prefix) {
-		switch (prefix) {
-			case T: this.derivationalPrefix = VerbPreformative.T; return true;
-			case A: if (this.verbType == VerbType.D || LetterType.isLaryngeal(this.rootAsLetters[0])) {
-						return false;
-					} else {
-						this.derivationalPrefix = prefix;
-						return true;
-					}
-			case ATTA: if (LetterType.isLaryngeal(this.rootAsLetters[0])) {
-						return false;
-					} else {
-						this.derivationalPrefix = prefix;
-						return true;
-					}
-			case AT: if (this.verbType == VerbType.A) {
-						// Check if any of the consonants is a laryngeal. If yes, assigning type A is possible; otherwise it isn't.
-						for (char consonant : this.rootAsLetters) {
-							if (LetterType.isLaryngeal(consonant)) { this.derivationalPrefix = prefix; return true; }
-						}
-						return false;
-					} else {
-						this.derivationalPrefix = prefix;
-						return true;
-					}
-			default:
-				this.derivationalPrefix = prefix;
-				return true;
-		}
-	}
-	
-	public static VerbType determineVerbType (Root root) {
-		if (root.size() == 3 && root.consTemplate.get(1).isGeminated) {
-			return VerbType.B;
-		} else if (root.size() == 4
-				&& root.consTemplate.get(1).followedByLongA
-				&& root.consTemplate.get(1).consonant == root.consTemplate.get(2).consonant) {
-			return VerbType.D;
-		} else if ((root.size() == 3 && root.consTemplate.get(0).followedByLongA)
-				|| (root.size() == 4 && root.consTemplate.get(1).followedByLongA)
-				|| (root.size() == 5 && root.consTemplate.get(2).followedByLongA)) {
-			return VerbType.C;
-		} else {
-			return VerbType.A;
-		}
 	}
 }

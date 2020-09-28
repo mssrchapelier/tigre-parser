@@ -4,9 +4,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class ConsDescription {
 	// tArm -> {t, true}, {r, false}, {m, false}
 	
-	char consonant;
-	boolean isGeminated;
-	boolean followedByLongA;
+	public char consonant;
+	public boolean isGeminated;
+	public boolean followedByLongA;
 	
 	public ConsDescription(char letter, boolean isGeminated, boolean followedByLongA) throws IllegalArgumentException {
 		if (!LetterType.isConsonant(letter)) { throw new IllegalArgumentException("Illegal parameter: char consonant must be a consonant."); }

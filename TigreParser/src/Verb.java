@@ -15,7 +15,7 @@ public class Verb {
 		
 		// Check whether the vowel template argument corresponds to root in stem argument.
 		// E. g., passing the "aa" template with a quadriradical root such as "trgm" would be invalid.
-		if (stem.getRoot().length != vowelTemplate.surfaceForm.length() + 1) {
+		if (stem.rootAsLetters.size() != vowelTemplate.surfaceForm.length() + 1) {
 			throw new IllegalArgumentException("Vowel template does not correspond to this root.");
 		}
 		

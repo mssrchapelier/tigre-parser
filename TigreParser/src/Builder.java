@@ -26,9 +26,10 @@ public class Builder {
 	
 	public Builder () {
 		try {
-			RegexIterator.readPatterns(patternFilePaths);
-			this.verbParadigm = new VerbParadigmBuilder().build(verbParadigmFilePath);
-			this.regexIterator = new RegexIterator();
+			this.regexIterator = RegexIterator.createWithPatterns(patternFilePaths);
+			this.verbParadigm = new VerbParadigm.VerbParadigmBuilder()
+				.readFrom(verbParadigmFilePath)
+				.build();
 			// ə in map file stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
 			// The actual [ə] sound may or may not occur in that position; this is determined by phonotactics.
 			// The ə symbol MUST be removed from any fields of GeezAnalysisPair objects immediately after generating geminated variants.
@@ -58,7 +59,6 @@ public class Builder {
 		
 		System.out.printf("Lines in total: %d%n", lines.size());
 		int counter = 0;
-		WordGlossPairComparator wgpComparator = new WordGlossPairComparator();
 		
 		for (String line : lines) {
 			counter++;
@@ -70,9 +70,9 @@ public class Builder {
 				
 				writer.printf("* * * * * * *%n%nWord: %s%nAnalyses:%n%n", word.geezWord);
 				for (String gemOrtho : word.geminatedOrthos) {
-					word.analysisList.addAll(this.analyzeLine(gemOrtho));
+					word.analysisList.addAll(this.analyseGeminatedOrtho(gemOrtho));
 				}
-				Collections.sort(word.analysisList, Collections.reverseOrder(wgpComparator));
+				Collections.sort(word.analysisList, Collections.reverseOrder(new WordGlossPairComparator()));
 				
 				
 				int curNumAnalysesToPrint;
@@ -98,15 +98,16 @@ public class Builder {
 		writer.close();
 	}
 	
-	private ArrayList<WordGlossPair> analyzeLine (String line) {
-		ArrayList<WordGlossPair> analysisList = new ArrayList<>();
-		analysisList.add(new WordGlossPair("[" + line + "]", "#", false));
-		analysisList = this.regexIterator.analyseList(analysisList); 
+	private ArrayList<WordGlossPair> analyseGeminatedOrtho (String geminatedOrtho) {
+		ArrayList<WordGlossPair> analysisList;
+		WordGlossPair unanalysedWord = WordGlossPair.createWithEmptyAnalysis(geminatedOrtho);
+		analysisList = this.regexIterator.analyseWord(unanalysedWord); 
+
 		ArrayList<WordGlossPair> analyzedVerbs = new ArrayList<>();
 		for (WordGlossPair analysis : analysisList) {
 			if (!analysis.isFinalAnalysis) {
-				ArrayList<WordGlossPair> newAnalysisList = this.analyzeAsVerb(analysis);
-				for (WordGlossPair verbAnalysis : newAnalysisList) {
+				ArrayList<WordGlossPair> verbAnalysisList = this.analyzeAsVerb(analysis);
+				for (WordGlossPair verbAnalysis : verbAnalysisList) {
 					analyzedVerbs.add(WordGlossPair.newInstance(verbAnalysis));
 				}
 			}
@@ -122,35 +123,18 @@ public class Builder {
 		// add the same unprocessed part as a variant to newLinesSet
 		analysisList.add(WordGlossPair.newInstance(wgPair));
 		// extract the part to be processed
-		String lineToProcess = extractUnprocessedPart(wgPair);
-		lineToProcess = lineToProcess.replaceAll("[\\[\\]]", "");
+		String lineToProcess = extractUnprocessedPart(wgPair).replaceAll("[\\[\\]]", "");
 		// run all patterns from this level on the unprocessed part of the current analysis
-		RootListGenerator rootListGenerator = new RootListGenerator(lineToProcess);
-		try {
-			rootListGenerator.buildRootList();
-		} catch (IllegalArgumentException e) {}
-		for (Root root : rootListGenerator.roots) {
+		ArrayList<Root> roots = RootListGenerator.getRoots(lineToProcess);
+
+		for (Root root : roots) {
 			LinkedHashSet<WordGlossPair> formSet = new LinkedHashSet<>();
 			try {
-				VerbStem baseStem = new VerbStem(root);
-				ArrayList<VerbStem> derivedStems = new ArrayList<>();
-				for (VerbPreformative prefix : VerbPreformative.values()) {
-					switch (prefix) {
-						case NO_PREFORMATIVE:
-						case A:
-						case T:
-						case AT:
-						case ATTA:
-							if (baseStem.setDerivationalPrefix(prefix)) {
-								VerbStem stemToAdd = VerbStem.newInstance(baseStem);
-								derivedStems.add(stemToAdd);
-							}
-							break;
-						default: break; 
-					}
-				}
-				for (VerbStem stem : derivedStems) {
-					formSet.addAll(this.verbParadigm.buildAllForms(stem));
+				ArrayList<VerbStem> derivedStems = VerbStem.generateWithPossiblePrefixes(root);
+ 				for (VerbStem stem : derivedStems) {
+					try {
+						formSet.addAll(this.verbParadigm.buildAllForms(stem));
+					} catch (NullPointerException e) { e.printStackTrace(); }
 				}
 				ArrayList<WordGlossPair> formList = new ArrayList<>(formSet);
 				for (WordGlossPair form : formList) {
@@ -158,7 +142,7 @@ public class Builder {
 						analysisList.add(constructVerbWgPair(wgPair, form));
 					}
 				}
-			} catch (IllegalArgumentException e) {}
+			} catch (IllegalArgumentException e) {  }
 		}
 		
 		return analysisList;
@@ -174,24 +158,10 @@ public class Builder {
 	
 	private static WordGlossPair constructVerbWgPair (WordGlossPair oldWgPair, WordGlossPair stemAnalysis) {
 		WordGlossPair newWgPair = new WordGlossPair();
-		boolean isFinalAnalysis = true;
 		
-		/*
-		String newSurfaceForm = oldWgPair.surfaceForm;
-		newSurfaceForm = newSurfaceForm.replaceAll("\\[.*\\]", stemAnalysis.surfaceForm);
-		newWgPair.surfaceForm = newSurfaceForm;
-		*/
-
 		newWgPair.surfaceForm = oldWgPair.surfaceForm.replaceAll("\\[.*\\]", stemAnalysis.surfaceForm);
-
-		/*
-		String newLexForm = oldWgPair.lexicalForm;
-		newLexForm = newLexForm.replaceAll("#", stemAnalysis.lexicalForm);
-		newWgPair.lexicalForm = newLexForm;
-		*/
 		newWgPair.lexicalForm = oldWgPair.lexicalForm.replaceAll("#", stemAnalysis.lexicalForm);
-
-		newWgPair.isFinalAnalysis = isFinalAnalysis;
+		newWgPair.isFinalAnalysis = true;
 		
 		return newWgPair;
 	}
