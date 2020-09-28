@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Builder {
-	VerbParadigm verbParadigm;
+	Conjugator conjugator;
 	RegexIterator regexIterator;
 	Transliterator transliterator;
 	
@@ -27,9 +27,11 @@ public class Builder {
 	public Builder () {
 		try {
 			this.regexIterator = RegexIterator.createWithPatterns(patternFilePaths);
-			this.verbParadigm = new VerbParadigm.VerbParadigmBuilder()
+			VerbParadigm verbParadigm = new VerbParadigm.VerbParadigmBuilder()
 				.readFrom(verbParadigmFilePath)
 				.build();
+			this.conjugator = new Conjugator(verbParadigm);
+
 			// ə in map file stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
 			// The actual [ə] sound may or may not occur in that position; this is determined by phonotactics.
 			// The ə symbol MUST be removed from any fields of GeezAnalysisPair objects immediately after generating geminated variants.
@@ -123,7 +125,7 @@ public class Builder {
 		// add the same unprocessed part as a variant to newLinesSet
 		analysisList.add(WordGlossPair.newInstance(wgPair));
 		// extract the part to be processed
-		String lineToProcess = extractUnprocessedPart(wgPair).replaceAll("[\\[\\]]", "");
+		String lineToProcess = extractUnprocessedPart(wgPair);
 		// run all patterns from this level on the unprocessed part of the current analysis
 		ArrayList<Root> roots = RootListGenerator.getRoots(lineToProcess);
 
@@ -133,7 +135,7 @@ public class Builder {
 				ArrayList<VerbStem> derivedStems = VerbStem.generateWithPossiblePrefixes(root);
  				for (VerbStem stem : derivedStems) {
 					try {
-						formSet.addAll(this.verbParadigm.buildAllForms(stem));
+						formSet.addAll(this.conjugator.conjugate(stem));
 					} catch (NullPointerException e) { e.printStackTrace(); }
 				}
 				ArrayList<WordGlossPair> formList = new ArrayList<>(formSet);
@@ -151,9 +153,9 @@ public class Builder {
 	private static String extractUnprocessedPart (WordGlossPair wgPair) {
 		Matcher m = unprocessedExtractorPattern.matcher(wgPair.surfaceForm);
 		if (m.find()) {
-			return m.group("unprocessed");
-		}
-		return "";
+			return m.group("unprocessed")
+				.replaceAll("[\\[\\]]", "");
+		} else { return ""; }
 	}
 	
 	private static WordGlossPair constructVerbWgPair (WordGlossPair oldWgPair, WordGlossPair stemAnalysis) {

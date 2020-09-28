@@ -33,25 +33,16 @@ public class VerbParadigm {
 		this.paradigm = new LinkedHashMap<>();
 	}
 
-	// builds all forms for a given verb stem
-
-	public ArrayList<WordGlossPair> buildAllForms (VerbStem stem) throws NullPointerException {
-		
-		ArrayList<WordGlossPair> formList = new ArrayList<>();
-		ArrayList<VerbParadigmCell> singleVerbParadigm = new ArrayList<>();
+	ArrayList<VerbParadigmCell> getSingleParadigm (int numRadicals, VerbType verbType, VerbPreformative derivationalPrefix) {
 		try {
-			singleVerbParadigm = this.paradigm.get(stem.numRadicals)
-					.get(stem.verbType)
-					.get(stem.derivationalPrefix);
-			for (VerbParadigmCell cell : singleVerbParadigm) {
-				formList.add(new VerbFormBuilder(cell, stem).build());
-			}
-			return formList;
+			return this.paradigm.get(numRadicals)
+				.get(verbType)
+				.get(derivationalPrefix);
 		} catch (NullPointerException e) {
-			String message = String.format("No cell was found in paradigm for root: %d-radical, type %s, prefix %s", stem.numRadicals, stem.verbType.toString(), stem.derivationalPrefix.toString());
+			String message = String.format("No cell was found in paradigm for root: %d-radical, type %s, prefix %s", numRadicals, verbType.toString(), derivationalPrefix.toString());
 			throw new NullPointerException(message);
 		}
-	}
+}
 
 	public static class VerbParadigmBuilder {
 	// Same as VerbParadigm.paradigm, but stores cells in Set rather than in a List, for management of duplicates when parsing the paradigm file.
