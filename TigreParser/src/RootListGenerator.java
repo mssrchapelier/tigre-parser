@@ -48,22 +48,11 @@ public class RootListGenerator {
 				char letterToAdd = sourceWord.charAt(nextPos);
 				
 				if (LetterType.isVowel(letterToAdd) && !LetterType.isLongA(letterToAdd)) {
-					/*
-					ArrayList<ConsDescription> fork = copyOfConsDescriptionList(candidateCombination);
-					if (letterToAdd == 'o' || letterToAdd == 'u') {
-						fork.add(new ConsDescription('w', false, false));
-					} else if (letterToAdd == 'e' || letterToAdd == 'i') {
-						fork.add(new ConsDescription('y', false, false));
-					}
-					
-					forks.add(fork);
-					*/
 					if (letterToAdd == 'o' || letterToAdd == 'u') {
 						candidateCombination.add(new ConsDescription('w', false, false));
 					} else if (letterToAdd == 'e' || letterToAdd == 'i') {
 						candidateCombination.add(new ConsDescription('y', false, false));
 					}
-					
 					forks.add(copyOfConsDescriptionList(candidateCombination));
 				} else if (LetterType.isLongA(letterToAdd)) {
 					// Two forks: 1. Verb of type C or D, long A is penultimate vowel belonging to the root. 2. Long A is part of a prefix/suffix.

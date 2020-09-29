@@ -131,7 +131,7 @@ public class Transliterator {
 			token = token.replaceAll(punctuationMarks, "");
 			if (!token.isEmpty() && isInGeez(token)) {
 				GeezAnalysisPair curGeezAnalysisPair = new GeezAnalysisPair();
-				curGeezAnalysisPair.geezWord = token;
+				curGeezAnalysisPair.ethiopicOrtho = token;
 				String ungemOrthoWithSchwas = this.romanizeLine(token);
 				curGeezAnalysisPair.geminatedOrthos = generateGeminatedVariants(ungemOrthoWithSchwas);
 				

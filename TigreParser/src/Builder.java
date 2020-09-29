@@ -15,41 +15,42 @@ public class Builder {
 	VerbProcessor verbProcessor;
 	Transliterator transliterator;
 	
+	final int maxAnalysesToShow;
+
 	// NB: The order of file names in patternFilePaths is NOT arbitrary (the levels generated are processed in this order).
 	static String romanizationMapFilePath = "configs/romanization-map.file";
 	static String verbParadigmFilePath = "configs/verb-paradigm.txt";
 
 	private static String[] patternFilePaths = { "configs/patterns/pref-coord.json", "configs/patterns/pref-relz.json", "configs/patterns/pref-neg.json", "configs/patterns/pref-iobj.json", "configs/patterns/suf-expl.json", "configs/patterns/suf-pron.json", "configs/patterns/pau_2.json", "configs/patterns/pass-ptcp-deriv-pref.json", "configs/patterns/nominal-stem.json", "configs/patterns/lexicon.json" };
 	
-	public Builder () {
-		try {
-			this.patternProcessor = new PatternProcessor.PatternProcessorBuilder()
-				.readFrom(patternFilePaths)
-				.build();
-			VerbParadigm verbParadigm = new VerbParadigm.VerbParadigmBuilder()
-				.readFrom(verbParadigmFilePath)
-				.build();
-			Conjugator conjugator = new Conjugator(verbParadigm);
-			this.verbProcessor = new VerbProcessor(conjugator);
+	public Builder (int maxAnalysesToShow) throws IOException, ParseException {
+		if (maxAnalysesToShow < 0) { throw new IllegalArgumentException("maxAnalysesToShow must be a non-negative integer"); }
+		
+		this.maxAnalysesToShow = maxAnalysesToShow;
+		this.patternProcessor = new PatternProcessor.PatternProcessorBuilder()
+			.readFrom(patternFilePaths)
+			.build();
+		VerbParadigm verbParadigm = new VerbParadigm.VerbParadigmBuilder()
+			.readFrom(verbParadigmFilePath)
+			.build();
+		Conjugator conjugator = new Conjugator(verbParadigm);
+		this.verbProcessor = new VerbProcessor(conjugator);
 
-			// ə in map file stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
-			// The actual [ə] sound may or may not occur in that position; this is determined by phonotactics.
-			// The ə symbol MUST be removed from any fields of GeezAnalysisPair objects immediately after generating geminated variants.
-			this.transliterator = new Transliterator(romanizationMapFilePath);
-		} catch (IOException | ParseException | NullPointerException e) { e.printStackTrace(); }
+		// ə in map file stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
+		// The actual [ə] sound may or may not occur in that position; this is determined by phonotactics.
+		// The ə symbol MUST be removed from any fields of GeezAnalysisPair objects immediately after generating geminated variants.
+		this.transliterator = new Transliterator(romanizationMapFilePath);
 	}
 	
-	public void processFile (String inputPath, String outputPath, int numAnalysesToShow) throws IllegalArgumentException, IOException {
-		
-		if (numAnalysesToShow < 0) { throw new IllegalArgumentException("Illegal argument: number of analyses to show must be a non-negative integer; 0 for showing all analyses"); }
+	public void processFile (String inputPath, String outputPath) throws IOException {
 		
 		BufferedReader textReader = new BufferedReader(new InputStreamReader(new FileInputStream(inputPath), "UTF-8"));
 		PrintWriter writer = new PrintWriter(outputPath, "UTF-8");
 		
-		if (numAnalysesToShow == 0) {
+		if (this.maxAnalysesToShow == 0) {
 			writer.print("Mode: Show all analyses\n\n");
 		} else {
-			writer.printf("Mode: Show first %d analyses%n%n", numAnalysesToShow);
+			writer.printf("Mode: Show first %d analyses%n%n", this.maxAnalysesToShow);
 		}
 		
 		ArrayList<String> lines = new ArrayList<>();
@@ -68,26 +69,26 @@ public class Builder {
 			System.out.printf("Processing line: %d out of %d%n", counter, lines.size());
 			
 			ArrayList<GeezAnalysisPair> wordList = transliterator.buildWordListFromLine(line);
-			for (GeezAnalysisPair word : wordList) {
+			for (GeezAnalysisPair geezWord : wordList) {
 				
-				writer.printf("* * * * * * *%n%nWord: %s%nAnalyses:%n%n", word.geezWord);
-				for (String gemOrtho : word.geminatedOrthos) {
-					word.analysisList.addAll(this.analyseWord(gemOrtho));
+				writer.printf("* * * * * * *%n%nWord: %s%nAnalyses:%n%n", geezWord.ethiopicOrtho);
+				for (String gemOrtho : geezWord.geminatedOrthos) {
+					geezWord.analysisList.addAll(this.analyseWord(gemOrtho));
 				}
-				Collections.sort(word.analysisList, Collections.reverseOrder(new WordGlossPairComparator()));
+				Collections.sort(geezWord.analysisList, Collections.reverseOrder(new WordGlossPairComparator()));
 				
 				int curNumAnalysesToPrint;
-				// numAnalysesToShow >= 0: checked in the beginning of this method
-				if (numAnalysesToShow == 0) {
-					curNumAnalysesToPrint = word.analysisList.size(); 
-				} else if (numAnalysesToShow < word.analysisList.size()) {
-					curNumAnalysesToPrint = numAnalysesToShow;
+				// this.maxAnalysesToShow >= 0: checked in the beginning of this method
+				if (this.maxAnalysesToShow == 0) {
+					curNumAnalysesToPrint = geezWord.analysisList.size(); 
+				} else if (this.maxAnalysesToShow < geezWord.analysisList.size()) {
+					curNumAnalysesToPrint = this.maxAnalysesToShow;
 				} else {
-					curNumAnalysesToPrint = word.analysisList.size();
+					curNumAnalysesToPrint = geezWord.analysisList.size();
 				}
 				
 				for (int i = 0; i < curNumAnalysesToPrint; i++) {
-					WordGlossPair analysis = word.analysisList.get(i);
+					WordGlossPair analysis = geezWord.analysisList.get(i);
 					writer.printf("%s%n%s%n%n", analysis.surfaceForm, analysis.lexicalForm);
 				}
 			}
