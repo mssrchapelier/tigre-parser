@@ -1,153 +1,68 @@
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.math3.util.CombinatoricsUtils;
+import java.io.IOException;
+import java.text.ParseException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.regex.Matcher;
 
 public class Transliterator {
-	// ə in values of romanizationMap stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
+	final private static Pattern entryPattern = Pattern.compile("^(?<geez>.)\\t(?<romanised>.+)$");
+	final private static String punctuationMarksRegex = "[፠፡።፣፤፥፦፧፨\\.!,\\-\\:;\"'/\\\\\\|‒–—―‘’“”\\(\\)\\[\\]<>\\{\\}]";
+
+	// ə in values of romanisationMap stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
 	// The actual [ə] sound may or may not occur in that position; this is determined by phonotactics.
 	// The ə symbol MUST be removed from any fields of GeezAnalysisPair objects immediately after generating geminated variants.
-	HashMap<Character, String> romanizationMap;
+	HashMap<Character, String> romanisationMap;
 	
-	static String punctuationMarks = "[፠፡።፣፤፥፦፧፨\\.!,\\-\\:;\"'/\\\\\\|‒–—―‘’“”\\(\\)\\[\\]<>\\{\\}]";
-	
-	public Transliterator (String romanizationMapFilePath) throws IOException {
-		this.romanizationMap = new HashMap<>();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(romanizationMapFilePath), "UTF-8"));
-		String currentLine;
-		Pattern pPair = Pattern.compile("^(?<geez>.)\\t(?<romanized>.+)$");
-		Matcher mPair;
-		while ((currentLine = reader.readLine()) != null) {
-			mPair = pPair.matcher(currentLine);
-			if (mPair.find() && mPair.groupCount() == 2) {
-				this.romanizationMap.put(mPair.group("geez").charAt(0), mPair.group("romanized"));
-			}
-		}
-		reader.close();
-	}
-	
-	public void romanizeFileReadWrite (String inputPath, String outputPath, boolean printGeez) throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader(inputPath));
-		PrintWriter writer = new PrintWriter(outputPath);
-		
-		String inputLine;
-		String outputLine;
-		while ((inputLine = reader.readLine()) != null) {
-			outputLine = this.romanizeLine(inputLine);
-			if (printGeez) { writer.println(inputLine); }
-			writer.println(outputLine);
-			if (printGeez) { writer.println(); }
-		}
-		reader.close();
-		writer.close();
-	}
-	
-	public String romanizeLine (String geezLine) {
-		String romanizedLine = "";
-		char curChar;
-		for (int i = 0; i < geezLine.length(); i++) {
-			curChar = geezLine.charAt(i);
-			if (this.romanizationMap.containsKey(curChar)) {
-				romanizedLine += this.romanizationMap.get(curChar);
-			} else {
-				romanizedLine += curChar;
-			}
-		}
-		return romanizedLine;
-	}
-	
-	static ArrayList<String> generateGeminatedVariants (String ungemWordWithSchwas) {
-		// ungemLine is a _non-geminated_ romanized version of a word written in Ge'ez script.
-		// does NOT check whether ungemLine was generated from a genuine Ge'ez word
-		// assumes conformity to pattern: (CV)+; V may include schwa
-		ArrayList<String> orthoVariants = new ArrayList<>();
-		ArrayList<Integer> geminablePositions = new ArrayList<>();
-		
-		orthoVariants.add(ungemWordWithSchwas.replaceAll("ə", ""));
-		
-		// Determine positions of geminable consonants.
-		// the first letter is always a consonant; the first consonant can never be geminated
-		// the second letter is a vowel or a schwa in ungemWordWithSchwas
-		for (int i = 2; i < ungemWordWithSchwas.length(); i++) {
-			char curChar = ungemWordWithSchwas.charAt(i);
-			if (LetterType.isConsonant(curChar)
-					&& !(LetterType.isLaryngeal(curChar) || LetterType.isSemivowel(curChar))) {
-				geminablePositions.add(i);
-			}
-		}
-		
-		// Generate all possible ortho variants with respect to gemination
-		for (int k = 1; k <= geminablePositions.size(); k++) {
-			Iterator<int[]> combinationsIterator = CombinatoricsUtils.combinationsIterator(geminablePositions.size(), k);
-			while (combinationsIterator.hasNext()) {
-				// e. g. {2, 4}
-				int[] combination = combinationsIterator.next();
-				ArrayList<Integer> curGeminatedPositions = new ArrayList<>();
-				// e. g. combination == {2, 4} and geminablePositions == {2, 3, 5, 7, 8} => curGeminatedPositions == {5, 8}
-				for (int i = 0; i < combination.length; i++) {
-					curGeminatedPositions.add(geminablePositions.get(combination[i]));
-				}
-				orthoVariants.add(generateGeminatedOrtho(ungemWordWithSchwas, curGeminatedPositions));
-			}
-		}
-		return orthoVariants;
+	public Transliterator (String romanisationMapFilePath) throws IOException, ParseException {
+		this.romanisationMap = readMap(romanisationMapFilePath);
 	}
 
-	private static String generateGeminatedOrtho (String ungeminatedWordWithSchwas, ArrayList<Integer> geminatedPositions) {
-		String geminatedOrtho = "";
-		Iterator<Integer> gemPosIterator = geminatedPositions.iterator();
-		int curPosToGeminate = gemPosIterator.next();
-		for (int i = 0; i < ungeminatedWordWithSchwas.length(); i++) {
-			char curChar = ungeminatedWordWithSchwas.charAt(i);
-			if (!LetterType.isSchwa(curChar)) {
-				geminatedOrtho += curChar;
+	private static HashMap<Character, String> readMap (String romanisationMapFilePath) throws IOException, ParseException {
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(romanisationMapFilePath), "UTF-8"))) {
+			HashMap<Character, String> romanisationMap = new HashMap<>();
+			String currentLine;
+			int curLineNumber = 0;
+			while ((currentLine = reader.readLine()) != null) {
+				curLineNumber++;
+				Matcher matcher = entryPattern.matcher(currentLine);
+				if (matcher.find() && matcher.groupCount() == 2) {
+					romanisationMap.put(matcher.group("geez").charAt(0), matcher.group("romanised"));
+				} else { throw new ParseException("Error when parsing romanisation map file: malformed", curLineNumber); }
 			}
-			if (i == curPosToGeminate) {
-				if (!LetterType.isSchwa(curChar)) {
-					geminatedOrtho += curChar;
-				}
-				if (gemPosIterator.hasNext()) {
-					curPosToGeminate = gemPosIterator.next();
-				}
+			return romanisationMap;
+		}
+	}
+
+	public String romanise (String ethiopicString) throws NotEthiopicScriptException {
+
+		// Returns the romanised representation of an Ethiopic word which assumes conformity to pattern: (CV)+, where V includes schwa.
+		// NB: All consonants in this representation are ungeminated. Gemination is intended to be performed by Geminator.geminate(romanisedWord).
+		// NB: Schwa in this representation is a technical symbol representing the order of the Ethiopic syllabic grapheme rather than the presence of the actual schwa sound. The schwa symbol is needed by Geminator.geminate(romanisedWord) for proper gemination (so that cases like ክኪ /romanised: [kəki]/ and ኪ /romanised: [ki]/ can be disambiguated - both sequences may be realised phonetically as [kki], but the former grapheme sequence cannot represent morphologically or lexically determined gemination, while the latter can). 
+
+		if (!isEthiopic(ethiopicString)) {
+			String message = String.format("The string is not in Ethiopic script: %s", ethiopicString); 
+			throw new NotEthiopicScriptException(message);
+		}
+
+		String romanisedString = "";
+		for (int i = 0; i < ethiopicString.length(); i++) {
+			char ethiopicChar = ethiopicString.charAt(i);
+			if (this.romanisationMap.containsKey(ethiopicChar)) {
+				romanisedString += this.romanisationMap.get(ethiopicChar);
+			} else {
+				romanisedString += ethiopicChar;
 			}
 		}
-		return geminatedOrtho;	
+		return romanisedString;
 	}
-	
-	// takes a line of text in Ge'ez as input, returns an ArrayList<GeezAnalysisPair> with ungeminated transliterations and their geminated orthos to be analysed
-	public ArrayList<GeezAnalysisPair> buildWordListFromLine (String inputLine) {
-		ArrayList<GeezAnalysisPair> list = new ArrayList<>();
-		String[] tokens = inputLine.split("[ \\-]");
-		for (String token : tokens) {
-			token = token.replaceAll(punctuationMarks, "");
-			if (!token.isEmpty() && isInGeez(token)) {
-				GeezAnalysisPair curGeezAnalysisPair = new GeezAnalysisPair();
-				curGeezAnalysisPair.ethiopicOrtho = token;
-				String ungemOrthoWithSchwas = this.romanizeLine(token);
-				curGeezAnalysisPair.geminatedOrthos = generateGeminatedVariants(ungemOrthoWithSchwas);
-				
-				// remove schwa and assign to ungeminatedOrtho. Schwas already not present in geminatedOrthos.
-				curGeezAnalysisPair.ungeminatedOrtho = ungemOrthoWithSchwas.replaceAll("ə", "");
-				list.add(curGeezAnalysisPair);
-			}
-		}
-		return list;
-	}
-	
-	static boolean isInGeez (String line) {
-		for (int i = 0; i < line.length(); i++) {
-			if (!Character.UnicodeBlock.of(line.charAt(i)).equals(Character.UnicodeBlock.ETHIOPIC)) {
-				return false;
-			}
+
+	private static boolean isEthiopic (String word) {
+		for (int i = 0; i < word.length(); i++) {
+			if (!Character.UnicodeBlock.of(word.charAt(i))
+				.equals(Character.UnicodeBlock.ETHIOPIC)) { return false; }
 		}
 		return true;
 	}

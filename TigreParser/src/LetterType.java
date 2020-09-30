@@ -39,7 +39,10 @@ public enum LetterType {
 	}
 
 	static boolean isSubjectToGemination (char c) {
-		// laryngeals and semivowels are never geminated
-		return !(isLaryngeal(c) || isSemivowel(c));
+		if (isConsonant(c)) {
+			// laryngeals and semivowels are never geminated
+			if (isLaryngeal(c) || isSemivowel(c)) { return false; }
+			else { return true; }
+		} else { return false; }
 	}
 }

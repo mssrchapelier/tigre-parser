@@ -35,7 +35,10 @@ public class Launcher {
 				throw new IllegalArgumentException("numanalyses must be a non-negative integer (0 to show all analyses - default)");
 			}
 			this.builder = new Builder(this.maxAnalysesToShow); 
-			builder.processFile(inputFilePath, outputFilePath);
-		} catch (IOException|ParseException e) { e.printStackTrace(); }
+			builder.processFile(inputFilePath, outputFilePath, true);
+		} catch (IOException|ParseException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 }

@@ -12,41 +12,43 @@ public class PatternProcessor {
 	final private static String unprocessedPartRegex = ".*\\[(?<unprocessed>.*)\\].*";
 	final private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
 	
-	private ArrayList<ArrayList<PatternReplacePair>> patternCascade;
+	private ArrayList<ArrayList<ReplaceRule>> patternCascade;
 
-	private PatternProcessor (ArrayList<ArrayList<PatternReplacePair>> patternCascade) {
+	private PatternProcessor (ArrayList<ArrayList<ReplaceRule>> patternCascade) {
 		this.patternCascade = patternCascade;
 	}
 
-	public ArrayList<WordGlossPair> processWord (final String transliteratedVariant) {
+	public ArrayList<WordGlossPair> processWord (final String geminatedOrtho) {
 		ArrayList<WordGlossPair> analysisList = new ArrayList<>();
 
-		WordGlossPair inputWgPair = WordGlossPair.createWithEmptyAnalysis(transliteratedVariant);
-		analysisList.add(inputWgPair);
+		WordGlossPair emptyAnalysis = WordGlossPair.createWithEmptyAnalysis(geminatedOrtho);
+		analysisList.add(emptyAnalysis);
 
-		for (ArrayList<PatternReplacePair> level : this.patternCascade) {
+		for (ArrayList<ReplaceRule> level : this.patternCascade) {
 			analysisList = processLevel(analysisList, level);
 		}
+
 		return analysisList;
 	}
 	
-	private static ArrayList<WordGlossPair> processLevel (ArrayList<WordGlossPair> inputWGPairs,
-			ArrayList<PatternReplacePair> patternLevel) {
+	private static ArrayList<WordGlossPair> processLevel (ArrayList<WordGlossPair> inputAnalysisList,
+			ArrayList<ReplaceRule> patternLevel) {
 		LinkedHashSet<WordGlossPair> newLinesSet = new LinkedHashSet<>();
-		for (WordGlossPair inputWGPair : inputWGPairs) {
+		for (WordGlossPair inputAnalysis : inputAnalysisList) {
 			// add the same unprocessed part as a variant to newLinesSet
-			newLinesSet.add(WordGlossPair.newInstance(inputWGPair));
+			newLinesSet.add(WordGlossPair.newInstance(inputAnalysis));
 			// extract the part to be processed
-			if (!inputWGPair.isFinalAnalysis) {
-				String wordToProcess = extractUnprocessedPart(inputWGPair);
+			if (!inputAnalysis.isFinalAnalysis) {
+				String wordToProcess = extractUnprocessedPart(inputAnalysis);
+
 				// run all patterns from this level on the unprocessed part of the current analysis
-				for (PatternReplacePair prPair : patternLevel) {
-					Pattern pattern = Pattern.compile(prPair.matchPattern);
+				for (ReplaceRule replaceRule : patternLevel) {
+					Pattern pattern = Pattern.compile(replaceRule.matchPattern);
 					Matcher matcher = pattern.matcher(wordToProcess);
 					if (matcher.find()) {
-						String replacement = matcher.replaceAll(prPair.replacePattern);
+						String replacement = matcher.replaceAll(replaceRule.replacePattern);
 						// add the replacement to newLinesSet
-						newLinesSet.add(constructWgPair(inputWGPair, replacement));
+						newLinesSet.add(constructWgPair(inputAnalysis, replacement));
 					}
 				}
 			}
@@ -58,7 +60,7 @@ public class PatternProcessor {
 	static String extractUnprocessedPart (WordGlossPair wgPair) {
 		Matcher m = unprocessedExtractorPattern.matcher(wgPair.surfaceForm);
 		if (m.find()) {	return m.group("unprocessed"); }
-		return "";
+		else { return ""; }
 	}
 	
 	// Replaces the unanalysed part of oldWgPair with the analysis specified in replacement (possibly non-final). Returns a WordGlossPair with the new analysis included.
@@ -92,14 +94,14 @@ public class PatternProcessor {
 	}
 	
 	public static class PatternProcessorBuilder {
-		private ArrayList<ArrayList<PatternReplacePair>> patternCascade;
+		private ArrayList<ArrayList<ReplaceRule>> patternCascade;
 
 		public PatternProcessorBuilder () { this.patternCascade = new ArrayList<>(); }
 
 		public PatternProcessorBuilder readFrom (String[] patternFilePaths) throws IOException {
 			for (String path : patternFilePaths) {
 				try (JsonReader reader = new JsonReader (new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
-					ArrayList<PatternReplacePair> curPatterns = new ArrayList<>();
+					ArrayList<ReplaceRule> curPatterns = new ArrayList<>();
 					reader.beginArray();
 					while (reader.hasNext()) {
 						reader.beginObject();
@@ -114,7 +116,7 @@ public class PatternProcessor {
 							reader.nextName();
 							String replacement = reader.nextString();
 							// create new PRPair
-							curPatterns.add(new PatternReplacePair(regex, replacement));
+							curPatterns.add(new ReplaceRule(regex, replacement));
 						}
 						reader.endObject();
 					}
