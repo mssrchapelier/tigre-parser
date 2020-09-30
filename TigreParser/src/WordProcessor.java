@@ -96,7 +96,7 @@ public class WordProcessor {
 	private ArrayList<WordGlossPair> parseVerbsInList (ArrayList<WordGlossPair> inputList) {
 		ArrayList<WordGlossPair> outputList = new ArrayList<>();
 		for (WordGlossPair inputAnalysis : inputList) {
-			outputList.add(WordGlossPair.newInstance(inputAnalysis));
+			outputList.add(new WordGlossPair(inputAnalysis));
 			if (!inputAnalysis.isFinalAnalysis) {
 				String unanalysedPart = inputAnalysis.getUnanalysedPart();
 				ArrayList<WordGlossPair> verbAnalysisList = this.verbProcessor.processWord(unanalysedPart);
@@ -110,8 +110,8 @@ public class WordProcessor {
 
 	private static ArrayList<WordGlossPair> removeEmptyAnalyses (ArrayList<WordGlossPair> inputList) {
 		ArrayList<WordGlossPair> outputList = new ArrayList<>();
-		for (WordGlossPair pair : inputList) {
-			if (!pair.isEmptyAnalysis()) { outputList.add(WordGlossPair.newInstance(pair)); }
+		for (WordGlossPair analysis : inputList) {
+			if (!analysis.isEmptyAnalysis()) { outputList.add(new WordGlossPair(analysis)); }
 		}
 		return outputList;
 	}

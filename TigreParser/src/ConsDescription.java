@@ -6,22 +6,24 @@ public class ConsDescription {
 	
 	public char consonant;
 	public boolean isGeminated;
-	public boolean followedByLongA;
+	public boolean isFollowedByLongA;
 	
-	public ConsDescription(char letter, boolean isGeminated, boolean followedByLongA) throws IllegalArgumentException {
+	public ConsDescription (char letter, boolean isGeminated, boolean isFollowedByLongA) throws IllegalArgumentException {
 		if (!LetterType.isConsonant(letter)) { throw new IllegalArgumentException("Illegal parameter: char consonant must be a consonant."); }
 		this.consonant = letter;
 		this.isGeminated = isGeminated;
-		this.followedByLongA = followedByLongA;
+		this.isFollowedByLongA = isFollowedByLongA;
 	}
-	
-	public static ConsDescription newInstance (ConsDescription cd) {
-		return new ConsDescription(cd.consonant, cd.isGeminated, cd.followedByLongA);
+
+	public ConsDescription (ConsDescription cd) {
+		this.consonant = cd.consonant;
+		this.isGeminated = cd.isGeminated;
+		this.isFollowedByLongA = cd.isFollowedByLongA;
 	}
 	
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder(29, 241).append(consonant).append(isGeminated).append(followedByLongA).toHashCode();
+		return new HashCodeBuilder(29, 241).append(consonant).append(isGeminated).append(isFollowedByLongA).toHashCode();
 	}
 	
 	@Override
@@ -35,7 +37,7 @@ public class ConsDescription {
         return new EqualsBuilder().
             append(consonant, rhs.consonant).
             append(isGeminated, rhs.isGeminated).
-            append(followedByLongA, rhs.followedByLongA).
+            append(isFollowedByLongA, rhs.isFollowedByLongA).
             isEquals();
     }
 }

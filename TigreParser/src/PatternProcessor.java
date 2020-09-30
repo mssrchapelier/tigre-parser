@@ -36,7 +36,7 @@ public class PatternProcessor {
 		LinkedHashSet<WordGlossPair> newLinesSet = new LinkedHashSet<>();
 		for (WordGlossPair inputAnalysis : inputAnalysisList) {
 			// add the same unprocessed part as a variant to newLinesSet
-			newLinesSet.add(WordGlossPair.newInstance(inputAnalysis));
+			newLinesSet.add(new WordGlossPair(inputAnalysis));
 			// extract the part to be processed
 			if (!inputAnalysis.isFinalAnalysis) {
 				String wordToProcess = extractUnprocessedPart(inputAnalysis);
@@ -101,7 +101,7 @@ public class PatternProcessor {
 		public PatternProcessorBuilder readFrom (String[] patternFilePaths) throws IOException {
 			for (String path : patternFilePaths) {
 				try (JsonReader reader = new JsonReader (new InputStreamReader(new FileInputStream(path), "UTF-8"))) {
-					ArrayList<ReplaceRule> curPatterns = new ArrayList<>();
+					ArrayList<ReplaceRule> level = new ArrayList<>();
 					reader.beginArray();
 					while (reader.hasNext()) {
 						reader.beginObject();
@@ -115,13 +115,14 @@ public class PatternProcessor {
 							// read replacement
 							reader.nextName();
 							String replacement = reader.nextString();
-							// create new PRPair
-							curPatterns.add(new ReplaceRule(regex, replacement));
+							// create new ReplaceRule
+							level.add(new ReplaceRule(regex, replacement));
 						}
 						reader.endObject();
 					}
 					reader.endArray();
-					this.patternCascade.add(curPatterns);
+					// add level to this.patternCascade
+					this.patternCascade.add(level);
 				} catch (IOException e) {
 					throw new IOException(String.format("Failed to read pattern file %s", path));
 				}

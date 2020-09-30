@@ -11,7 +11,7 @@ public class VerbStem {
 	
 	final public String rootAsString;
 	
-	private VerbStem (VerbStem originalStem) {
+	public VerbStem (VerbStem originalStem) {
 		this.rootAsLetters = new ArrayList<>(originalStem.rootAsLetters);
 		this.rootAsString = originalStem.rootAsString;
 		this.numRadicals = originalStem.numRadicals;
@@ -44,9 +44,5 @@ public class VerbStem {
 			if (root.combinesWithPrefix(prefix)) { stemList.add(new VerbStem(root, prefix)); }
 		}
 		return stemList;
-	}
-	
-	public static VerbStem newInstance (VerbStem stem) {
-		return new VerbStem(stem);
 	}
 }

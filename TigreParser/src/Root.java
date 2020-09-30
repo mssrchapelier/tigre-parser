@@ -12,12 +12,12 @@ public class Root {
 		
 		int longACount = 0;
 		for (ConsDescription cd : template) {
-			if (cd.followedByLongA) { longACount++; }
+			if (cd.isFollowedByLongA) { longACount++; }
 			if (longACount > 1) { throw new IllegalArgumentException("template not a valid root: cannot contain more than two consonants followed by [a:] (long A)."); }
 		}
 
 		ArrayList<ConsDescription> templateCopy = new ArrayList<>();
-		for (ConsDescription cd : template) { templateCopy.add(ConsDescription.newInstance(cd)); }
+		for (ConsDescription cd : template) { templateCopy.add(new ConsDescription(cd)); }
 		this.consTemplate = templateCopy;
 	}
 	
@@ -25,12 +25,12 @@ public class Root {
 		if (this.size() == 3 && this.consTemplate.get(1).isGeminated) {
 			return VerbType.B;
 		} else if (this.size() == 4
-				&& this.consTemplate.get(1).followedByLongA
+				&& this.consTemplate.get(1).isFollowedByLongA
 				&& this.consTemplate.get(1).consonant == this.consTemplate.get(2).consonant) {
 			return VerbType.D;
-		} else if ((this.size() == 3 && this.consTemplate.get(0).followedByLongA)
-				|| (this.size() == 4 && this.consTemplate.get(1).followedByLongA)
-				|| (this.size() == 5 && this.consTemplate.get(2).followedByLongA)) {
+		} else if ((this.size() == 3 && this.consTemplate.get(0).isFollowedByLongA)
+				|| (this.size() == 4 && this.consTemplate.get(1).isFollowedByLongA)
+				|| (this.size() == 5 && this.consTemplate.get(2).isFollowedByLongA)) {
 			return VerbType.C;
 		} else {
 			return VerbType.A;
@@ -62,12 +62,11 @@ public class Root {
 		}
 	}
 	
-	static Root newInstance (Root root) throws IllegalArgumentException {
-		ArrayList<ConsDescription> newConsTemplate = new ArrayList<>();
+	public Root (Root root) throws IllegalArgumentException {
+		this.consTemplate = new ArrayList<>();
 		for (ConsDescription cd : root.consTemplate) {
-			newConsTemplate.add(ConsDescription.newInstance(cd));
+			this.consTemplate.add(new ConsDescription(cd));
 		}
-		return new Root(newConsTemplate);
 	}
 	
 	int size () {
@@ -81,7 +80,7 @@ public class Root {
 			String toAppend = "";
 			toAppend += radical.consonant;
 			if (radical.isGeminated) { toAppend += "(2)"; }
-			if (radical.followedByLongA) { toAppend += "(A)"; }
+			if (radical.isFollowedByLongA) { toAppend += "(A)"; }
 			output += toAppend;
 		}
 		return output;

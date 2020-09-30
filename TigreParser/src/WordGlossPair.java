@@ -50,16 +50,18 @@ public class WordGlossPair {
 		return outputPair;
 	}
 	
-	public WordGlossPair() {
+	public WordGlossPair () {
 		this.surfaceForm = "";
 		this.lexicalForm = "";
 		this.isFinalAnalysis = false;
 	}
 	
-	public static WordGlossPair newInstance(WordGlossPair wgPair) {
-		return new WordGlossPair(wgPair.surfaceForm, wgPair.lexicalForm, wgPair.isFinalAnalysis);
+	public WordGlossPair (WordGlossPair wgp) {
+		this.surfaceForm = wgp.surfaceForm;
+		this.lexicalForm = wgp.lexicalForm;
+		this.isFinalAnalysis = wgp.isFinalAnalysis;
 	}
-	
+
 	public String getRawWord () {
 		return surfaceForm.replaceAll("\\-", "");
 	}

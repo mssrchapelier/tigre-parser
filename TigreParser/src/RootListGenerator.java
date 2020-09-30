@@ -60,7 +60,7 @@ public class RootListGenerator {
 					// Fork 1: update last ConsDescription in candidateCombination: followed by long A
 					ArrayList<ConsDescription> fork1 = copyOfConsDescriptionList(candidateCombination);
 					// update lastConsDescription in fork1: followed by long A
-					fork1.get(fork1.size() - 1).followedByLongA = true;
+					fork1.get(fork1.size() - 1).isFollowedByLongA = true;
 
 					// Fork 2: long A is a part of a prefix/suffix; do not add to root description.
 					ArrayList<ConsDescription> fork2 = copyOfConsDescriptionList(candidateCombination);
@@ -69,7 +69,7 @@ public class RootListGenerator {
 					forks.add(fork2);
 				} else if (LetterType.isConsonant(letterToAdd)) {
 					if (letterToAdd == lastLetter &&
-							!candidateCombination.get(candidateCombination.size() - 1).followedByLongA) {
+							!candidateCombination.get(candidateCombination.size() - 1).isFollowedByLongA) {
 						// update last ConsDescription in candidateCombination: geminated
 						ArrayList<ConsDescription> fork1 = copyOfConsDescriptionList(candidateCombination);
 						fork1.get(fork1.size() - 1).isGeminated = true;
@@ -113,7 +113,7 @@ public class RootListGenerator {
 
 	private static ArrayList<ConsDescription> copyOfConsDescriptionList (ArrayList<ConsDescription> oldList) {
 		ArrayList<ConsDescription> newList = new ArrayList<>();
-		for (ConsDescription cd : oldList) { newList.add(ConsDescription.newInstance(cd)); }
+		for (ConsDescription cd : oldList) { newList.add(new ConsDescription(cd)); }
 		return newList;
 	}
 }
