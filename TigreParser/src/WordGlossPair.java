@@ -5,11 +5,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class WordGlossPair {
 
-	private static String unprocessedPartRegex = ".*\\[(?<unprocessed>.*)\\].*";
-	private static Pattern unprocessedExtractorPattern = Pattern.compile(unprocessedPartRegex);
+	private static final String unanalysedPartRegex = ".*\\[(?<unanalysed>.*)\\].*";
+	private static final Pattern unanalysedExtractorPattern = Pattern.compile(unanalysedPartRegex);
 	
-	private static String emptyAnalysisRegex = "^\\[(?<unprocessed>.*)\\]$";
-	private static Pattern emptyAnalysisPattern = Pattern.compile(emptyAnalysisRegex);
+	private static final String emptyAnalysisRegex = "^\\[(?<unanalysed>.*)\\]$";
+	private static final Pattern emptyAnalysisPattern = Pattern.compile(emptyAnalysisRegex);
+
+	// Format for surfaceForm, lexicalForm: morpheme1-...-[unanalysedPart]-...-morphemeN
 
 	public String surfaceForm;
 	public String lexicalForm;
@@ -31,11 +33,50 @@ public class WordGlossPair {
 	}
 
 	public String getUnanalysedPart () {
-		Matcher m = unprocessedExtractorPattern.matcher(this.surfaceForm);
+		Matcher m = unanalysedExtractorPattern.matcher(this.surfaceForm);
 		if (m.find()) {
-			return m.group("unprocessed")
+			return m.group("unanalysed")
 				.replaceAll("[\\[\\]]", "");
 		} else { return ""; }
+	}
+
+	// Replaces the unanalysed part of this WordGlossPair with the analysis specified in replacement (possibly non-final). Returns a WordGlossPair with the new analysis included.
+	// Format for replacement: surface1:lex1-..:..-[unanalysedPart]-..:..-surfaceN:lexN
+
+	public WordGlossPair insertReplacement (String replacement) {
+		String[] morphemes = replacement.split("\\-");
+
+		String analysisSurface = "";
+		String analysisLex = "";
+		boolean isFinalAnalysis = true;
+
+		for (int i = 0; i < morphemes.length; i++) {
+			String morpheme = morphemes[i];
+			String[] morphemeParts = morpheme.split("\\:");
+			if (morphemeParts.length != 2) {
+				throw new IllegalArgumentException("replacement is not formatted properly");
+			}
+			String morphemeSurface = morphemeParts[0];
+			String morphemeLex = morphemeParts[1];
+
+			if (morphemeSurface.charAt(0) == '['
+				&& morphemeLex.charAt(0) == '#') {
+				// unanalysed part -> the returned WGPair is not a final analysis
+				isFinalAnalysis = false;
+			}
+
+			analysisSurface += morphemeSurface;
+			analysisLex += morphemeLex;
+			
+			if (i < morphemes.length - 1) {
+				analysisSurface += "-";
+				analysisLex += "-";
+			}
+		}
+		
+		WordGlossPair innerPartAnalysis = new WordGlossPair(analysisSurface, analysisLex, isFinalAnalysis);
+		WordGlossPair newAnalysis = innerPartAnalysis.insertInto(this);
+		return newAnalysis; 
 	}
 
 	public WordGlossPair insertInto (WordGlossPair pairToChange) {
@@ -45,7 +86,7 @@ public class WordGlossPair {
 		
 		outputPair.surfaceForm = pairToChange.surfaceForm.replaceAll("\\[.*\\]", this.surfaceForm);
 		outputPair.lexicalForm = pairToChange.lexicalForm.replaceAll("#", this.lexicalForm);
-		outputPair.isFinalAnalysis = true;
+		outputPair.isFinalAnalysis = this.isFinalAnalysis;
 		
 		return outputPair;
 	}

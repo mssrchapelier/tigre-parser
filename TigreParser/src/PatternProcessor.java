@@ -39,58 +39,22 @@ public class PatternProcessor {
 			newLinesSet.add(new WordGlossPair(inputAnalysis));
 			// extract the part to be processed
 			if (!inputAnalysis.isFinalAnalysis) {
-				String wordToProcess = extractUnprocessedPart(inputAnalysis);
+				String unprocessedPart = inputAnalysis.getUnanalysedPart();
 
 				// run all patterns from this level on the unprocessed part of the current analysis
 				for (ReplaceRule replaceRule : patternLevel) {
 					Pattern pattern = Pattern.compile(replaceRule.matchPattern);
-					Matcher matcher = pattern.matcher(wordToProcess);
+					Matcher matcher = pattern.matcher(unprocessedPart);
 					if (matcher.find()) {
-						String replacement = matcher.replaceAll(replaceRule.replacePattern);
-						// add the replacement to newLinesSet
-						newLinesSet.add(constructWgPair(inputAnalysis, replacement));
+						// replace and add to newLinesSet
+						String replacement = matcher.replaceFirst(replaceRule.replacePattern);
+						WordGlossPair newAnalysis = inputAnalysis.insertReplacement(replacement);
+						newLinesSet.add(newAnalysis);
 					}
 				}
 			}
 		}
-		
 		return new ArrayList<WordGlossPair>(newLinesSet);
-	}
-	
-	static String extractUnprocessedPart (WordGlossPair wgPair) {
-		Matcher m = unprocessedExtractorPattern.matcher(wgPair.surfaceForm);
-		if (m.find()) {	return m.group("unprocessed"); }
-		else { return ""; }
-	}
-	
-	// Replaces the unanalysed part of oldWgPair with the analysis specified in replacement (possibly non-final). Returns a WordGlossPair with the new analysis included.
-	static WordGlossPair constructWgPair (WordGlossPair oldWgPair, String replacement) throws IllegalArgumentException {
-		String[] morphemes = replacement.split("\\-");
-		String analysisSurface = "";
-		String analysisLex = "";
-		boolean isFinalAnalysis = true;
-		for (int i = 0; i < morphemes.length; i++) {
-			String morpheme = morphemes[i];
-			String[] morphemeParts = morpheme.split("\\:");
-			if (morphemeParts.length != 2) { throw new IllegalArgumentException("replacement is not formatted properly"); }
-			if (morphemeParts[0].charAt(0) == '[' && morphemeParts[1].charAt(0) == '#') {
-				// unanalysed part -> the returned WGPair is not a final analysis
-				isFinalAnalysis = false;
-			}
-			analysisSurface += morphemeParts[0];
-			analysisLex += morphemeParts[1];
-			
-			if (i < morphemes.length - 1) {
-				analysisSurface += "-";
-				analysisLex += "-";
-			}
-		}
-		
-		WordGlossPair newWgPair = new WordGlossPair();
-		newWgPair.surfaceForm = oldWgPair.surfaceForm.replaceAll("\\[.*\\]", analysisSurface);
-		newWgPair.lexicalForm = oldWgPair.lexicalForm.replaceAll("#", analysisLex);
-		newWgPair.isFinalAnalysis = isFinalAnalysis;
-		return newWgPair;
 	}
 	
 	public static class PatternProcessorBuilder {
@@ -130,6 +94,8 @@ public class PatternProcessor {
 			return this;
 		}
 		
-		public PatternProcessor build () { return new PatternProcessor(this.patternCascade); }
+		public PatternProcessor build () {
+			return new PatternProcessor(this.patternCascade);
+		}
 	}
 }
