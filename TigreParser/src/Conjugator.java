@@ -17,9 +17,10 @@ public class Conjugator {
 	}
 
 	private static WordGlossPair constructSingleForm (VerbParadigmCell cell, VerbStem stem) {
-		WordGlossPair wgPair = new WordGlossPair();
-		wgPair.isFinalAnalysis = true;
 		
+		String surfaceForm = "";
+		String lexicalForm = "";
+
 		ListIterator<MorphemeDescriptionPair> it;
 		MorphemeDescriptionPair curMorpheme;
 		
@@ -29,17 +30,17 @@ public class Conjugator {
 		
 		while (it.hasNext()) {
 			curMorpheme = it.next();
-			wgPair.surfaceForm += curMorpheme.surfaceForm;
-			wgPair.lexicalForm += curMorpheme.lexicalForm;
+			surfaceForm += curMorpheme.surfaceForm;
+			lexicalForm += curMorpheme.lexicalForm;
 			if (it.hasNext()) {
-				wgPair.surfaceForm += "-";
-				wgPair.lexicalForm += "-";
+				surfaceForm += "-";
+				lexicalForm += "-";
 			}
 		}
 		
 		if (!cell.prefixes.isEmpty()) {
-			wgPair.surfaceForm += "-";
-			wgPair.lexicalForm += "-";
+			surfaceForm += "-";
+			lexicalForm += "-";
 		}
 		
 		// appending root
@@ -49,42 +50,42 @@ public class Conjugator {
 			char consToAdd = stem.rootAsLetters.get(radIndex);
 			
 			if (cell.geminationPattern[radIndex] > 0) {
-				wgPair.surfaceForm += consToAdd;
+				surfaceForm += consToAdd;
 			}
 			
 			if (cell.geminationPattern[radIndex] == 2 && LetterType.isSubjectToGemination(stem.rootAsLetters.get(radIndex))) {
-				wgPair.surfaceForm += consToAdd;
+				surfaceForm += consToAdd;
 			}
 			// append vowel if applicable
 			if (radIndex != stem.numRadicals - 1) {
 				char charToAppend = cell.vowelPattern.surfaceForm.charAt(radIndex);
 				if (charToAppend != '0') {
-					wgPair.surfaceForm += charToAppend;
+					surfaceForm += charToAppend;
 				}
 			}
 		}
-		wgPair.lexicalForm += stem.rootAsString + ":";
-		wgPair.lexicalForm += cell.vowelPattern.lexicalForm;
+		lexicalForm += stem.rootAsString + ":";
+		lexicalForm += cell.vowelPattern.lexicalForm;
 		
 		// appending suffixes
 		
 		if (!cell.suffixes.isEmpty()) {
-			wgPair.surfaceForm += "-";
-			wgPair.lexicalForm += "-";
+			surfaceForm += "-";
+			lexicalForm += "-";
 		}
 		
 		it = cell.suffixes.listIterator();
 		
 		while (it.hasNext()) {
 			curMorpheme = it.next();
-			wgPair.surfaceForm += curMorpheme.surfaceForm;
-			wgPair.lexicalForm += curMorpheme.lexicalForm;
+			surfaceForm += curMorpheme.surfaceForm;
+			lexicalForm += curMorpheme.lexicalForm;
 			if (it.hasNext()) {
-				wgPair.surfaceForm += "-";
-				wgPair.lexicalForm += "-";
+				surfaceForm += "-";
+				lexicalForm += "-";
 			}
 		}
 		
-		return wgPair;
+		return new WordGlossPair(surfaceForm, lexicalForm);
 	}
 }

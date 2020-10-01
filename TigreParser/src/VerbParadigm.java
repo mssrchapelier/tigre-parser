@@ -59,6 +59,10 @@ public class VerbParadigm {
 		private ListIterator<String> lineIterator;
 		private int currentLineNum;
 
+		private int curNumRadicals;
+		private VerbType curVerbType;
+		private VerbPreformative curDerivPrefix;
+
 		public VerbParadigmBuilder () {
 			this.lines = new ArrayList<>();
 			this.lineIterator = lines.listIterator();
@@ -74,29 +78,26 @@ public class VerbParadigm {
 		}
 		
 		public VerbParadigmBuilder readFrom (String paradigmFilePath) throws IOException, ConfigParseException {
-			BufferedReader reader = new BufferedReader(new FileReader(paradigmFilePath));
-			String currentLine;
-			
-			while ((currentLine = reader.readLine()) != null) {
-				this.lines.add(currentLine);
+			try (BufferedReader reader = new BufferedReader(new FileReader(paradigmFilePath))) {
+				String currentLine;
+				while ((currentLine = reader.readLine()) != null) {
+					this.lines.add(currentLine);
+				}
 			}
-			reader.close();
 			
 			this.lineIterator = lines.listIterator();
 			this.currentLineNum = 0;
+
 			while (this.lineIterator.hasNext()) {
-				currentLine = this.lineIterator.next();
+				String currentLine = this.lineIterator.next();
 				currentLineNum++;
 				if (lineHasContent(currentLine)) { // skip comments and empty lines
 					if (currentLine.charAt(0) == '$') {
 						this.lineIterator.previous();
 						currentLineNum--;
 						// this.lineIterator, this.currentLineNum: before paradigm header
-						try {
-							this.readSingleParadigm();
-							// this.lineIterator, this.currentLineNum: before next paradigm header, or at last line
-						}
-						catch (ConfigParseException e) { e.printStackTrace(); } // ConfigParseException handled here; parsing will continue with the next paradigm in the file.
+						this.readSingleParadigm();
+						// this.lineIterator, this.currentLineNum: before next paradigm header, or at last line
 					} else {
 						throw new ConfigParseException("Failed to read paradigm file header: paradigm file not read");
 					}
@@ -110,64 +111,61 @@ public class VerbParadigm {
 			String paradigmHeaderLine = this.lineIterator.next();
 			this.currentLineNum++;
 
-			// e. g. {"3", "A", "ASTA"} -> 3-radical, type A, prefix ASTA
-			String[] paradigmHeaderTriple = this.parseParadigmHeader(paradigmHeaderLine);
-			
-			int numRadicals;
-			VerbType verbType;
-			VerbPreformative derivPrefix;
-			try {
-				numRadicals = Integer.parseInt(paradigmHeaderTriple[0]);
-				verbType = VerbType.parseVerbType(paradigmHeaderTriple[1]);
-				derivPrefix = VerbPreformative.parseVerbPreformative(paradigmHeaderTriple[2]);
-			} catch (IllegalArgumentException e) {
-				throw new ConfigParseException(String.format("Failed to read paradigm header at line %d; paradigm not read", this.currentLineNum));
-			}
+			// e. g. {"3", "A", "ASTA"} ->
+			// this.curNumRadicals = 3
+			// this.curVerbType = VerbType.A
+			// this.curDerivPrefix = VerbPreformative.ASTA
+			this.updateParadigmHeader(paradigmHeaderLine);
 			
 			// read everything before the next paradigm header (or the end of this file if there are no more headers)
 			ArrayList<String> paradigmLines = this.readSingleParadigmAsLines();
-
 			// this.lineIterator, this.currentLineNum: before next paradigm header, or at last line
 	
-			// build cell list
-			
-			LinkedHashSet<VerbParadigmCell> cellsAsSet = new LinkedHashSet<>();
-			for (String line : paradigmLines) {
+			// build cell set
+			LinkedHashSet<VerbParadigmCell> cellSet = this.buildCellSet(paradigmLines);
+			this.putCellsInParadigm(cellSet);
+		}
+
+		private LinkedHashSet<VerbParadigmCell> buildCellSet (ArrayList<String> cellsAsLines) throws ConfigParseException {
+			LinkedHashSet<VerbParadigmCell> cellSet = new LinkedHashSet<>();
+			for (String line : cellsAsLines) {
 				try {
-					VerbParadigmCell cell = VerbParadigmCell.VerbParadigmCellBuilder.parseAndBuild(line, numRadicals, verbType, derivPrefix);
-					cellsAsSet.add(cell);
+					VerbParadigmCell cell = VerbParadigmCell.VerbParadigmCellBuilder.parseAndBuild(line, this.curNumRadicals, this.curVerbType, this.curDerivPrefix);
+					cellSet.add(cell);
 				} catch (ConfigParseException e) {
-					throw new ConfigParseException(String.format("Failed to read paradigm at line %d: not included in paradigm", this.currentLineNum));
+					throw new ConfigParseException("Failed to read paradigm line");
 				}
 			}
-			ArrayList<VerbParadigmCell> cellsAsList = new ArrayList<>(cellsAsSet);
-			
+			return cellSet;
+		}
+
+		private void putCellsInParadigm (LinkedHashSet<VerbParadigmCell> cellSet) {
 			// check whether paradigmAsSets already has cells for this num radicals + verb type + derivational prefix.
 			// If it does, add cells to the corresponding set.
 			// If it doesn't, create a new set.
 			
 			LinkedHashSet<VerbParadigmCell> curSingleVerbParadigm;
-			if (this.paradigmAsSets.containsKey(numRadicals) &&
-				this.paradigmAsSets.get(numRadicals).containsKey(verbType) &&
-				this.paradigmAsSets.get(numRadicals).get(verbType).containsKey(derivPrefix)) {
-				curSingleVerbParadigm = this.paradigmAsSets.get(numRadicals).get(verbType).get(derivPrefix); // get existing paradigm
-				curSingleVerbParadigm.addAll(cellsAsList); // add non-duplicate entries
-				this.paradigmAsSets.get(numRadicals).get(verbType).put(derivPrefix, curSingleVerbParadigm); // put the updated paradigm back
-			} else if (this.paradigmAsSets.containsKey(numRadicals) &&
-						this.paradigmAsSets.get(numRadicals).containsKey(verbType) &&
-						!this.paradigmAsSets.get(numRadicals).get(verbType).containsKey(derivPrefix)) {
-				this.paradigmAsSets.get(numRadicals).get(verbType).put(derivPrefix, cellsAsSet);
-			} else if (this.paradigmAsSets.containsKey(numRadicals) &&
-						!this.paradigmAsSets.get(numRadicals).containsKey(verbType)) {
+			if (this.paradigmAsSets.containsKey(this.curNumRadicals) &&
+				this.paradigmAsSets.get(this.curNumRadicals).containsKey(this.curVerbType) &&
+				this.paradigmAsSets.get(this.curNumRadicals).get(this.curVerbType).containsKey(this.curDerivPrefix)) {
+				curSingleVerbParadigm = this.paradigmAsSets.get(this.curNumRadicals).get(this.curVerbType).get(this.curDerivPrefix); // get existing paradigm
+				curSingleVerbParadigm.addAll(cellSet); // add entries
+				this.paradigmAsSets.get(this.curNumRadicals).get(this.curVerbType).put(this.curDerivPrefix, curSingleVerbParadigm); // put the updated paradigm back
+			} else if (this.paradigmAsSets.containsKey(this.curNumRadicals) &&
+						this.paradigmAsSets.get(this.curNumRadicals).containsKey(this.curVerbType) &&
+						!this.paradigmAsSets.get(this.curNumRadicals).get(this.curVerbType).containsKey(this.curDerivPrefix)) {
+				this.paradigmAsSets.get(this.curNumRadicals).get(this.curVerbType).put(this.curDerivPrefix, cellSet);
+			} else if (this.paradigmAsSets.containsKey(this.curNumRadicals) &&
+						!this.paradigmAsSets.get(this.curNumRadicals).containsKey(this.curVerbType)) {
 				LinkedHashMap<VerbPreformative, LinkedHashSet<VerbParadigmCell>> derivPrefixMap = new LinkedHashMap<>();
-				derivPrefixMap.put(derivPrefix, cellsAsSet);
-				this.paradigmAsSets.get(numRadicals).put(verbType, derivPrefixMap);
-			} else { // if !this.paradigmAsSets.containsKey(numRadicals)
+				derivPrefixMap.put(this.curDerivPrefix, cellSet);
+				this.paradigmAsSets.get(this.curNumRadicals).put(this.curVerbType, derivPrefixMap);
+			} else { // if !this.paradigmAsSets.containsKey(this.curNumRadicals)
 				LinkedHashMap<VerbPreformative, LinkedHashSet<VerbParadigmCell>> derivPrefixMap = new LinkedHashMap<>();
-				derivPrefixMap.put(derivPrefix, cellsAsSet);
+				derivPrefixMap.put(this.curDerivPrefix, cellSet);
 				LinkedHashMap<VerbType, LinkedHashMap<VerbPreformative, LinkedHashSet<VerbParadigmCell>>> typeMap = new LinkedHashMap<>();
-				typeMap.put(verbType, derivPrefixMap);
-				this.paradigmAsSets.put(numRadicals, typeMap);
+				typeMap.put(this.curVerbType, derivPrefixMap);
+				this.paradigmAsSets.put(this.curNumRadicals, typeMap);
 			}
 		}
 
@@ -198,20 +196,16 @@ public class VerbParadigm {
 			return paradigmLines;
 		}
 		
-		private String[] parseParadigmHeader(String line) throws ConfigParseException {
-			// $radicals:3,type:A,prefix:ASTA => {"3", "A", "ASTA"}
-
-			String[] headerTriple = new String[3];
-			
-			Matcher m = paradigmHeaderPattern.matcher(line);
-			if (m.find() && m.groupCount() == 3) {
-				headerTriple[0] = m.group("rad");
-				headerTriple[1] = m.group("type");
-				headerTriple[2] = m.group("prefix");
-			} else {
+		private void updateParadigmHeader (String line) throws ConfigParseException {
+			Matcher matcher = paradigmHeaderPattern.matcher(line);
+			try {
+				matcher.find();
+				this.curNumRadicals = Integer.parseInt(matcher.group("rad"));
+				this.curVerbType = VerbType.parseVerbType(matcher.group("type"));
+				this.curDerivPrefix = VerbPreformative.parseVerbPreformative(matcher.group("prefix"));
+			} catch (IllegalStateException|IllegalArgumentException e) {
 				throw new ConfigParseException(String.format("Failed to read paradigm header at line %d", this.currentLineNum));
 			}
-			return headerTriple;
 		}
 		
 		private static boolean lineHasContent (String line) {
@@ -244,6 +238,5 @@ public class VerbParadigm {
 
 			return paradigmAsLists;
 		}
-
 	}
 }

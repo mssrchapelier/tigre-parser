@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class WordGlossPair {
+class WordGlossPair {
 
 	private static final String unanalysedPartRegex = ".*\\[(?<unanalysed>.*)\\].*";
 	private static final Pattern unanalysedExtractorPattern = Pattern.compile(unanalysedPartRegex);
@@ -13,26 +13,34 @@ public class WordGlossPair {
 
 	// Format for surfaceForm, lexicalForm: morpheme1-...-[unanalysedPart]-...-morphemeN
 
-	public String surfaceForm;
-	public String lexicalForm;
-	public boolean isFinalAnalysis;
+	final String surfaceForm;
+	final String lexicalForm;
+	final boolean isFinalAnalysis;
 	
-	public WordGlossPair(String surfaceForm, String lexicalForm, boolean isFinalAnalysis) {
+	WordGlossPair(String surfaceForm, String lexicalForm) {
 		this.surfaceForm = surfaceForm;
 		this.lexicalForm = lexicalForm;
-		this.isFinalAnalysis = isFinalAnalysis;
+		this.isFinalAnalysis = isFinalAnalysis(surfaceForm, lexicalForm);
 	}
 
-	public static WordGlossPair createWithEmptyAnalysis (String surfaceForm) {
-		return new WordGlossPair ("[" + surfaceForm + "]", "#",	false);
+	private static boolean isFinalAnalysis (String surfaceForm, String lexicalForm) {
+		if (surfaceForm.contains("[") || lexicalForm.contains("#")) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
-	public boolean isEmptyAnalysis () {
+	static WordGlossPair createWithEmptyAnalysis (String surfaceForm) {
+		return new WordGlossPair ("[" + surfaceForm + "]", "#");
+	}
+
+	boolean isEmptyAnalysis () {
 		Matcher m = emptyAnalysisPattern.matcher(this.surfaceForm);
 		return ( !this.isFinalAnalysis && this.lexicalForm == "#" && m.find() );
 	}
 
-	public String getUnanalysedPart () {
+	String getUnanalysedPart () {
 		Matcher m = unanalysedExtractorPattern.matcher(this.surfaceForm);
 		if (m.find()) {
 			return m.group("unanalysed")
@@ -43,7 +51,7 @@ public class WordGlossPair {
 	// Replaces the unanalysed part of this WordGlossPair with the analysis specified in replacement (possibly non-final). Returns a WordGlossPair with the new analysis included.
 	// Format for replacement: surface1:lex1-..:..-[unanalysedPart]-..:..-surfaceN:lexN
 
-	public WordGlossPair insertReplacement (String replacement) {
+	WordGlossPair insertReplacement (String replacement) {
 		String[] morphemes = replacement.split("\\-");
 
 		String analysisSurface = "";
@@ -74,39 +82,32 @@ public class WordGlossPair {
 			}
 		}
 		
-		WordGlossPair innerPartAnalysis = new WordGlossPair(analysisSurface, analysisLex, isFinalAnalysis);
+		WordGlossPair innerPartAnalysis = new WordGlossPair(analysisSurface, analysisLex);
 		WordGlossPair newAnalysis = innerPartAnalysis.insertInto(this);
 		return newAnalysis; 
 	}
 
-	public WordGlossPair insertInto (WordGlossPair pairToChange) {
+	WordGlossPair insertInto (WordGlossPair pairToChange) {
 		
 		// Inserts this pair into the unanalysed part of pairToChange.
-		WordGlossPair outputPair = new WordGlossPair();
 		
-		outputPair.surfaceForm = pairToChange.surfaceForm.replaceAll("\\[.*\\]", this.surfaceForm);
-		outputPair.lexicalForm = pairToChange.lexicalForm.replaceAll("#", this.lexicalForm);
-		outputPair.isFinalAnalysis = this.isFinalAnalysis;
+		String surfaceForm = pairToChange.surfaceForm.replaceAll("\\[.*\\]", this.surfaceForm);
+		String lexicalForm = pairToChange.lexicalForm.replaceAll("#", this.lexicalForm);
 		
-		return outputPair;
+		return new WordGlossPair(surfaceForm, lexicalForm);
 	}
 	
-	public WordGlossPair () {
-		this.surfaceForm = "";
-		this.lexicalForm = "";
-		this.isFinalAnalysis = false;
-	}
-	
-	public WordGlossPair (WordGlossPair wgp) {
+	WordGlossPair (WordGlossPair wgp) {
 		this.surfaceForm = wgp.surfaceForm;
 		this.lexicalForm = wgp.lexicalForm;
 		this.isFinalAnalysis = wgp.isFinalAnalysis;
 	}
 
-	public String getRawWord () {
+	String getRawWord () {
 		return surfaceForm.replaceAll("\\-", "");
 	}
-	
+
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(109, 113)
 				.append(surfaceForm)
@@ -116,17 +117,13 @@ public class WordGlossPair {
 	
 	@Override
 	public boolean equals(Object obj) {
-       if (!(obj instanceof WordGlossPair))
-            return false;
-        if (obj == this)
-            return true;
+		if (!(obj instanceof WordGlossPair)) { return false; }
+		if (obj == this) { return true; }
 
-        WordGlossPair rhs = (WordGlossPair) obj;
-        return new EqualsBuilder().
-            // if deriving: appendSuper(super.equals(obj)).
-            append(surfaceForm, rhs.surfaceForm)
-            .append(lexicalForm, rhs.lexicalForm)
-            .append(isFinalAnalysis, rhs.isFinalAnalysis)
-            .isEquals();
-    }
+		WordGlossPair rhs = (WordGlossPair) obj;
+		return new EqualsBuilder().append(surfaceForm, rhs.surfaceForm)
+					.append(lexicalForm, rhs.lexicalForm)
+					.append(isFinalAnalysis, rhs.isFinalAnalysis)
+					.isEquals();
+	}
 }
