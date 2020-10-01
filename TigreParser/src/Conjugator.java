@@ -8,7 +8,7 @@ public class Conjugator {
 	public Conjugator (VerbParadigm paradigm) { this.paradigm = paradigm; }
 
 	public ArrayList<WordGlossPair> conjugate (VerbStem stem) {
-		ArrayList<VerbParadigmCell> singleVerbParadigm = this.paradigm.getSingleParadigm(stem.numRadicals, stem.verbType, stem.derivationalPrefix);
+		ArrayList<VerbParadigmCell> singleVerbParadigm = this.paradigm.getSingleVerbParadigm(stem.numRadicals, stem.verbType, stem.derivationalPrefix);
 		ArrayList<WordGlossPair> formList = new ArrayList<>();
 		for (VerbParadigmCell cell : singleVerbParadigm) {
 			formList.add(constructSingleForm(cell, stem));

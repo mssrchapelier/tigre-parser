@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.ParseException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class Builder {
 		this.maxAnalyses = maxAnalyses;
 	}
 
-	public Builder (int maxAnalyses) throws IOException, ParseException {
+	public Builder (int maxAnalyses) throws IOException, ConfigParseException {
 		if (maxAnalyses < 0) { throw new IllegalArgumentException("maxAnalyses must be a non-negative integer"); }
 		
 		this.setMaxAnalyses(maxAnalyses);
@@ -110,7 +109,7 @@ public class Builder {
 		 * For i-th analysis,
 		 *
 		 * - analysisArray[i][0] is the romanised representation of the word (with morpheme boundaries);
-		 * - analysisArray[i][1] is the gloss."
+		 * - analysisArray[i][1] is the gloss.
 		 * 
 		 * Example: አሰይድ -> { {">-a-sayd", "1.SG-CAUS-syd:IMPF"}, {">asayd", "(>syd).PL"} }.
 		 *

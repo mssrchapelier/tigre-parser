@@ -1,6 +1,5 @@
 import java.util.regex.Pattern;
 import java.io.IOException;
-import java.text.ParseException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.FileInputStream;
@@ -16,11 +15,11 @@ public class Transliterator {
 	// The ə symbol MUST be removed from any fields of GeezAnalysisPair objects immediately after generating geminated variants.
 	HashMap<Character, String> romanisationMap;
 	
-	public Transliterator (String romanisationMapFilePath) throws IOException, ParseException {
+	public Transliterator (String romanisationMapFilePath) throws IOException, ConfigParseException {
 		this.romanisationMap = readMap(romanisationMapFilePath);
 	}
 
-	private static HashMap<Character, String> readMap (String romanisationMapFilePath) throws IOException, ParseException {
+	private static HashMap<Character, String> readMap (String romanisationMapFilePath) throws IOException, ConfigParseException {
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(romanisationMapFilePath), "UTF-8"))) {
 			HashMap<Character, String> romanisationMap = new HashMap<>();
 			String currentLine;
@@ -30,7 +29,7 @@ public class Transliterator {
 				Matcher matcher = entryPattern.matcher(currentLine);
 				if (matcher.find() && matcher.groupCount() == 2) {
 					romanisationMap.put(matcher.group("geez").charAt(0), matcher.group("romanised"));
-				} else { throw new ParseException("Error when parsing romanisation map file: malformed", curLineNumber); }
+				} else { throw new ConfigParseException(String.format("Failed to read romanisation map file: error at line %d", curLineNumber)); }
 			}
 			return romanisationMap;
 		}

@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.text.ParseException;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
@@ -36,7 +35,7 @@ public class Launcher {
 			}
 			this.builder = new Builder(this.maxAnalysesToShow); 
 			builder.processFile(inputFilePath, outputFilePath, true);
-		} catch (IOException|ParseException e) {
+		} catch (IOException|ConfigParseException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
