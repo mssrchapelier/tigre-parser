@@ -4,22 +4,20 @@ import java.util.List;
 
 public class VerbStem {
 	
-	final public ArrayList<Character> rootAsLetters;
-	final public VerbPreformative derivationalPrefix;
-	final public VerbType verbType;
-	final public int numRadicals;
+	final VerbStemDescription stemDescription;
+	final ArrayList<Character> rootAsLetters;
 	
-	final public String rootAsString;
+	// --- FOR TESTING ---
+	// implement getRootAsString method, remove rootAsString field
+	final String rootAsString;
 	
-	public VerbStem (VerbStem originalStem) {
-		this.rootAsLetters = new ArrayList<>(originalStem.rootAsLetters);
-		this.rootAsString = originalStem.rootAsString;
-		this.numRadicals = originalStem.numRadicals;
-		this.derivationalPrefix = originalStem.derivationalPrefix;
-		this.verbType = originalStem.verbType;
+	VerbStem (VerbStem stem) {
+		this.stemDescription = stem.stemDescription;
+		this.rootAsLetters = new ArrayList<>(stem.rootAsLetters);
+		this.rootAsString = stem.rootAsString;
 	}
 	
-	private VerbStem (Root root, VerbPreformative derivationalPrefix) throws IllegalArgumentException {
+	private VerbStem (Root root, VerbPreformative derivationalPrefix) {
 		
 		this.rootAsString = root.toString();
 		
@@ -29,16 +27,16 @@ public class VerbStem {
 		}
 		this.rootAsLetters = rootAsLetters;
 		
-		this.verbType = root.determineVerbType();
-		this.derivationalPrefix = derivationalPrefix;
-		this.numRadicals = this.rootAsLetters.size();
+		this.stemDescription = new VerbStemDescription(NumRadicals.parseNumRadicals(Integer.toString(this.rootAsLetters.size())),
+								root.determineVerbType(),
+								derivationalPrefix);
 	}
 
-	public VerbStem createWithNoPrefix (Root root) throws IllegalArgumentException {
+	VerbStem createWithNoPrefix (Root root) {
 		return new VerbStem(root, VerbPreformative.NO_PREFORMATIVE);
 	}
 
-	public static ArrayList<VerbStem> generateWithPossiblePrefixes (Root root) throws IllegalArgumentException {
+	static ArrayList<VerbStem> generateWithPossiblePrefixes (Root root) {
 		ArrayList<VerbStem> stemList = new ArrayList<>();
 		for (VerbPreformative prefix : VerbPreformative.values()) {
 			if (root.combinesWithPrefix(prefix)) { stemList.add(new VerbStem(root, prefix)); }

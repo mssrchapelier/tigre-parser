@@ -9,9 +9,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class VerbParadigmCell {
 	
-	int acceptedNumRadicals;
-	VerbType acceptedVerbType;
-	VerbPreformative acceptedDerivPrefix;
+	VerbStemDescription stemDescription;
 	
 	VerbGrammemeSet grammemeSet;
 	
@@ -25,7 +23,95 @@ public class VerbParadigmCell {
 	// suffixes
 	ArrayList<MorphemeDescriptionPair> suffixes;
 
+	private VerbParadigmCell (VerbStemDescription stemDescription,
+					VerbGrammemeSet grammemeSet,
+					ArrayList<MorphemeDescriptionPair> prefixes,
+					MorphemeDescriptionPair vowelPattern,
+					int[] geminationPattern,
+					ArrayList<MorphemeDescriptionPair> suffixes) {
+		this.stemDescription = stemDescription;
+		this.grammemeSet = grammemeSet;
+		this.prefixes = prefixes;
+		this.vowelPattern = vowelPattern;
+		this.geminationPattern = geminationPattern;
+		this.suffixes = suffixes;
+	}
+
+	WordGlossPair applyTo (VerbStem stem) {
+		String surfaceForm = "";
+		String lexicalForm = "";
+
+		ListIterator<MorphemeDescriptionPair> it;
+		MorphemeDescriptionPair curMorpheme;
+		
+		// appending prefixes
+		
+		it = this.prefixes.listIterator();
+		
+		while (it.hasNext()) {
+			curMorpheme = it.next();
+			surfaceForm += curMorpheme.surfaceForm;
+			lexicalForm += curMorpheme.lexicalForm;
+			if (it.hasNext()) {
+				surfaceForm += "-";
+				lexicalForm += "-";
+			}
+		}
+		
+		if (!this.prefixes.isEmpty()) {
+			surfaceForm += "-";
+			lexicalForm += "-";
+		}
+		
+		// appending root
+		
+		int numRadicals = stem.rootAsLetters.size();
+		for (int radIndex = 0; radIndex < numRadicals; radIndex++) {
+			// geminate if applicable
+			char consToAdd = stem.rootAsLetters.get(radIndex);
+			
+			if (this.geminationPattern[radIndex] > 0) {
+				surfaceForm += consToAdd;
+			}
+			
+			if (this.geminationPattern[radIndex] == 2 && LetterType.isSubjectToGemination(stem.rootAsLetters.get(radIndex))) {
+				surfaceForm += consToAdd;
+			}
+			// append vowel if applicable
+			if (radIndex != numRadicals - 1) {
+				char charToAppend = this.vowelPattern.surfaceForm.charAt(radIndex);
+				if (charToAppend != '0') {
+					surfaceForm += charToAppend;
+				}
+			}
+		}
+		lexicalForm += stem.rootAsString + ":";
+		lexicalForm += this.vowelPattern.lexicalForm;
+		
+		// appending suffixes
+		
+		if (!this.suffixes.isEmpty()) {
+			surfaceForm += "-";
+			lexicalForm += "-";
+		}
+		
+		it = this.suffixes.listIterator();
+		
+		while (it.hasNext()) {
+			curMorpheme = it.next();
+			surfaceForm += curMorpheme.surfaceForm;
+			lexicalForm += curMorpheme.lexicalForm;
+			if (it.hasNext()) {
+				surfaceForm += "-";
+				lexicalForm += "-";
+			}
+		}
+		
+		return new WordGlossPair(surfaceForm, lexicalForm);
+	}
+
 	// --- FOR TESTING ---
+	/*
 	public void testPrintA () {
 		if (this.acceptedNumRadicals == 3
 			&& this.acceptedVerbType == VerbType.A
@@ -36,8 +122,10 @@ public class VerbParadigmCell {
 			&& this.grammemeSet.gender == Gender.COMMON
 			&& this.grammemeSet.number == Number.SINGULAR) { System.out.println(this.toString()); }
 	}
+	*/
 
 	// --- FOR TESTING ---
+	/*
 	public String toString () {
 		String message = "";
 		message += "--- cell ---" + "\n";
@@ -71,24 +159,12 @@ public class VerbParadigmCell {
 
 		return message;
 	}
-	
-	public VerbParadigmCell () {
-		this.acceptedNumRadicals = 0;
-		this.acceptedVerbType = VerbType.UNKNOWN;
-		this.acceptedDerivPrefix = VerbPreformative.UNKNOWN;
-		this.prefixes = new ArrayList<>();
-		this.vowelPattern = new MorphemeDescriptionPair("", "");
-		this.geminationPattern = new int[0];
-		this.suffixes = new ArrayList<>();
-		this.grammemeSet = new VerbGrammemeSet();
-	}
+	*/
 
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(109, 113)
-				.append(acceptedNumRadicals)
-				.append(acceptedVerbType)
-				.append(acceptedDerivPrefix)	
+				.append(stemDescription)	
 				.append(prefixes)
 				.append(vowelPattern)
 				.append(geminationPattern)
@@ -104,9 +180,7 @@ public class VerbParadigmCell {
 
 		VerbParadigmCell rhs = (VerbParadigmCell) obj;
 		return new EqualsBuilder()
-        		.append(acceptedNumRadicals, rhs.acceptedNumRadicals)
-        		.append(acceptedVerbType, rhs.acceptedVerbType)
-        		.append(acceptedDerivPrefix, rhs.acceptedDerivPrefix)	
+        		.append(stemDescription, rhs.stemDescription)	
         		.append(prefixes, rhs.prefixes)
         		.append(vowelPattern, rhs.vowelPattern)
         		.append(geminationPattern, rhs.geminationPattern)
@@ -119,30 +193,39 @@ public class VerbParadigmCell {
 		
 		private static final Pattern cellDescriptionPattern = Pattern.compile("^(?<grammemeset>.+)\\t(?<surfacepattern>.+)\\t(?<lexpattern>.+)$");
 		
+		private VerbStemDescription stemDescription;
+		private VerbGrammemeSet grammemeSet;
+		private ArrayList<MorphemeDescriptionPair> prefixes;
+		private MorphemeDescriptionPair vowelPattern;
+		private int[] geminationPattern;
+		private ArrayList<MorphemeDescriptionPair> suffixes;
+
 		VerbParadigmCellBuilder () {}
 
-		static VerbParadigmCell parseAndBuild (String line, int numRadicals, VerbType verbType, VerbPreformative derivPrefix) throws ConfigParseException {
-			VerbParadigmCell cell = new VerbParadigmCell();
-			cell.acceptedNumRadicals = numRadicals;
-			cell.acceptedVerbType = verbType;
-			cell.acceptedDerivPrefix = derivPrefix;
-			
+		VerbParadigmCell parseAndBuild (String line, VerbStemDescription stemDescription) throws ConfigParseException {
 			try {
+				this.stemDescription = stemDescription;
 				Matcher cellDescriptionMatcher = cellDescriptionPattern.matcher(line);
 				cellDescriptionMatcher.find();
-				cell.grammemeSet = VerbGrammemeSet.parse(cellDescriptionMatcher.group("grammemeset"));
-				cell = readMorphemes(cellDescriptionMatcher.group("surfacepattern"),
-							cellDescriptionMatcher.group("lexpattern"),
-							cell);
-				
-				return cell;
-				
+				this.stemDescription = stemDescription;
+				this.grammemeSet = VerbGrammemeSet.parse(cellDescriptionMatcher.group("grammemeset"));
+				this.prefixes = new ArrayList<>();
+				this.suffixes = new ArrayList<>();
+				// this.vowelPattern, this.geminationPattern are not initialised yet; initialised in this.readRoot
+				readMorphemes(cellDescriptionMatcher.group("surfacepattern"),
+							cellDescriptionMatcher.group("lexpattern"));
+				return new VerbParadigmCell(this.stemDescription,
+										this.grammemeSet,
+										this.prefixes,
+										this.vowelPattern,
+										this.geminationPattern,
+										this.suffixes);
 			} catch (IndexOutOfBoundsException|NoSuchElementException|IllegalArgumentException e) {
 				throw new ConfigParseException("Failed to read paradigm line");
 			}
 		}
 	
-		private static VerbParadigmCell readMorphemes (String surfaceString, String lexString, VerbParadigmCell cell) {
+		private void readMorphemes (String surfaceString, String lexString) {
 			ArrayList<String> surfacePatternParts = new ArrayList<>(Arrays.asList(surfaceString.split("\\+")));
 			ArrayList<String> lexPatternParts = new ArrayList<>(Arrays.asList(lexString.split("\\+")));
 	
@@ -159,18 +242,16 @@ public class VerbParadigmCell {
 	
 				if (curSurface.matches("^.*_.*$")) {
 					// is root
-					readRoot(curSurface, curLex, cell);
+					readRoot(curSurface, curLex);
 					rootHasBeenRead = true;
 				} else {
-					if (rootHasBeenRead) { readSuffix(curSurface, curLex, cell); }
-					else { readPrefix(curSurface, curLex, cell); }
+					if (rootHasBeenRead) { readSuffix(curSurface, curLex); }
+					else { readPrefix(curSurface, curLex); }
 				}
 			}
-	
-			return cell;
 		}
 	
-		private static VerbParadigmCell readRoot (String surfaceString, String lexString, VerbParadigmCell cell) {
+		private void readRoot (String surfaceString, String lexString) {
 			String[] surfaceParts = surfaceString.split("_"); // i. e. "aa_121" -> {"aa", "121"}
 			String vowelPatternString = surfaceParts[0];
 			String gemPatternString = surfaceParts[1];
@@ -180,24 +261,20 @@ public class VerbParadigmCell {
 				gemPattern[i] = Integer.parseInt(gemPatternString.substring(i, i+1));
 			}
 			
-			cell.vowelPattern = new MorphemeDescriptionPair(vowelPatternString, lexString);
-			cell.geminationPattern = gemPattern;
-	
-			return cell;
+			this.vowelPattern = new MorphemeDescriptionPair(vowelPatternString, lexString);
+			this.geminationPattern = gemPattern;
 		}
 		
-		private static VerbParadigmCell readSuffix (String surfaceString, String lexString, VerbParadigmCell cell) {
+		private void readSuffix (String surfaceString, String lexString) {
 			if (!surfaceString.matches("0")) {
-				cell.suffixes.add(new MorphemeDescriptionPair(surfaceString, lexString));
+				this.suffixes.add(new MorphemeDescriptionPair(surfaceString, lexString));
 			}
-			return cell;
 		}
 	
-		private static VerbParadigmCell readPrefix (String surfaceString, String lexString, VerbParadigmCell cell) {
+		private void readPrefix (String surfaceString, String lexString) {
 			if (!surfaceString.matches("0")) {
-				cell.prefixes.add(new MorphemeDescriptionPair(surfaceString, lexString));
+				this.prefixes.add(new MorphemeDescriptionPair(surfaceString, lexString));
 			}
-			return cell;
 		}
 	}
 
