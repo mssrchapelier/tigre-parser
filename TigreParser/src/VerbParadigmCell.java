@@ -14,21 +14,21 @@ public class VerbParadigmCell {
 	VerbGrammemeSet grammemeSet;
 	
 	// prefixes
-	ArrayList<MorphemeDescriptionPair> prefixes;
+	ArrayList<MorphemeGlossPair> prefixes;
 
 	// root
-	MorphemeDescriptionPair vowelPattern;
+	MorphemeGlossPair vowelPattern;
 	int[] geminationPattern;
 
 	// suffixes
-	ArrayList<MorphemeDescriptionPair> suffixes;
+	ArrayList<MorphemeGlossPair> suffixes;
 
 	private VerbParadigmCell (VerbStemDescription stemDescription,
 					VerbGrammemeSet grammemeSet,
-					ArrayList<MorphemeDescriptionPair> prefixes,
-					MorphemeDescriptionPair vowelPattern,
+					ArrayList<MorphemeGlossPair> prefixes,
+					MorphemeGlossPair vowelPattern,
 					int[] geminationPattern,
-					ArrayList<MorphemeDescriptionPair> suffixes) {
+					ArrayList<MorphemeGlossPair> suffixes) {
 		this.stemDescription = stemDescription;
 		this.grammemeSet = grammemeSet;
 		this.prefixes = prefixes;
@@ -41,8 +41,8 @@ public class VerbParadigmCell {
 		String surfaceForm = "";
 		String lexicalForm = "";
 
-		ListIterator<MorphemeDescriptionPair> it;
-		MorphemeDescriptionPair curMorpheme;
+		ListIterator<MorphemeGlossPair> it;
+		MorphemeGlossPair curMorpheme;
 		
 		// appending prefixes
 		
@@ -138,7 +138,7 @@ public class VerbParadigmCell {
 					this.grammemeSet.number.toString()) + "\n";
 		
 		String prefixesSurface = "", prefixesLex = "";
-		for (MorphemeDescriptionPair morpheme : this.prefixes) {
+		for (MorphemeGlossPair morpheme : this.prefixes) {
 			prefixesSurface += morpheme.surfaceForm + "-";
 			prefixesLex += morpheme.lexicalForm + "-";
 		}
@@ -151,7 +151,7 @@ public class VerbParadigmCell {
 		message += String.format("gemination pattern: %s", gemPattern) + "\n";
 
 		String suffixesSurface = "", suffixesLex = "";
-		for (MorphemeDescriptionPair morpheme : this.suffixes) {
+		for (MorphemeGlossPair morpheme : this.suffixes) {
 			suffixesSurface += morpheme.surfaceForm + "-";
 			suffixesLex += morpheme.lexicalForm + "-";
 		}
@@ -195,10 +195,10 @@ public class VerbParadigmCell {
 		
 		private VerbStemDescription stemDescription;
 		private VerbGrammemeSet grammemeSet;
-		private ArrayList<MorphemeDescriptionPair> prefixes;
-		private MorphemeDescriptionPair vowelPattern;
+		private ArrayList<MorphemeGlossPair> prefixes;
+		private MorphemeGlossPair vowelPattern;
 		private int[] geminationPattern;
-		private ArrayList<MorphemeDescriptionPair> suffixes;
+		private ArrayList<MorphemeGlossPair> suffixes;
 
 		VerbParadigmCellBuilder () {}
 
@@ -261,19 +261,19 @@ public class VerbParadigmCell {
 				gemPattern[i] = Integer.parseInt(gemPatternString.substring(i, i+1));
 			}
 			
-			this.vowelPattern = new MorphemeDescriptionPair(vowelPatternString, lexString);
+			this.vowelPattern = new MorphemeGlossPair(vowelPatternString, lexString);
 			this.geminationPattern = gemPattern;
 		}
 		
 		private void readSuffix (String surfaceString, String lexString) {
 			if (!surfaceString.matches("0")) {
-				this.suffixes.add(new MorphemeDescriptionPair(surfaceString, lexString));
+				this.suffixes.add(new MorphemeGlossPair(surfaceString, lexString));
 			}
 		}
 	
 		private void readPrefix (String surfaceString, String lexString) {
 			if (!surfaceString.matches("0")) {
-				this.prefixes.add(new MorphemeDescriptionPair(surfaceString, lexString));
+				this.prefixes.add(new MorphemeGlossPair(surfaceString, lexString));
 			}
 		}
 	}

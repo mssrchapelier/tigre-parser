@@ -1,10 +1,10 @@
 
-public class MorphemeDescriptionPair {
+public class MorphemeGlossPair {
 	
 	String surfaceForm; // e. g. "ka"
 	String lexicalForm; // e. g. "POSS.2.F.SG"
 	
-	public MorphemeDescriptionPair(String surfaceForm, String lexicalForm) {
+	public MorphemeGlossPair(String surfaceForm, String lexicalForm) {
 		this.surfaceForm = surfaceForm;
 		this.lexicalForm = lexicalForm;
 	}
