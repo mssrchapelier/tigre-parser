@@ -164,7 +164,7 @@ public class Builder {
 			for (int i = 0; i < numAnalysesToPrint; i++) {
 				WordGlossPair analysis = analysisList.getAnalysis(i);
 				toPrint += String.format("%s" + "%n" + "%s" + "%n%n",
-							analysis.surfaceForm, analysis.lexicalForm);
+							analysis.surface, analysis.gloss);
 			}
 			writer.print(toPrint);
 		}

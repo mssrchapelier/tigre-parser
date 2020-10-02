@@ -14,21 +14,21 @@ public class VerbParadigmCell {
 	VerbGrammemeSet grammemeSet;
 	
 	// prefixes
-	ArrayList<MorphemeGlossPair> prefixes;
+	ArrayList<MorphemeAnalysis> prefixes;
 
 	// root
-	MorphemeGlossPair vowelPattern;
+	MorphemeAnalysis vowelPattern;
 	int[] geminationPattern;
 
 	// suffixes
-	ArrayList<MorphemeGlossPair> suffixes;
+	ArrayList<MorphemeAnalysis> suffixes;
 
 	private VerbParadigmCell (VerbStemDescription stemDescription,
 					VerbGrammemeSet grammemeSet,
-					ArrayList<MorphemeGlossPair> prefixes,
-					MorphemeGlossPair vowelPattern,
+					ArrayList<MorphemeAnalysis> prefixes,
+					MorphemeAnalysis vowelPattern,
 					int[] geminationPattern,
-					ArrayList<MorphemeGlossPair> suffixes) {
+					ArrayList<MorphemeAnalysis> suffixes) {
 		this.stemDescription = stemDescription;
 		this.grammemeSet = grammemeSet;
 		this.prefixes = prefixes;
@@ -38,11 +38,11 @@ public class VerbParadigmCell {
 	}
 
 	WordGlossPair applyTo (VerbStem stem) {
-		String surfaceForm = "";
-		String lexicalForm = "";
+		String surface = "";
+		String gloss = "";
 
-		ListIterator<MorphemeGlossPair> it;
-		MorphemeGlossPair curMorpheme;
+		ListIterator<MorphemeAnalysis> it;
+		MorphemeAnalysis curMorpheme;
 		
 		// appending prefixes
 		
@@ -50,17 +50,17 @@ public class VerbParadigmCell {
 		
 		while (it.hasNext()) {
 			curMorpheme = it.next();
-			surfaceForm += curMorpheme.surfaceForm;
-			lexicalForm += curMorpheme.lexicalForm;
+			surface += curMorpheme.surface;
+			gloss += curMorpheme.gloss;
 			if (it.hasNext()) {
-				surfaceForm += "-";
-				lexicalForm += "-";
+				surface += "-";
+				gloss += "-";
 			}
 		}
 		
 		if (!this.prefixes.isEmpty()) {
-			surfaceForm += "-";
-			lexicalForm += "-";
+			surface += "-";
+			gloss += "-";
 		}
 		
 		// appending root
@@ -71,43 +71,43 @@ public class VerbParadigmCell {
 			char consToAdd = stem.rootAsLetters.get(radIndex);
 			
 			if (this.geminationPattern[radIndex] > 0) {
-				surfaceForm += consToAdd;
+				surface += consToAdd;
 			}
 			
 			if (this.geminationPattern[radIndex] == 2 && LetterType.isSubjectToGemination(stem.rootAsLetters.get(radIndex))) {
-				surfaceForm += consToAdd;
+				surface += consToAdd;
 			}
 			// append vowel if applicable
 			if (radIndex != numRadicals - 1) {
-				char charToAppend = this.vowelPattern.surfaceForm.charAt(radIndex);
+				char charToAppend = this.vowelPattern.surface.charAt(radIndex);
 				if (charToAppend != '0') {
-					surfaceForm += charToAppend;
+					surface += charToAppend;
 				}
 			}
 		}
-		lexicalForm += stem.rootAsString + ":";
-		lexicalForm += this.vowelPattern.lexicalForm;
+		gloss += stem.rootAsString + ":";
+		gloss += this.vowelPattern.gloss;
 		
 		// appending suffixes
 		
 		if (!this.suffixes.isEmpty()) {
-			surfaceForm += "-";
-			lexicalForm += "-";
+			surface += "-";
+			gloss += "-";
 		}
 		
 		it = this.suffixes.listIterator();
 		
 		while (it.hasNext()) {
 			curMorpheme = it.next();
-			surfaceForm += curMorpheme.surfaceForm;
-			lexicalForm += curMorpheme.lexicalForm;
+			surface += curMorpheme.surface;
+			gloss += curMorpheme.gloss;
 			if (it.hasNext()) {
-				surfaceForm += "-";
-				lexicalForm += "-";
+				surface += "-";
+				gloss += "-";
 			}
 		}
 		
-		return new WordGlossPair(surfaceForm, lexicalForm);
+		return new WordGlossPair(surface, gloss);
 	}
 
 	// --- FOR TESTING ---
@@ -138,22 +138,22 @@ public class VerbParadigmCell {
 					this.grammemeSet.number.toString()) + "\n";
 		
 		String prefixesSurface = "", prefixesLex = "";
-		for (MorphemeGlossPair morpheme : this.prefixes) {
-			prefixesSurface += morpheme.surfaceForm + "-";
-			prefixesLex += morpheme.lexicalForm + "-";
+		for (MorphemeAnalysis morpheme : this.prefixes) {
+			prefixesSurface += morpheme.surface + "-";
+			prefixesLex += morpheme.gloss + "-";
 		}
 		message += String.format("prefixes: %s; %s", prefixesSurface, prefixesLex) + "\n";
 
-		message += String.format("vowel pattern: %s; %s", this.vowelPattern.surfaceForm, this.vowelPattern.lexicalForm) + "\n";
+		message += String.format("vowel pattern: %s; %s", this.vowelPattern.surface, this.vowelPattern.gloss) + "\n";
 
 		String gemPattern = "";
 		for (int i = 0; i < this.geminationPattern.length; i++) { gemPattern += Integer.toString(this.geminationPattern[i]); }
 		message += String.format("gemination pattern: %s", gemPattern) + "\n";
 
 		String suffixesSurface = "", suffixesLex = "";
-		for (MorphemeGlossPair morpheme : this.suffixes) {
-			suffixesSurface += morpheme.surfaceForm + "-";
-			suffixesLex += morpheme.lexicalForm + "-";
+		for (MorphemeAnalysis morpheme : this.suffixes) {
+			suffixesSurface += morpheme.surface + "-";
+			suffixesLex += morpheme.gloss + "-";
 		}
 		message += String.format("suffixes: %s; %s", suffixesSurface, suffixesLex);
 
@@ -195,10 +195,10 @@ public class VerbParadigmCell {
 		
 		private VerbStemDescription stemDescription;
 		private VerbGrammemeSet grammemeSet;
-		private ArrayList<MorphemeGlossPair> prefixes;
-		private MorphemeGlossPair vowelPattern;
+		private ArrayList<MorphemeAnalysis> prefixes;
+		private MorphemeAnalysis vowelPattern;
 		private int[] geminationPattern;
-		private ArrayList<MorphemeGlossPair> suffixes;
+		private ArrayList<MorphemeAnalysis> suffixes;
 
 		VerbParadigmCellBuilder () {}
 
@@ -261,19 +261,19 @@ public class VerbParadigmCell {
 				gemPattern[i] = Integer.parseInt(gemPatternString.substring(i, i+1));
 			}
 			
-			this.vowelPattern = new MorphemeGlossPair(vowelPatternString, lexString);
+			this.vowelPattern = new MorphemeAnalysis(vowelPatternString, lexString);
 			this.geminationPattern = gemPattern;
 		}
 		
 		private void readSuffix (String surfaceString, String lexString) {
 			if (!surfaceString.matches("0")) {
-				this.suffixes.add(new MorphemeGlossPair(surfaceString, lexString));
+				this.suffixes.add(new MorphemeAnalysis(surfaceString, lexString));
 			}
 		}
 	
 		private void readPrefix (String surfaceString, String lexString) {
 			if (!surfaceString.matches("0")) {
-				this.prefixes.add(new MorphemeGlossPair(surfaceString, lexString));
+				this.prefixes.add(new MorphemeAnalysis(surfaceString, lexString));
 			}
 		}
 	}

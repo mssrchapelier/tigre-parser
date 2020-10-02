@@ -20,8 +20,8 @@ public class GeezAnalysisPair {
 		String[][] analysisArray = new String[numAnalyses][2];
 		for (int i = 0; i < numAnalyses; i++) {
 			WordGlossPair analysis = analysisList.get(i);
-			analysisArray[i][0] = analysis.surfaceForm;
-			analysisArray[i][1] = analysis.lexicalForm;
+			analysisArray[i][0] = analysis.surface;
+			analysisArray[i][1] = analysis.gloss;
 		}
 		return analysisArray;
 	}

@@ -11,37 +11,37 @@ class WordGlossPair {
 	private static final String emptyAnalysisRegex = "^\\[(?<unanalysed>.*)\\]$";
 	private static final Pattern emptyAnalysisPattern = Pattern.compile(emptyAnalysisRegex);
 
-	// Format for surfaceForm, lexicalForm: morpheme1-...-[unanalysedPart]-...-morphemeN
+	// Format for surface, gloss: morpheme1-...-[unanalysedPart]-...-morphemeN
 
-	final String surfaceForm;
-	final String lexicalForm;
+	final String surface;
+	final String gloss;
 	final boolean isFinalAnalysis;
 	
-	WordGlossPair(String surfaceForm, String lexicalForm) {
-		this.surfaceForm = surfaceForm;
-		this.lexicalForm = lexicalForm;
-		this.isFinalAnalysis = isFinalAnalysis(surfaceForm, lexicalForm);
+	WordGlossPair(String surface, String gloss) {
+		this.surface = surface;
+		this.gloss = gloss;
+		this.isFinalAnalysis = isFinalAnalysis(surface, gloss);
 	}
 
-	private static boolean isFinalAnalysis (String surfaceForm, String lexicalForm) {
-		if (surfaceForm.contains("[") || lexicalForm.contains("#")) {
+	private static boolean isFinalAnalysis (String surface, String gloss) {
+		if (surface.contains("[") || gloss.contains("#")) {
 			return false;
 		} else {
 			return true;
 		}
 	}
 
-	static WordGlossPair createWithEmptyAnalysis (String surfaceForm) {
-		return new WordGlossPair ("[" + surfaceForm + "]", "#");
+	static WordGlossPair createWithEmptyAnalysis (String surface) {
+		return new WordGlossPair ("[" + surface + "]", "#");
 	}
 
 	boolean isEmptyAnalysis () {
-		Matcher m = emptyAnalysisPattern.matcher(this.surfaceForm);
-		return ( !this.isFinalAnalysis && this.lexicalForm == "#" && m.find() );
+		Matcher m = emptyAnalysisPattern.matcher(this.surface);
+		return ( !this.isFinalAnalysis && this.gloss == "#" && m.find() );
 	}
 
 	String getUnanalysedPart () {
-		Matcher m = unanalysedExtractorPattern.matcher(this.surfaceForm);
+		Matcher m = unanalysedExtractorPattern.matcher(this.surface);
 		if (m.find()) {
 			return m.group("unanalysed")
 				.replaceAll("[\\[\\]]", "");
@@ -91,27 +91,27 @@ class WordGlossPair {
 		
 		// Inserts this pair into the unanalysed part of pairToChange.
 		
-		String surfaceForm = pairToChange.surfaceForm.replaceAll("\\[.*\\]", this.surfaceForm);
-		String lexicalForm = pairToChange.lexicalForm.replaceAll("#", this.lexicalForm);
+		String surface = pairToChange.surface.replaceAll("\\[.*\\]", this.surface);
+		String gloss = pairToChange.gloss.replaceAll("#", this.gloss);
 		
-		return new WordGlossPair(surfaceForm, lexicalForm);
+		return new WordGlossPair(surface, gloss);
 	}
 	
 	WordGlossPair (WordGlossPair wgp) {
-		this.surfaceForm = wgp.surfaceForm;
-		this.lexicalForm = wgp.lexicalForm;
+		this.surface = wgp.surface;
+		this.gloss = wgp.gloss;
 		this.isFinalAnalysis = wgp.isFinalAnalysis;
 	}
 
 	String getRawWord () {
-		return surfaceForm.replaceAll("\\-", "");
+		return surface.replaceAll("\\-", "");
 	}
 
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(109, 113)
-				.append(surfaceForm)
-				.append(lexicalForm)
+				.append(surface)
+				.append(gloss)
 				.toHashCode();
 	}
 	
@@ -121,8 +121,8 @@ class WordGlossPair {
 		if (obj == this) { return true; }
 
 		WordGlossPair rhs = (WordGlossPair) obj;
-		return new EqualsBuilder().append(surfaceForm, rhs.surfaceForm)
-					.append(lexicalForm, rhs.lexicalForm)
+		return new EqualsBuilder().append(surface, rhs.surface)
+					.append(gloss, rhs.gloss)
 					.append(isFinalAnalysis, rhs.isFinalAnalysis)
 					.isEquals();
 	}

@@ -15,9 +15,9 @@ public class WordGlossPairComparator implements Comparator<WordGlossPair> {
 			// both final or both non-final
 			int morphemeCount_1;
 			int morphemeCount_2;
-			Matcher m = morphemeSeparatorPattern.matcher(wgp_1.lexicalForm);
+			Matcher m = morphemeSeparatorPattern.matcher(wgp_1.gloss);
 			morphemeCount_1 = (m.find()) ? m.groupCount() + 1 : 1;
-			m = morphemeSeparatorPattern.matcher(wgp_2.lexicalForm);
+			m = morphemeSeparatorPattern.matcher(wgp_2.gloss);
 			morphemeCount_2 = (m.find()) ? m.groupCount() + 1 : 1;
 			
 			if (wgp_1.isFinalAnalysis && wgp_2.isFinalAnalysis) {

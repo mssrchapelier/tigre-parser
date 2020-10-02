@@ -13,22 +13,15 @@ public class VerbProcessor {
 		ArrayList<Root> roots = RootListGenerator.getRoots(word);
 
 		for (Root root : roots) {
-			try {
-				ArrayList<VerbStem> derivedStems = VerbStem.generateWithPossiblePrefixes(root);
- 				for (VerbStem stem : derivedStems) {
-					try {
-						ArrayList<WordGlossPair> allFormsWithRoot = this.conjugator.conjugate(stem);
-						for (WordGlossPair form : allFormsWithRoot) {
-							if (form.getRawWord().equals(word)) {
-								analysisList.add(form);
-							}
-						}
-					} catch (NullPointerException e) {
-						System.out.println(e.getMessage());
-						e.printStackTrace();
+			ArrayList<VerbStem> derivedStems = VerbStem.generateWithPossiblePrefixes(root);
+ 			for (VerbStem stem : derivedStems) {
+				ArrayList<WordGlossPair> allFormsWithRoot = this.conjugator.conjugate(stem);
+				for (WordGlossPair form : allFormsWithRoot) {
+					if (form.getRawWord().equals(word)) {
+						analysisList.add(form);
 					}
 				}
-			} catch (IllegalArgumentException e) { e.printStackTrace(); }
+			}
 		}
 		
 		return analysisList;
