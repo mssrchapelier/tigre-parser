@@ -2,7 +2,7 @@ import java.io.IOException;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
-public class Launcher {
+public class StandaloneLauncher {
 	
 	@Parameter(names = { "-i", "--input" }, description = "input file path")
 	String inputFilePath = "input.txt";
@@ -17,7 +17,7 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		
-		Launcher launcher = new Launcher();
+		StandaloneLauncher launcher = new StandaloneLauncher();
 		
 		JCommander.newBuilder()
 			.addObject(launcher)
