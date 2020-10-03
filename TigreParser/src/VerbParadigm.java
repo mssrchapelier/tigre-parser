@@ -101,7 +101,7 @@ public class VerbParadigm {
 					VerbParadigmCell cell = new VerbParadigmCell.VerbParadigmCellBuilder().parseAndBuild(line, stemDescription);
 					cellSet.add(cell);
 				} catch (ConfigParseException e) {
-					throw new ConfigParseException("Failed to read paradigm line");
+					throw new ConfigParseException("Failed to read paradigm line", e);
 				}
 			}
 			return cellSet;

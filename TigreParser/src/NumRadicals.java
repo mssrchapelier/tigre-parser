@@ -7,11 +7,15 @@ enum NumRadicals {
 
 	NumRadicals (int numValue) { this.numValue = numValue; }
 
-	static NumRadicals parseNumRadicals (String numRadicals) throws IllegalArgumentException {
+	static NumRadicals parseNumRadicals (String numRadicalsAsString) {
+		return parseNumRadicals(Integer.parseInt(numRadicalsAsString));
+	}
+
+	static NumRadicals parseNumRadicals (int numRadicals) {
 		switch (numRadicals) {
-			case "3": return NumRadicals.RAD3;
-			case "4": return NumRadicals.RAD4;
-			case "5": return NumRadicals.RAD5;
+			case 3: return NumRadicals.RAD3;
+			case 4: return NumRadicals.RAD4;
+			case 5: return NumRadicals.RAD5;
 			default: throw new IllegalArgumentException("Couldn't parse number of radicals");
 		}
 	}

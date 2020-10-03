@@ -53,7 +53,8 @@ public class Builder {
 							.readFrom(verbParadigmFilePath)
 							.build();
 		Conjugator conjugator = new Conjugator(verbParadigm);
-		VerbProcessor verbProcessor = new VerbProcessor(conjugator);
+		RootListGenerator rootListGenerator = new RootListGenerator();
+		VerbProcessor verbProcessor = new VerbProcessor(conjugator, rootListGenerator);
 
 
 		this.wordProcessor = new WordProcessor.WordProcessorBuilder()
@@ -64,12 +65,12 @@ public class Builder {
 							.build();
 	}
 
-	public void processFile (String inputPath, String outputPath) throws IOException {
+	public void processFile (String inputPath, String outputPath) throws IOException, ConfigParseException {
 		// process silently (nothing sent to System.out)
 		this.processFile(inputPath, outputPath, false);
 	}
 
-	public void processFile (String inputPath, String outputPath, boolean printNotifications) throws IOException {
+	public void processFile (String inputPath, String outputPath, boolean printNotifications) throws IOException, ConfigParseException {
 		if (printNotifications) {
 			String message = String.format("Processing file: %s", inputPath);
 			System.out.println(message);
@@ -91,8 +92,8 @@ public class Builder {
 					System.out.println(message);
 				}
 
-				ArrayList<GeezAnalysisPair> analysisLists = this.processLine(line);
-				this.writeLine(writer, analysisLists);
+				ArrayList<WordEntry> wordEntries = this.processLine(line);
+				this.writeLine(writer, wordEntries);
 			}
 
 			if (printNotifications) {
@@ -103,7 +104,7 @@ public class Builder {
 		}
 	}
 	
-	public String[][] analyseWord (String ethiopicWord) {
+	public String[][] analyseWord (String ethiopicWord) throws ConfigParseException {
 		/*
 		 * Returns a two-dimensional String array analysisArray[n][2] (with n analyses for this word).
 		 * For i-th analysis,
@@ -141,39 +142,42 @@ public class Builder {
 		writer.print(modeMessage);
 	}
 
-	private ArrayList<GeezAnalysisPair> processLine (String ethiopicLine) {
+	private ArrayList<WordEntry> processLine (String ethiopicLine) throws ConfigParseException {
 		ArrayList<String> ethiopicWords = this.tokeniser.tokenise(ethiopicLine);
-		ArrayList<GeezAnalysisPair> processedWordList = new ArrayList<>();
+		ArrayList<WordEntry> processedWordList = new ArrayList<>();
 		for (String ethiopicWord : ethiopicWords) {
-			GeezAnalysisPair processedWord = wordProcessor.processWord(ethiopicWord);
+			WordEntry processedWord = wordProcessor.processWord(ethiopicWord);
 			processedWordList.add(processedWord);
 		}
 		return processedWordList;
 	}
 
-	private void writeLine (PrintWriter writer, ArrayList<GeezAnalysisPair> analysisLists) throws IOException {
+	private void writeLine (PrintWriter writer, ArrayList<WordEntry> entryList) throws IOException {
 		// writer -> write to file
-		for (GeezAnalysisPair analysisList : analysisLists) {
+		for (WordEntry entry : entryList) {
 			String toPrint = "";
 			toPrint += String.format("* * * * * * *"
 						+ "%n%n"
 						+ "Word: %s"
-						+ "%n%n", analysisList.getEthiopicOrtho());
+						+ "%n%n", entry.getEthiopicOrtho());
 		
-			int numAnalysesToPrint = this.getNumAnalysesToPrint(analysisList);
+			int numAnalysesToPrint = this.getNumAnalysesToPrint(entry);
 			for (int i = 0; i < numAnalysesToPrint; i++) {
-				WordGlossPair analysis = analysisList.getAnalysis(i);
+				WordAnalysis analysis = entry.getAnalysis(i);
+				String[] exportedAnalysis = analysis.exportWithMarkup();
+				String surface = exportedAnalysis[0];
+				String gloss = exportedAnalysis[1];
 				toPrint += String.format("%s" + "%n" + "%s" + "%n%n",
-							analysis.surface, analysis.gloss);
+								surface, gloss);
 			}
 			writer.print(toPrint);
 		}
 	}
 
-	private int getNumAnalysesToPrint (GeezAnalysisPair gaPair) {
+	private int getNumAnalysesToPrint (WordEntry wordEntry) {
 		int numToPrint;
 		int maxNum = this.maxAnalyses;
-		int listSize = gaPair.getNumAnalyses();
+		int listSize = wordEntry.getNumAnalyses();
 		if (maxNum == 0) { numToPrint = listSize; }
 		else { // == if (this.maxAnalyses > 0)
 			if (listSize <= maxNum) { numToPrint = listSize; }

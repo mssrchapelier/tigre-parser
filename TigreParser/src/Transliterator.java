@@ -10,9 +10,6 @@ public class Transliterator {
 	final private static Pattern entryPattern = Pattern.compile("^(?<geez>.)\\t(?<romanised>.+)$");
 	final private static String punctuationMarksRegex = "[፠፡።፣፤፥፦፧፨\\.!,\\-\\:;\"'/\\\\\\|‒–—―‘’“”\\(\\)\\[\\]<>\\{\\}]";
 
-	// ə in values of romanisationMap stands for disambiguation of cases like [kə][ka] from [kka] (geminated).
-	// The actual [ə] sound may or may not occur in that position; this is determined by phonotactics.
-	// The ə symbol MUST be removed from any fields of GeezAnalysisPair objects immediately after generating geminated variants.
 	HashMap<Character, String> romanisationMap;
 	
 	public Transliterator (String romanisationMapFilePath) throws IOException, ConfigParseException {

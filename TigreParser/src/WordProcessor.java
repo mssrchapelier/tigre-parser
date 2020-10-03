@@ -62,45 +62,45 @@ public class WordProcessor {
 	public void setPatternProcessor (PatternProcessor patternProcessor) { this.patternProcessor = patternProcessor; }
 	public void setVerbProcessor (VerbProcessor verbProcessor) { this.verbProcessor = verbProcessor; }
 
-	public GeezAnalysisPair processWord (String ethiopicOrtho) {
+	public WordEntry processWord (String ethiopicOrtho) throws ConfigParseException {
 		try {
 			String romanisedOrtho = this.transliterator.romanise(ethiopicOrtho);
 			ArrayList<String> geminatedOrthos = this.geminator.geminate(romanisedOrtho);
-			ArrayList<WordGlossPair> analysisList = new ArrayList<>();
+			ArrayList<WordAnalysis> analysisList = new ArrayList<>();
 			for (String geminatedOrtho : geminatedOrthos) {
 				analysisList.addAll(this.analyseGeminatedOrtho(geminatedOrtho));
 			}
 			analysisList = removeDuplicates(analysisList);
-			Collections.sort(analysisList, Collections.reverseOrder(new WordGlossPairComparator()));
+			Collections.sort(analysisList, Collections.reverseOrder(new WordAnalysisComparator()));
 	
-			return new GeezAnalysisPair(ethiopicOrtho, analysisList);
+			return new WordEntry(ethiopicOrtho, analysisList);
 		} catch (NotEthiopicScriptException e) {
 			return constructWithEmptyAnalysis(ethiopicOrtho);
 		}
 	}
 
-	private static GeezAnalysisPair constructWithEmptyAnalysis (String inputWord) {
-		WordGlossPair analysis = WordGlossPair.createWithEmptyAnalysis(inputWord);
-		ArrayList<WordGlossPair> analysisList = new ArrayList<>();
+	private static WordEntry constructWithEmptyAnalysis (String inputWord) {
+		WordAnalysis analysis = WordAnalysis.createWithEmptyAnalysis(inputWord);
+		ArrayList<WordAnalysis> analysisList = new ArrayList<>();
 		analysisList.add(analysis);
-		return new GeezAnalysisPair(inputWord, analysisList);
+		return new WordEntry(inputWord, analysisList);
 	}
 
-	private ArrayList<WordGlossPair> analyseGeminatedOrtho (String geminatedOrtho) {
-		ArrayList<WordGlossPair> analysisList = this.patternProcessor.processWord(geminatedOrtho); 
+	private ArrayList<WordAnalysis> analyseGeminatedOrtho (String geminatedOrtho) throws ConfigParseException {
+		ArrayList<WordAnalysis> analysisList = this.patternProcessor.processWord(geminatedOrtho); 
 		analysisList = this.parseVerbsInList(analysisList);
 		analysisList = removeEmptyAnalyses(analysisList);
 		return analysisList;
 	}
 
-	private ArrayList<WordGlossPair> parseVerbsInList (ArrayList<WordGlossPair> inputList) {
-		ArrayList<WordGlossPair> outputList = new ArrayList<>();
-		for (WordGlossPair inputAnalysis : inputList) {
-			outputList.add(new WordGlossPair(inputAnalysis));
+	private ArrayList<WordAnalysis> parseVerbsInList (ArrayList<WordAnalysis> inputList) {
+		ArrayList<WordAnalysis> outputList = new ArrayList<>();
+		for (WordAnalysis inputAnalysis : inputList) {
+			outputList.add(new WordAnalysis(inputAnalysis));
 			if (!inputAnalysis.isFinalAnalysis) {
 				String unanalysedPart = inputAnalysis.getUnanalysedPart();
-				ArrayList<WordGlossPair> verbAnalysisList = this.verbProcessor.processWord(unanalysedPart);
-				for (WordGlossPair verbAnalysis : verbAnalysisList) {
+				ArrayList<WordAnalysis> verbAnalysisList = this.verbProcessor.processWord(unanalysedPart);
+				for (WordAnalysis verbAnalysis : verbAnalysisList) {
 					outputList.add(verbAnalysis.insertInto(inputAnalysis));
 				}
 			}
@@ -108,16 +108,16 @@ public class WordProcessor {
 		return outputList;
 	}
 
-	private static ArrayList<WordGlossPair> removeEmptyAnalyses (ArrayList<WordGlossPair> inputList) {
-		ArrayList<WordGlossPair> outputList = new ArrayList<>();
-		for (WordGlossPair analysis : inputList) {
-			if (!analysis.isEmptyAnalysis()) { outputList.add(new WordGlossPair(analysis)); }
+	private static ArrayList<WordAnalysis> removeEmptyAnalyses (ArrayList<WordAnalysis> inputList) {
+		ArrayList<WordAnalysis> outputList = new ArrayList<>();
+		for (WordAnalysis analysis : inputList) {
+			if (!analysis.isEmptyAnalysis()) { outputList.add(new WordAnalysis(analysis)); }
 		}
 		return outputList;
 	}
 	
-	private static ArrayList<WordGlossPair> removeDuplicates (ArrayList<WordGlossPair> inputList) {
-		LinkedHashSet<WordGlossPair> outputSet = new LinkedHashSet<>(inputList);
+	private static ArrayList<WordAnalysis> removeDuplicates (ArrayList<WordAnalysis> inputList) {
+		LinkedHashSet<WordAnalysis> outputSet = new LinkedHashSet<>(inputList);
 		return new ArrayList<>(outputSet);
 	}
 }

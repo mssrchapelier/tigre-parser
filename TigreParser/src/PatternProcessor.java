@@ -18,10 +18,10 @@ public class PatternProcessor {
 		this.patternCascade = patternCascade;
 	}
 
-	public ArrayList<WordGlossPair> processWord (final String geminatedOrtho) {
-		ArrayList<WordGlossPair> analysisList = new ArrayList<>();
+	public ArrayList<WordAnalysis> processWord (final String geminatedOrtho) throws ConfigParseException {
+		ArrayList<WordAnalysis> analysisList = new ArrayList<>();
 
-		WordGlossPair emptyAnalysis = WordGlossPair.createWithEmptyAnalysis(geminatedOrtho);
+		WordAnalysis emptyAnalysis = WordAnalysis.createWithEmptyAnalysis(geminatedOrtho);
 		analysisList.add(emptyAnalysis);
 
 		for (ArrayList<ReplaceRule> level : this.patternCascade) {
@@ -31,12 +31,12 @@ public class PatternProcessor {
 		return analysisList;
 	}
 	
-	private static ArrayList<WordGlossPair> processLevel (ArrayList<WordGlossPair> inputAnalysisList,
-			ArrayList<ReplaceRule> patternLevel) {
-		LinkedHashSet<WordGlossPair> newLinesSet = new LinkedHashSet<>();
-		for (WordGlossPair inputAnalysis : inputAnalysisList) {
-			// add the same unprocessed part as a variant to newLinesSet
-			newLinesSet.add(new WordGlossPair(inputAnalysis));
+	private static ArrayList<WordAnalysis> processLevel (ArrayList<WordAnalysis> inputAnalysisList,
+			ArrayList<ReplaceRule> patternLevel) throws ConfigParseException {
+		LinkedHashSet<WordAnalysis> newAnalysisSet = new LinkedHashSet<>();
+		for (WordAnalysis inputAnalysis : inputAnalysisList) {
+			// add the same unprocessed part as a variant to newAnalysisSet
+			newAnalysisSet.add(new WordAnalysis(inputAnalysis));
 			// extract the part to be processed
 			if (!inputAnalysis.isFinalAnalysis) {
 				String unprocessedPart = inputAnalysis.getUnanalysedPart();
@@ -46,15 +46,15 @@ public class PatternProcessor {
 					Pattern pattern = Pattern.compile(replaceRule.matchPattern);
 					Matcher matcher = pattern.matcher(unprocessedPart);
 					if (matcher.find()) {
-						// replace and add to newLinesSet
+						// replace and add to newAnalysisSet
 						String replacement = matcher.replaceFirst(replaceRule.replacePattern);
-						WordGlossPair newAnalysis = inputAnalysis.insertReplacement(replacement);
-						newLinesSet.add(newAnalysis);
+						WordAnalysis newAnalysis = inputAnalysis.insertReplacement(replacement);
+						newAnalysisSet.add(newAnalysis);
 					}
 				}
 			}
 		}
-		return new ArrayList<WordGlossPair>(newLinesSet);
+		return new ArrayList<WordAnalysis>(newAnalysisSet);
 	}
 	
 	public static class PatternProcessorBuilder {

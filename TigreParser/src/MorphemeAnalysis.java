@@ -6,5 +6,10 @@ class MorphemeAnalysis extends AnalysisSegment {
 		super(surface);
 		this.gloss = gloss;
 	}
+
+	MorphemeAnalysis (MorphemeAnalysis analysis) {
+		super(analysis);
+		this.gloss = analysis.gloss;
+	} 
 	
 }

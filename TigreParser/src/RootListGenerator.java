@@ -4,9 +4,11 @@ import java.util.LinkedHashSet;
 
 import org.apache.commons.math3.util.CombinatoricsUtils;
 
-public class RootListGenerator {
+class RootListGenerator {
 	
-	public static ArrayList<Root> getRoots (String word) {
+	RootListGenerator () {}
+
+	ArrayList<Root> getRoots (String word) {
 		// mikattaqAla -> myktql; mykt2ql; myktqAl; myk2qAl
 		ArrayList<ArrayList<ConsDescription>> consonantCombinations = generateConsonantCombinations(word);
 		

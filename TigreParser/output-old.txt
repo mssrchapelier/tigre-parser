@@ -85,11 +85,11 @@ xArrGGAy-SG.F
 
 Word: አሰይድ
 
->-a-sayd
-1.SG-CAUS-syd:IMPF
-
 >asayd
 (>syd).PL
+
+>-a-sayd
+1.SG-CAUS-syd:IMPF
 
 * * * * * * *
 
@@ -115,23 +115,11 @@ wagemay-SG.M
 wagemy-Ay
 wagemAy-SG.M
 
-wa-gemy-Ay
-COORD-gemay-SG.M
-
-wa-gemy-Ay
-COORD-gemAy-SG.M
-
 waggemy-Ay
 waggemay-SG.M
 
 waggemy-Ay
 waggemAy-SG.M
-
-wa-ggemy-Ay
-COORD-ggemay-SG.M
-
-wa-ggemy-Ay
-COORD-ggemAy-SG.M
 
 wagemmy-Ay
 wagemmay-SG.M
@@ -139,23 +127,71 @@ wagemmay-SG.M
 wagemmy-Ay
 wagemmAy-SG.M
 
-wa-gemmy-Ay
-COORD-gemmay-SG.M
-
-wa-gemmy-Ay
-COORD-gemmAy-SG.M
-
 waggemmy-Ay
 waggemmay-SG.M
 
 waggemmy-Ay
 waggemmAy-SG.M
 
+wa-gemy-Ay
+COORD-gemay-SG.M
+
+wa-gemy-Ay
+COORD-gemAy-SG.M
+
+wa-ggemy-Ay
+COORD-ggemay-SG.M
+
+wa-ggemy-Ay
+COORD-ggemAy-SG.M
+
+wa-gemmy-Ay
+COORD-gemmay-SG.M
+
+wa-gemmy-Ay
+COORD-gemmAy-SG.M
+
 wa-ggemmy-Ay
 COORD-ggemmay-SG.M
 
 wa-ggemmy-Ay
 COORD-ggemmAy-SG.M
+
+wa-[gemy]-Ay
+COORD-#-SG.M
+
+wa-[gemya]-Ay
+COORD-#-SG.M
+
+wa-[gemya]-Ay
+COORD-#-SG.F
+
+wa-[ggemy]-Ay
+COORD-#-SG.M
+
+wa-[ggemya]-Ay
+COORD-#-SG.M
+
+wa-[ggemya]-Ay
+COORD-#-SG.F
+
+wa-[gemmy]-Ay
+COORD-#-SG.M
+
+wa-[gemmya]-Ay
+COORD-#-SG.M
+
+wa-[gemmya]-Ay
+COORD-#-SG.F
+
+wa-[ggemmy]-Ay
+COORD-#-SG.M
+
+wa-[ggemmya]-Ay
+COORD-#-SG.M
+
+wa-[ggemmya]-Ay
+COORD-#-SG.F
 
 [wagemy]-Ay
 #-SG.M
@@ -169,15 +205,6 @@ COORD-ggemmAy-SG.M
 wa-[gemyAy]
 COORD-#
 
-wa-[gemy]-Ay
-COORD-#-SG.M
-
-wa-[gemya]-Ay
-COORD-#-SG.M
-
-wa-[gemya]-Ay
-COORD-#-SG.F
-
 [waggemy]-Ay
 #-SG.M
 
@@ -189,15 +216,6 @@ COORD-#-SG.F
 
 wa-[ggemyAy]
 COORD-#
-
-wa-[ggemy]-Ay
-COORD-#-SG.M
-
-wa-[ggemya]-Ay
-COORD-#-SG.M
-
-wa-[ggemya]-Ay
-COORD-#-SG.F
 
 [wagemmy]-Ay
 #-SG.M
@@ -211,15 +229,6 @@ COORD-#-SG.F
 wa-[gemmyAy]
 COORD-#
 
-wa-[gemmy]-Ay
-COORD-#-SG.M
-
-wa-[gemmya]-Ay
-COORD-#-SG.M
-
-wa-[gemmya]-Ay
-COORD-#-SG.F
-
 [waggemmy]-Ay
 #-SG.M
 
@@ -232,15 +241,6 @@ COORD-#-SG.F
 wa-[ggemmyAy]
 COORD-#
 
-wa-[ggemmy]-Ay
-COORD-#-SG.M
-
-wa-[ggemmya]-Ay
-COORD-#-SG.M
-
-wa-[ggemmya]-Ay
-COORD-#-SG.F
-
 * * * * * * *
 
 Word: ርኢስ
@@ -252,11 +252,11 @@ r>is
 
 Word: አሰይድ
 
->-a-sayd
-1.SG-CAUS-syd:IMPF
-
 >asayd
 (>syd).PL
+
+>-a-sayd
+1.SG-CAUS-syd:IMPF
 
 * * * * * * *
 
@@ -311,6 +311,24 @@ REL-PASS-kwn:IMP.2.M.SG-OBJ.3.F.SG
 
 la-tkaw-a-na
 REL-tkw:IMP-2.F.PL-OBJ.1.PL
+
+la-t-kawan-na
+DEF-PASS-kwn(2):PRF-1.PL
+
+la-t-kawan-na
+DEF-PASS-kwn:IMP.2.M.SG-POSS.1.PL
+
+la-t-kawan-na
+DEF-PASS-kwn:IMP.2.M.SG-OBJ.1.PL
+
+la-t-kawan-na
+REL-PASS-kwn(2):PRF-1.PL
+
+la-t-kawan-na
+REL-PASS-kwn:IMP.2.M.SG-POSS.1.PL
+
+la-t-kawan-na
+REL-PASS-kwn:IMP.2.M.SG-OBJ.1.PL
 
 la-t-t-kawan-a
 DEF-2-PASS-kwn:IMPF-F.PL
@@ -384,24 +402,6 @@ REL-3.F.SG-PASS-kwn:JUSS-OBJ.3.F.SG
 la-t-tkaw-a-na
 REL-2-t(2)kw:JUSS-F.PL-OBJ.1.PL
 
-la-t-kawan-na
-DEF-PASS-kwn(2):PRF-1.PL
-
-la-t-kawan-na
-DEF-PASS-kwn:IMP.2.M.SG-POSS.1.PL
-
-la-t-kawan-na
-DEF-PASS-kwn:IMP.2.M.SG-OBJ.1.PL
-
-la-t-kawan-na
-REL-PASS-kwn(2):PRF-1.PL
-
-la-t-kawan-na
-REL-PASS-kwn:IMP.2.M.SG-POSS.1.PL
-
-la-t-kawan-na
-REL-PASS-kwn:IMP.2.M.SG-OBJ.1.PL
-
 la-t-t-kawan-na
 DEF-2.M.SG-PASS-kwn:IMPF-POSS.1.PL
 
@@ -450,6 +450,198 @@ REL-2.M.SG-PASS-kwn:JUSS-OBJ.1.PL
 la-t-t-kawan-na
 REL-3.F.SG-PASS-kwn:JUSS-OBJ.1.PL
 
+la-[tkawan]-a
+DEF-#-POSS.3.F.SG
+
+la-[tkawa]-na
+DEF-#-POSS.1.PL
+
+la-[tkawan]-a
+DEF-#-OBJ.3.F.SG
+
+la-[tkawa]-na
+DEF-#-OBJ.1.PL
+
+la-[tkawan]-a
+REL-#-POSS.3.F.SG
+
+la-[tkawa]-na
+REL-#-POSS.1.PL
+
+la-[tkawan]-a
+REL-#-OBJ.3.F.SG
+
+la-[tkawa]-na
+REL-#-OBJ.1.PL
+
+la-[ttkawan]-a
+DEF-#-POSS.3.F.SG
+
+la-[ttkawa]-na
+DEF-#-POSS.1.PL
+
+la-[ttkawan]-a
+DEF-#-OBJ.3.F.SG
+
+la-[ttkawa]-na
+DEF-#-OBJ.1.PL
+
+la-[ttkawan]-a
+REL-#-POSS.3.F.SG
+
+la-[ttkawa]-na
+REL-#-POSS.1.PL
+
+la-[ttkawan]-a
+REL-#-OBJ.3.F.SG
+
+la-[ttkawa]-na
+REL-#-OBJ.1.PL
+
+la-[tkkawan]-a
+DEF-#-POSS.3.F.SG
+
+la-[tkkawa]-na
+DEF-#-POSS.1.PL
+
+la-[tkkawan]-a
+DEF-#-OBJ.3.F.SG
+
+la-[tkkawa]-na
+DEF-#-OBJ.1.PL
+
+la-[tkkawan]-a
+REL-#-POSS.3.F.SG
+
+la-[tkkawa]-na
+REL-#-POSS.1.PL
+
+la-[tkkawan]-a
+REL-#-OBJ.3.F.SG
+
+la-[tkkawa]-na
+REL-#-OBJ.1.PL
+
+la-[tkawann]-a
+DEF-#-POSS.3.F.SG
+
+la-[tkawan]-na
+DEF-#-POSS.1.PL
+
+la-[tkawann]-a
+DEF-#-OBJ.3.F.SG
+
+la-[tkawan]-na
+DEF-#-OBJ.1.PL
+
+la-[tkawann]-a
+REL-#-POSS.3.F.SG
+
+la-[tkawan]-na
+REL-#-POSS.1.PL
+
+la-[tkawann]-a
+REL-#-OBJ.3.F.SG
+
+la-[tkawan]-na
+REL-#-OBJ.1.PL
+
+la-[ttkkawan]-a
+DEF-#-POSS.3.F.SG
+
+la-[ttkkawa]-na
+DEF-#-POSS.1.PL
+
+la-[ttkkawan]-a
+DEF-#-OBJ.3.F.SG
+
+la-[ttkkawa]-na
+DEF-#-OBJ.1.PL
+
+la-[ttkkawan]-a
+REL-#-POSS.3.F.SG
+
+la-[ttkkawa]-na
+REL-#-POSS.1.PL
+
+la-[ttkkawan]-a
+REL-#-OBJ.3.F.SG
+
+la-[ttkkawa]-na
+REL-#-OBJ.1.PL
+
+la-[ttkawann]-a
+DEF-#-POSS.3.F.SG
+
+la-[ttkawan]-na
+DEF-#-POSS.1.PL
+
+la-[ttkawann]-a
+DEF-#-OBJ.3.F.SG
+
+la-[ttkawan]-na
+DEF-#-OBJ.1.PL
+
+la-[ttkawann]-a
+REL-#-POSS.3.F.SG
+
+la-[ttkawan]-na
+REL-#-POSS.1.PL
+
+la-[ttkawann]-a
+REL-#-OBJ.3.F.SG
+
+la-[ttkawan]-na
+REL-#-OBJ.1.PL
+
+la-[tkkawann]-a
+DEF-#-POSS.3.F.SG
+
+la-[tkkawan]-na
+DEF-#-POSS.1.PL
+
+la-[tkkawann]-a
+DEF-#-OBJ.3.F.SG
+
+la-[tkkawan]-na
+DEF-#-OBJ.1.PL
+
+la-[tkkawann]-a
+REL-#-POSS.3.F.SG
+
+la-[tkkawan]-na
+REL-#-POSS.1.PL
+
+la-[tkkawann]-a
+REL-#-OBJ.3.F.SG
+
+la-[tkkawan]-na
+REL-#-OBJ.1.PL
+
+la-[ttkkawann]-a
+DEF-#-POSS.3.F.SG
+
+la-[ttkkawan]-na
+DEF-#-POSS.1.PL
+
+la-[ttkkawann]-a
+DEF-#-OBJ.3.F.SG
+
+la-[ttkkawan]-na
+DEF-#-OBJ.1.PL
+
+la-[ttkkawann]-a
+REL-#-POSS.3.F.SG
+
+la-[ttkkawan]-na
+REL-#-POSS.1.PL
+
+la-[ttkkawann]-a
+REL-#-OBJ.3.F.SG
+
+la-[ttkkawan]-na
+REL-#-OBJ.1.PL
+
 [latkawan]-a
 #-POSS.3.F.SG
 
@@ -465,32 +657,8 @@ REL-3.F.SG-PASS-kwn:JUSS-OBJ.1.PL
 la-[tkawana]
 DEF-#
 
-la-[tkawan]-a
-DEF-#-POSS.3.F.SG
-
-la-[tkawa]-na
-DEF-#-POSS.1.PL
-
-la-[tkawan]-a
-DEF-#-OBJ.3.F.SG
-
-la-[tkawa]-na
-DEF-#-OBJ.1.PL
-
 la-[tkawana]
 REL-#
-
-la-[tkawan]-a
-REL-#-POSS.3.F.SG
-
-la-[tkawa]-na
-REL-#-POSS.1.PL
-
-la-[tkawan]-a
-REL-#-OBJ.3.F.SG
-
-la-[tkawa]-na
-REL-#-OBJ.1.PL
 
 [lattkawan]-a
 #-POSS.3.F.SG
@@ -507,33 +675,9 @@ REL-#-OBJ.1.PL
 la-[ttkawana]
 DEF-#
 
-la-[ttkawan]-a
-DEF-#-POSS.3.F.SG
-
-la-[ttkawa]-na
-DEF-#-POSS.1.PL
-
-la-[ttkawan]-a
-DEF-#-OBJ.3.F.SG
-
-la-[ttkawa]-na
-DEF-#-OBJ.1.PL
-
 la-[ttkawana]
 REL-#
 
-la-[ttkawan]-a
-REL-#-POSS.3.F.SG
-
-la-[ttkawa]-na
-REL-#-POSS.1.PL
-
-la-[ttkawan]-a
-REL-#-OBJ.3.F.SG
-
-la-[ttkawa]-na
-REL-#-OBJ.1.PL
-
 [latkkawan]-a
 #-POSS.3.F.SG
 
@@ -549,32 +693,8 @@ REL-#-OBJ.1.PL
 la-[tkkawana]
 DEF-#
 
-la-[tkkawan]-a
-DEF-#-POSS.3.F.SG
-
-la-[tkkawa]-na
-DEF-#-POSS.1.PL
-
-la-[tkkawan]-a
-DEF-#-OBJ.3.F.SG
-
-la-[tkkawa]-na
-DEF-#-OBJ.1.PL
-
 la-[tkkawana]
 REL-#
-
-la-[tkkawan]-a
-REL-#-POSS.3.F.SG
-
-la-[tkkawa]-na
-REL-#-POSS.1.PL
-
-la-[tkkawan]-a
-REL-#-OBJ.3.F.SG
-
-la-[tkkawa]-na
-REL-#-OBJ.1.PL
 
 [latkawann]-a
 #-POSS.3.F.SG
@@ -591,33 +711,9 @@ REL-#-OBJ.1.PL
 la-[tkawanna]
 DEF-#
 
-la-[tkawann]-a
-DEF-#-POSS.3.F.SG
-
-la-[tkawan]-na
-DEF-#-POSS.1.PL
-
-la-[tkawann]-a
-DEF-#-OBJ.3.F.SG
-
-la-[tkawan]-na
-DEF-#-OBJ.1.PL
-
 la-[tkawanna]
 REL-#
 
-la-[tkawann]-a
-REL-#-POSS.3.F.SG
-
-la-[tkawan]-na
-REL-#-POSS.1.PL
-
-la-[tkawann]-a
-REL-#-OBJ.3.F.SG
-
-la-[tkawan]-na
-REL-#-OBJ.1.PL
-
 [lattkkawan]-a
 #-POSS.3.F.SG
 
@@ -633,32 +729,8 @@ REL-#-OBJ.1.PL
 la-[ttkkawana]
 DEF-#
 
-la-[ttkkawan]-a
-DEF-#-POSS.3.F.SG
-
-la-[ttkkawa]-na
-DEF-#-POSS.1.PL
-
-la-[ttkkawan]-a
-DEF-#-OBJ.3.F.SG
-
-la-[ttkkawa]-na
-DEF-#-OBJ.1.PL
-
 la-[ttkkawana]
 REL-#
-
-la-[ttkkawan]-a
-REL-#-POSS.3.F.SG
-
-la-[ttkkawa]-na
-REL-#-POSS.1.PL
-
-la-[ttkkawan]-a
-REL-#-OBJ.3.F.SG
-
-la-[ttkkawa]-na
-REL-#-OBJ.1.PL
 
 [lattkawann]-a
 #-POSS.3.F.SG
@@ -675,33 +747,9 @@ REL-#-OBJ.1.PL
 la-[ttkawanna]
 DEF-#
 
-la-[ttkawann]-a
-DEF-#-POSS.3.F.SG
-
-la-[ttkawan]-na
-DEF-#-POSS.1.PL
-
-la-[ttkawann]-a
-DEF-#-OBJ.3.F.SG
-
-la-[ttkawan]-na
-DEF-#-OBJ.1.PL
-
 la-[ttkawanna]
 REL-#
 
-la-[ttkawann]-a
-REL-#-POSS.3.F.SG
-
-la-[ttkawan]-na
-REL-#-POSS.1.PL
-
-la-[ttkawann]-a
-REL-#-OBJ.3.F.SG
-
-la-[ttkawan]-na
-REL-#-OBJ.1.PL
-
 [latkkawann]-a
 #-POSS.3.F.SG
 
@@ -717,32 +765,8 @@ REL-#-OBJ.1.PL
 la-[tkkawanna]
 DEF-#
 
-la-[tkkawann]-a
-DEF-#-POSS.3.F.SG
-
-la-[tkkawan]-na
-DEF-#-POSS.1.PL
-
-la-[tkkawann]-a
-DEF-#-OBJ.3.F.SG
-
-la-[tkkawan]-na
-DEF-#-OBJ.1.PL
-
 la-[tkkawanna]
 REL-#
-
-la-[tkkawann]-a
-REL-#-POSS.3.F.SG
-
-la-[tkkawan]-na
-REL-#-POSS.1.PL
-
-la-[tkkawann]-a
-REL-#-OBJ.3.F.SG
-
-la-[tkkawan]-na
-REL-#-OBJ.1.PL
 
 [lattkkawann]-a
 #-POSS.3.F.SG
@@ -759,32 +783,8 @@ REL-#-OBJ.1.PL
 la-[ttkkawanna]
 DEF-#
 
-la-[ttkkawann]-a
-DEF-#-POSS.3.F.SG
-
-la-[ttkkawan]-na
-DEF-#-POSS.1.PL
-
-la-[ttkkawann]-a
-DEF-#-OBJ.3.F.SG
-
-la-[ttkkawan]-na
-DEF-#-OBJ.1.PL
-
 la-[ttkkawanna]
 REL-#
-
-la-[ttkkawann]-a
-REL-#-POSS.3.F.SG
-
-la-[ttkkawan]-na
-REL-#-POSS.1.PL
-
-la-[ttkkawann]-a
-REL-#-OBJ.3.F.SG
-
-la-[ttkkawan]-na
-REL-#-OBJ.1.PL
 
 * * * * * * *
 
@@ -804,76 +804,76 @@ l>uk
 
 Word: ኤርትርየ
 
-[>ertry]-a
-#-POSS.3.F.SG
-
-[>ertry]-a
-#-OBJ.3.F.SG
-
 [>ertr]e-ya
-#-OBJ.3.F.SG
-
-[>errtry]-a
-#-POSS.3.F.SG
-
-[>errtry]-a
 #-OBJ.3.F.SG
 
 [>errtr]e-ya
 #-OBJ.3.F.SG
 
-[>erttry]-a
-#-POSS.3.F.SG
-
-[>erttry]-a
-#-OBJ.3.F.SG
-
 [>erttr]e-ya
-#-OBJ.3.F.SG
-
-[>ertrry]-a
-#-POSS.3.F.SG
-
-[>ertrry]-a
 #-OBJ.3.F.SG
 
 [>ertrr]e-ya
 #-OBJ.3.F.SG
 
-[>errttry]-a
-#-POSS.3.F.SG
-
-[>errttry]-a
-#-OBJ.3.F.SG
-
 [>errttr]e-ya
-#-OBJ.3.F.SG
-
-[>errtrry]-a
-#-POSS.3.F.SG
-
-[>errtrry]-a
 #-OBJ.3.F.SG
 
 [>errtrr]e-ya
 #-OBJ.3.F.SG
 
-[>erttrry]-a
-#-POSS.3.F.SG
-
-[>erttrry]-a
-#-OBJ.3.F.SG
-
 [>erttrr]e-ya
 #-OBJ.3.F.SG
 
+[>errttrr]e-ya
+#-OBJ.3.F.SG
+
+[>ertry]-a
+#-POSS.3.F.SG
+
+[>ertry]-a
+#-OBJ.3.F.SG
+
+[>errtry]-a
+#-POSS.3.F.SG
+
+[>errtry]-a
+#-OBJ.3.F.SG
+
+[>erttry]-a
+#-POSS.3.F.SG
+
+[>erttry]-a
+#-OBJ.3.F.SG
+
+[>ertrry]-a
+#-POSS.3.F.SG
+
+[>ertrry]-a
+#-OBJ.3.F.SG
+
+[>errttry]-a
+#-POSS.3.F.SG
+
+[>errttry]-a
+#-OBJ.3.F.SG
+
+[>errtrry]-a
+#-POSS.3.F.SG
+
+[>errtrry]-a
+#-OBJ.3.F.SG
+
+[>erttrry]-a
+#-POSS.3.F.SG
+
+[>erttrry]-a
+#-OBJ.3.F.SG
+
 [>errttrry]-a
 #-POSS.3.F.SG
 
 [>errttrry]-a
-#-OBJ.3.F.SG
-
-[>errttrr]e-ya
 #-OBJ.3.F.SG
 
 * * * * * * *
@@ -1128,18 +1128,42 @@ REL-(Ght).PL
 la-GahAt
 REL-(Ghy).AGNZ.M.SG
 
-la-GGah-At
-DEF-(GGh).PL-PAU.F
-
-la-GGah-At
-REL-(GGh).PL-PAU.F
-
 la-GahAtt
 DEF-(Ghtt).PL
 
 la-GahAtt
 REL-(Ghtt).PL
 
+la-GGah-At
+DEF-(GGh).PL-PAU.F
+
+la-GGah-At
+REL-(GGh).PL-PAU.F
+
+la-[Gah]-At
+DEF-#-PL
+
+la-[Gah]-At
+DEF-#-PAU.F
+
+la-[Gah]-At
+REL-#-PL
+
+la-[Gah]-At
+REL-#-PAU.F
+
+la-[GGah]-At
+DEF-#-PL
+
+la-[GGah]-At
+DEF-#-PAU.F
+
+la-[GGah]-At
+REL-#-PL
+
+la-[GGah]-At
+REL-#-PAU.F
+
 [laGah]-At
 #-PL
 
@@ -1149,20 +1173,8 @@ REL-(Ghtt).PL
 la-[GahAt]
 DEF-#
 
-la-[Gah]-At
-DEF-#-PL
-
-la-[Gah]-At
-DEF-#-PAU.F
-
 la-[GahAt]
 REL-#
-
-la-[Gah]-At
-REL-#-PL
-
-la-[Gah]-At
-REL-#-PAU.F
 
 [laGGah]-At
 #-PL
@@ -1173,20 +1185,8 @@ REL-#-PAU.F
 la-[GGahAt]
 DEF-#
 
-la-[GGah]-At
-DEF-#-PL
-
-la-[GGah]-At
-DEF-#-PAU.F
-
 la-[GGahAt]
 REL-#
-
-la-[GGah]-At
-REL-#-PL
-
-la-[GGah]-At
-REL-#-PAU.F
 
 la-[GahAtt]
 DEF-#
@@ -1295,20 +1295,29 @@ COORD-(>g(2)l).PTCP.PASS.F.SG
 wa->ggl
 COORD-(>ggl).PTCP.PASS.F.SG
 
-wa->-ggl
-COORD-CAUS-(ggl).PTCP.PASS.F.SG
-
 wa->gll
 COORD-(>gll).PTCP.PASS.F.SG
-
-wa->-gll
-COORD-CAUS-(gll).PTCP.PASS.F.SG
 
 wa->ggll
 COORD-(>ggll).PTCP.PASS.F.SG
 
+wa->-ggl
+COORD-CAUS-(ggl).PTCP.PASS.F.SG
+
+wa->-gll
+COORD-CAUS-(gll).PTCP.PASS.F.SG
+
 wa->-ggll
 COORD-CAUS-(ggll).PTCP.PASS.F.SG
+
+wa->-[ggl]
+COORD-CAUS-#
+
+wa->-[gll]
+COORD-CAUS-#
+
+wa->-[ggll]
+COORD-CAUS-#
 
 wa-[>gl]
 COORD-#
@@ -1316,20 +1325,11 @@ COORD-#
 wa-[>ggl]
 COORD-#
 
-wa->-[ggl]
-COORD-CAUS-#
-
 wa-[>gll]
 COORD-#
 
-wa->-[gll]
-COORD-CAUS-#
-
 wa-[>ggll]
 COORD-#
-
-wa->-[ggll]
-COORD-CAUS-#
 
 * * * * * * *
 
@@ -1348,6 +1348,12 @@ Word: ለወጅቡ
 lawaGb-u
 (lwGb).PL-POSS.3.M.SG
 
+lawaGGb-u
+(lwGb).PL-POSS.3.M.SG
+
+lawaGGb-u
+(lGb).PL-POSS.3.M.SG
+
 la-waGb-u
 DEF-(wGb).PL-POSS.3.M.SG
 
@@ -1360,23 +1366,41 @@ REL-(wGb).PL-POSS.3.M.SG
 la-waGb-u
 REL-(wGb).INF-POSS.3.M.SG
 
+la-waGGb-u
+DEF-wG(2)b:IMP.2.M.SG-POSS.3.M.SG
+
+la-waGGb-u
+REL-wG(2)b:IMP.2.M.SG-POSS.3.M.SG
+
 l-a-waGGb-u
 3.M.SG-CAUS-wG(2)b:IMPF-POSS.3.M.SG
 
 l-a-waGGb-u
 3.M.SG-CAUS-wG(2)b:JUSS-POSS.3.M.SG
 
-lawaGGb-u
-(lwGb).PL-POSS.3.M.SG
+la-[waGb]-u
+DEF-#-POSS.3.M.SG
 
-lawaGGb-u
-(lGb).PL-POSS.3.M.SG
+la-[waGb]-u
+REL-#-POSS.3.M.SG
 
-la-waGGb-u
-DEF-wG(2)b:IMP.2.M.SG-POSS.3.M.SG
+la-[waGGb]-u
+DEF-#-POSS.3.M.SG
 
-la-waGGb-u
-REL-wG(2)b:IMP.2.M.SG-POSS.3.M.SG
+la-[waGGb]-u
+REL-#-POSS.3.M.SG
+
+la-[waGbb]-u
+DEF-#-POSS.3.M.SG
+
+la-[waGbb]-u
+REL-#-POSS.3.M.SG
+
+la-[waGGbb]-u
+DEF-#-POSS.3.M.SG
+
+la-[waGGbb]-u
+REL-#-POSS.3.M.SG
 
 [lawaGb]-u
 #-POSS.3.M.SG
@@ -1384,14 +1408,8 @@ REL-wG(2)b:IMP.2.M.SG-POSS.3.M.SG
 la-[waGbu]
 DEF-#
 
-la-[waGb]-u
-DEF-#-POSS.3.M.SG
-
 la-[waGbu]
 REL-#
-
-la-[waGb]-u
-REL-#-POSS.3.M.SG
 
 [lawaGGb]-u
 #-POSS.3.M.SG
@@ -1399,14 +1417,8 @@ REL-#-POSS.3.M.SG
 la-[waGGbu]
 DEF-#
 
-la-[waGGb]-u
-DEF-#-POSS.3.M.SG
-
 la-[waGGbu]
 REL-#
-
-la-[waGGb]-u
-REL-#-POSS.3.M.SG
 
 [lawaGbb]-u
 #-POSS.3.M.SG
@@ -1414,14 +1426,8 @@ REL-#-POSS.3.M.SG
 la-[waGbbu]
 DEF-#
 
-la-[waGbb]-u
-DEF-#-POSS.3.M.SG
-
 la-[waGbbu]
 REL-#
-
-la-[waGbb]-u
-REL-#-POSS.3.M.SG
 
 [lawaGGbb]-u
 #-POSS.3.M.SG
@@ -1429,14 +1435,8 @@ REL-#-POSS.3.M.SG
 la-[waGGbbu]
 DEF-#
 
-la-[waGGbb]-u
-DEF-#-POSS.3.M.SG
-
 la-[waGGbbu]
 REL-#
-
-la-[waGGbb]-u
-REL-#-POSS.3.M.SG
 
 * * * * * * *
 

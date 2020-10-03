@@ -4,19 +4,23 @@ import java.util.ArrayList;
 
 public class VerbProcessor {
 	private Conjugator conjugator;
+	private RootListGenerator rootListGenerator;
 	
-	public VerbProcessor (Conjugator conjugator) { this.conjugator = conjugator; }
+	public VerbProcessor (Conjugator conjugator, RootListGenerator rootListGenerator) {
+		this.conjugator = conjugator;
+		this.rootListGenerator = rootListGenerator;
+	}
 
-	public ArrayList<WordGlossPair> processWord (String word) {
-		ArrayList<WordGlossPair> analysisList = new ArrayList<>();
+	public ArrayList<WordAnalysis> processWord (String word) {
+		ArrayList<WordAnalysis> analysisList = new ArrayList<>();
 		
-		ArrayList<Root> roots = RootListGenerator.getRoots(word);
+		ArrayList<Root> roots = this.rootListGenerator.getRoots(word);
 
 		for (Root root : roots) {
 			ArrayList<VerbStem> derivedStems = VerbStem.generateWithPossiblePrefixes(root);
  			for (VerbStem stem : derivedStems) {
-				ArrayList<WordGlossPair> allFormsWithRoot = this.conjugator.conjugate(stem);
-				for (WordGlossPair form : allFormsWithRoot) {
+				ArrayList<WordAnalysis> allFormsWithRoot = this.conjugator.conjugate(stem);
+				for (WordAnalysis form : allFormsWithRoot) {
 					if (form.getRawWord().equals(word)) {
 						analysisList.add(form);
 					}

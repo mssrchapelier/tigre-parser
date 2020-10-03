@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 
-public class GeezAnalysisPair {
+public class WordEntry {
 	private String ethiopicOrtho;
-	private ArrayList<WordGlossPair> analysisList;
+	private ArrayList<WordAnalysis> analysisList;
 	
-	public GeezAnalysisPair (String ethiopicOrtho, ArrayList<WordGlossPair> analysisList) {
+	public WordEntry (String ethiopicOrtho, ArrayList<WordAnalysis> analysisList) {
 		this.ethiopicOrtho = ethiopicOrtho;
 		this.analysisList = analysisList;
 	}
 
 	public String getEthiopicOrtho () { return this.ethiopicOrtho; }
 	
-	public WordGlossPair getAnalysis (int i) { return this.analysisList.get(i); }
+	public WordAnalysis getAnalysis (int i) { return this.analysisList.get(i); }
 
 	public int getNumAnalyses () { return this.analysisList.size(); }
 
@@ -19,9 +19,8 @@ public class GeezAnalysisPair {
 		int numAnalyses = this.analysisList.size();
 		String[][] analysisArray = new String[numAnalyses][2];
 		for (int i = 0; i < numAnalyses; i++) {
-			WordGlossPair analysis = analysisList.get(i);
-			analysisArray[i][0] = analysis.surface;
-			analysisArray[i][1] = analysis.gloss;
+			WordAnalysis analysis = analysisList.get(i);
+			analysisArray[i] = analysis.exportWithMarkup();
 		}
 		return analysisArray;
 	}
