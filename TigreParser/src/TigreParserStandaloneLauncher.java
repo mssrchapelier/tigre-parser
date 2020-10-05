@@ -3,7 +3,7 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.validators.PositiveInteger;
 
-public class StandaloneLauncher {
+public class TigreParserStandaloneLauncher {
 	
 	@Parameter(description = "input file path", required = true)
 	String inputFilePath;
@@ -14,11 +14,11 @@ public class StandaloneLauncher {
 	@Parameter(names = { "-n", "--numanalyses" }, description = "maximum number of analyses to show (non-negative integer; 0 to show all analyses - default)", validateWith = PositiveInteger.class)
 	int maxAnalysesToShow = 0;
 
-	Builder builder;
+	TigreParser tigreParser;
 	
 	public static void main(String[] args) {
 		
-		StandaloneLauncher launcher = new StandaloneLauncher();
+		TigreParserStandaloneLauncher launcher = new TigreParserStandaloneLauncher();
 		
 		JCommander.newBuilder()
 			.addObject(launcher)
@@ -35,8 +35,8 @@ public class StandaloneLauncher {
 	
 	public void run () {
 		try {
-			this.builder = new Builder(this.maxAnalysesToShow); 
-			builder.processFile(this.inputFilePath, this.outputFilePath, true);
+			this.tigreParser = new TigreParser(this.maxAnalysesToShow); 
+			tigreParser.processFile(this.inputFilePath, this.outputFilePath, true);
 		} catch (IOException | ConfigParseException e) {
 			e.printStackTrace();
 		}

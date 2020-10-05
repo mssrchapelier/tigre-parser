@@ -31,7 +31,7 @@
 
 		<jar destfile="${dist.jar}" basedir="${build.dir}">
 			<manifest>
-				<attribute name="Main-Class" value="StandaloneLauncher" />
+				<attribute name="Main-Class" value="TigreParserStandaloneLauncher" />
 				<attribute name="Class-Path" value="${jar.classpath}" />
 			</manifest>
 		</jar>

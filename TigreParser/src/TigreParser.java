@@ -9,7 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Builder {
+public class TigreParser {
 	private static final String DEFAULT_CONFIG_FILE_PATH = "config.json";
 	private static final int DEFAULT_MAX_ANALYSES = 0;
 	
@@ -37,19 +37,19 @@ public class Builder {
 		this.maxAnalyses = maxAnalyses;
 	}
 
-	public Builder () throws IOException, ConfigParseException {
+	public TigreParser () throws IOException, ConfigParseException {
 		this(DEFAULT_MAX_ANALYSES, DEFAULT_CONFIG_FILE_PATH);
 	}
 
-	public Builder (int maxAnalyses) throws IOException, ConfigParseException {
+	public TigreParser (int maxAnalyses) throws IOException, ConfigParseException {
 		this(maxAnalyses, DEFAULT_CONFIG_FILE_PATH);
 	}
 
-	public Builder (String configFilePath) throws IOException, ConfigParseException {
+	public TigreParser (String configFilePath) throws IOException, ConfigParseException {
 		this(DEFAULT_MAX_ANALYSES, configFilePath);
 	}
 
-	public Builder (int maxAnalyses, String configFilePath) throws IOException, ConfigParseException {
+	public TigreParser (int maxAnalyses, String configFilePath) throws IOException, ConfigParseException {
 		if (maxAnalyses < 0) { throw new IllegalArgumentException("maxAnalyses must be a non-negative integer"); }
 
 		this.configurationBuilder = new ConfigurationBuilder().readConfig(configFilePath);
