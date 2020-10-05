@@ -17,9 +17,15 @@ public class VerbStem {
 	private VerbStem (Root root, VerbPreformative derivationalPrefix) {
 		this.rootDictionaryGloss = root.dictionaryGloss;
 		this.rootConsonants = Arrays.copyOf(root.consonants, root.consonants.length);
-		this.stemDescription = new VerbStemDescription(NumRadicals.parseNumRadicals(this.rootConsonants.length),
-								root.verbType,
-								derivationalPrefix);
+
+		VerbType verbType = root.verbType;
+		try {
+			this.stemDescription = new VerbStemDescription(NumRadicals.parseNumRadicals(this.rootConsonants.length),
+									root.verbType,
+									derivationalPrefix);
+		} catch (ConfigParseException e) {
+			throw new IllegalArgumentException(e);
+		}
 	}
 
 	VerbStem createWithNoPrefix (Root root) {

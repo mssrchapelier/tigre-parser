@@ -2,12 +2,14 @@
 public enum Mood {
 	INDICATIVE, JUSSIVE, IMPERATIVE, UNKNOWN;
 	
-	public static Mood parseMood (String s) throws IllegalArgumentException {
+	public static Mood parseMood (String s) throws ConfigParseException {
 		switch (s) {
 			case "INDIC": return Mood.INDICATIVE;
 			case "JUSS": return Mood.JUSSIVE;
 			case "IMP": return Mood.IMPERATIVE;
-			default: throw new IllegalArgumentException("Couldn't parse mood.");
+			default:
+				String message = String.format("Couldn't parse mood: %s", s);
+				throw new ConfigParseException(message);
 		}
 	}
 }

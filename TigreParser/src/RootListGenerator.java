@@ -40,6 +40,7 @@ class RootListGenerator {
 		
 		if (candidateCombination.isEmpty()) {
 			candidateCombination.add(new ConsDescription(sourceWord.charAt(0), false, false));
+
 			forks.add(copyOfConsDescriptionList(candidateCombination));
 		} else { // has 1 item at least
 			char lastLetter = candidateCombination.get(candidateCombination.size() - 1).consonant; // last letter in candidateCombination

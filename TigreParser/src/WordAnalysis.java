@@ -19,9 +19,7 @@ class WordAnalysis {
 	final boolean isFinalAnalysis;
 
 	WordAnalysis (ArrayList<AnalysisSegment> segments) {
-		try {
-			validateSegmentList(segments);
-		}
+		try { validateSegmentList(segments); }
 		catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Failed to create word analysis", e);
 		}
@@ -42,7 +40,7 @@ class WordAnalysis {
 		return new WordAnalysis(segmentList);
 	}
 
-	WordAnalysis insertReplacement (String replacement) throws ConfigParseException {
+	WordAnalysis insertReplacement (String replacement) {
 		if (replacement.isEmpty()) {
 			throw new IllegalArgumentException("Failed to insert replacement into word analysis: replacement string cannot be empty");
 		}
@@ -51,13 +49,7 @@ class WordAnalysis {
 		ArrayList<AnalysisSegment> segmentList = new ArrayList<>();
 		for (int i = 0; i < segmentStrings.length; i++) {
 			String segmentString = segmentStrings[i];
-			try {
-				segmentList.add(AnalysisSegmentUtils.parseAndBuild(segmentString));
-			} catch (ConfigParseException e) {
-				String message = "Failed to insert replacement into word analysis: malformed";
-				message += String.format("replacement:%n" + "%s" + "%n", replacement);
-				throw new ConfigParseException(message, e);
-			}
+			segmentList.add(AnalysisSegmentUtils.parseAndBuild(segmentString));
 		}
 		WordAnalysis innerAnalysis = new WordAnalysis(segmentList);
 		return innerAnalysis.insertInto(this);

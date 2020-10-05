@@ -99,10 +99,9 @@ public class VerbParadigmCell {
 										this.prefixes,
 										this.rootTemplate,
 										this.suffixes);
-			} catch (IndexOutOfBoundsException|NoSuchElementException|IllegalArgumentException e) {
-				String message = "Failed to read paradigm line: ";
-				message += line;
-				throw new ConfigParseException(message);
+			} catch (IllegalStateException | ConfigParseException e) {
+				String message = String.format("Failed to read paradigm line: %s", line);
+				throw new ConfigParseException(message, e);
 			}
 		}
 	
@@ -129,6 +128,10 @@ public class VerbParadigmCell {
 					if (rootHasBeenRead) { readSuffix(curSurface, curGloss); }
 					else { readPrefix(curSurface, curGloss); }
 				}
+			}
+
+			if (!rootHasBeenRead) {
+				throw new ConfigParseException("Failed to locate root in description");
 			}
 		}
 		

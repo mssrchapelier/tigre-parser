@@ -987,7 +987,7 @@
     {
         "comment": "front",
         "regex": "^(?<stem>qbl)(?<suf>At)$",
-        "replace": "${stem}:midst-${suf}F.SG"
+        "replace": "${stem}:midst-${suf}:F.SG"
     },
     {
         "comment": "without, except",

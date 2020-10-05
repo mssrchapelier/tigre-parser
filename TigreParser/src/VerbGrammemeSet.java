@@ -40,17 +40,22 @@ public class VerbGrammemeSet {
 		this.number = number;
 	}
 
-	static VerbGrammemeSet parse (String inputString) {
-		Matcher matcher = descriptionPattern.matcher(inputString);
-		matcher.find();
+	static VerbGrammemeSet parse (String inputString) throws ConfigParseException {
+		try {
+			Matcher matcher = descriptionPattern.matcher(inputString);
+			matcher.find();
 
-		Mood mood = Mood.parseMood(matcher.group("mood"));
-		Tense tense = Tense.parseTense(matcher.group("tense"));
-		Person person = Person.parsePerson(matcher.group("person"));
-		Gender gender = Gender.parseGender(matcher.group("gender"));
-		Number number = Number.parseNumber(matcher.group("number"));
+			Mood mood = Mood.parseMood(matcher.group("mood"));
+			Tense tense = Tense.parseTense(matcher.group("tense"));
+			Person person = Person.parsePerson(matcher.group("person"));
+			Gender gender = Gender.parseGender(matcher.group("gender"));
+			Number number = Number.parseNumber(matcher.group("number"));
 
-		return new VerbGrammemeSet(mood, tense, person, gender, number);
+			return new VerbGrammemeSet(mood, tense, person, gender, number);
+		} catch (IllegalStateException | ConfigParseException e) {
+			String message = String.format("Failed to parse grammeme set: %s", inputString);
+			throw new ConfigParseException(message, e);
+		}
 	}
 	
 	

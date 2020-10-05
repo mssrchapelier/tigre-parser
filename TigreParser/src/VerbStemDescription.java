@@ -6,9 +6,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 class VerbStemDescription {
 	private static final Pattern stemDescriptionPattern = Pattern.compile("^\\$radicals\\:(?<rad>[345]),type\\:(?<type>[ABCD]),prefix\\:(?<prefix>0|A|T|AT|ATTA|AN|AS|ATTAN|ATTAS|ASTA)$");
 	
-	private NumRadicals numRadicals;
-	private VerbType verbType;
-	private VerbPreformative derivPrefix;
+	private final NumRadicals numRadicals;
+	private final VerbType verbType;
+	private final VerbPreformative derivPrefix;
 
 	VerbStemDescription (NumRadicals numRadicals, VerbType verbType, VerbPreformative derivPrefix) {
 		this.numRadicals = numRadicals;
@@ -30,8 +30,9 @@ class VerbStemDescription {
 			VerbType verbType = VerbType.parseVerbType(matcher.group("type"));
 			VerbPreformative derivPrefix = VerbPreformative.parseVerbPreformative(matcher.group("prefix"));
 			return new VerbStemDescription (numRadicals, verbType, derivPrefix);
-		} catch (IllegalStateException|IllegalArgumentException e) {
-			throw new ConfigParseException("Failed to read paradigm header");
+		} catch (IllegalStateException | ConfigParseException e) {
+			String message = String.format("Failed to parse paradigm description: %s", line);
+			throw new ConfigParseException(message, e);
 		}
 	}
 

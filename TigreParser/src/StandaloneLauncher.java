@@ -35,8 +35,7 @@ public class StandaloneLauncher {
 			}
 			this.builder = new Builder(this.maxAnalysesToShow); 
 			builder.processFile(inputFilePath, outputFilePath, true);
-		} catch (IOException|ConfigParseException e) {
-			System.out.println(e.getMessage());
+		} catch (IOException | ConfigParseException e) {
 			e.printStackTrace();
 		}
 	}

@@ -14,13 +14,13 @@ final class AnalysisSegmentUtils {
 		}
 	}
 
-	static AnalysisSegment parseAndBuild (String inputString) throws ConfigParseException {
+	static AnalysisSegment parseAndBuild (String inputString) {
 		// Format of inputString:
 		// - for MorphemeAnalysis: "surface:gloss"
 		// - for UnanalysedSegment: "[surface]:#"
 		String[] morphemeParts = inputString.split("\\:");
 		if (morphemeParts.length != 2) {
-			throw new ConfigParseException("Failed to parse analysis segment: replacement is not formatted properly (no surface/gloss separator)");
+			throw new IllegalArgumentException("Failed to parse analysis segment: replacement is not formatted properly (must contain exactly one surface/gloss separator)");
 		}
 		String surface = morphemeParts[0];
 		String gloss = morphemeParts[1];

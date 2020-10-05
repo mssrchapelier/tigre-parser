@@ -1,4 +1,4 @@
-import java.io.BufferedReader;
+import java.io.LineNumberReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,16 +30,8 @@ public class VerbParadigm {
 		// Same as VerbParadigm.paradigm, but stores cells in Set rather than in a List, for management of duplicates when parsing the paradigm file.
 		// Sets of cells must be converted to Lists when creating a VerbParadigm object, for efficient subsequent iteration.
 		private LinkedHashMap<VerbStemDescription, LinkedHashSet<VerbParadigmCell>> paradigmAsSets;
-		
-		private ArrayList<String> lines;
-		private ListIterator<String> lineIterator;
-		private int currentLineNum;
 
 		public VerbParadigmBuilder () {
-			this.lines = new ArrayList<>();
-			this.lineIterator = lines.listIterator();
-			this.currentLineNum = 0;
-
 			this.paradigmAsSets = new LinkedHashMap<>();
 		}
 
@@ -50,61 +42,45 @@ public class VerbParadigm {
 		}
 		
 		public VerbParadigmBuilder readFrom (String paradigmFilePath) throws IOException, ConfigParseException {
-			try (BufferedReader reader = new BufferedReader(new FileReader(paradigmFilePath))) {
-				String currentLine;
-				while ((currentLine = reader.readLine()) != null) {
-					this.lines.add(currentLine);
-				}
-			}
-			
-			this.lineIterator = lines.listIterator();
-			this.currentLineNum = 0;
-
-			while (this.lineIterator.hasNext()) {
-				String currentLine = this.lineIterator.next();
-				currentLineNum++;
-				if (lineHasContent(currentLine)) { // skip comments and empty lines
-					if (currentLine.charAt(0) == '$') {
-						this.lineIterator.previous();
-						currentLineNum--;
-						// this.lineIterator, this.currentLineNum: before paradigm header
-						this.readAndBuildSingleParadigm();
-						// this.lineIterator, this.currentLineNum: before next paradigm header, or at last line
-					} else {
-						throw new ConfigParseException("Failed to read paradigm file header: paradigm file not read");
+			try (LineNumberReader reader = new LineNumberReader(new FileReader(paradigmFilePath))) {
+				String line;
+				VerbStemDescription stemDescription = null;
+				LinkedHashSet<VerbParadigmCell> cellSet = null;
+				while ( (line = reader.readLine()) != null ) {
+					if (lineHasContent(line)) {
+						try {
+							if (line.charAt(0) == '$') {
+								// read next paradigm header
+								if (stemDescription != null && cellSet != null) {
+									this.putCellsInParadigm(cellSet, stemDescription);
+								}
+								stemDescription = VerbStemDescription.parse(line);
+								cellSet = new LinkedHashSet<>();
+							} else {
+								// read next cell description
+								if (stemDescription == null || cellSet == null) {
+									String message = String.format("The paradigm header for this cell description has not been set: %s", line);
+									throw new ConfigParseException(message);
+								}
+								VerbParadigmCell cell = new VerbParadigmCell.VerbParadigmCellBuilder().parseAndBuild(line, stemDescription);
+								cellSet.add(cell);
+							}
+						} catch (ConfigParseException cause) {
+							String description = "Failed to parse verb paradigm file";
+							throw new ConfigParseException.ConfigParseExceptionBuilder().appendDescription(description)
+															.appendFilePath(paradigmFilePath)
+															.appendLineNumber(reader.getLineNumber())
+															.appendCause(cause)
+															.build();
+						}
 					}
 				}
+				return this;
+			} catch (ConfigParseException e) {
+				// reset this.paradigmAsSets
+				this.paradigmAsSets = new LinkedHashMap<>();
+				throw e;
 			}
-			return this;
-		}
-		
-		private void readAndBuildSingleParadigm () throws ConfigParseException {
-			// this.lineIterator, this.currentLineNum: before paradigm header
-			String paradigmHeaderLine = this.lineIterator.next();
-			this.currentLineNum++;
-
-			VerbStemDescription stemDescription = VerbStemDescription.parse(paradigmHeaderLine);
-			
-			// read everything before the next paradigm header (or the end of this file if there are no more headers)
-			ArrayList<String> paradigmLines = this.readSingleParadigmAsLines();
-			// this.lineIterator, this.currentLineNum: before next paradigm header, or at last line
-	
-			// build cell set
-			LinkedHashSet<VerbParadigmCell> cellSet = buildCellSet(paradigmLines, stemDescription);
-			this.putCellsInParadigm(cellSet, stemDescription);
-		}
-
-		private static LinkedHashSet<VerbParadigmCell> buildCellSet (ArrayList<String> cellsAsLines, VerbStemDescription stemDescription) throws ConfigParseException {
-			LinkedHashSet<VerbParadigmCell> cellSet = new LinkedHashSet<>();
-			for (String line : cellsAsLines) {
-				try {
-					VerbParadigmCell cell = new VerbParadigmCell.VerbParadigmCellBuilder().parseAndBuild(line, stemDescription);
-					cellSet.add(cell);
-				} catch (ConfigParseException e) {
-					throw new ConfigParseException("Failed to read paradigm line", e);
-				}
-			}
-			return cellSet;
 		}
 
 		private void putCellsInParadigm (LinkedHashSet<VerbParadigmCell> cellSet, VerbStemDescription stemDescription) {
@@ -116,33 +92,6 @@ public class VerbParadigm {
 				// create a new paradigm with these entries
 				this.paradigmAsSets.put(stemDescription, cellSet);
 			}
-		}
-
-		private ArrayList<String> readSingleParadigmAsLines () {
-			// this.lineIterator, this.currentLineNum: at line after paradigm header
-			ArrayList<String> paradigmLines = new ArrayList<>();
-			String curLine;
-			while (this.lineIterator.hasNext()) {
-				curLine = this.lineIterator.next();
-				this.currentLineNum++;
-
-				if (!curLine.isEmpty() &&
-					curLine.charAt(0) == '$') {
-					// new paradigm header
-					break;
-				}
-				if (lineHasContent(curLine)) { paradigmLines.add(curLine); }	
-			}
-			
-			if (this.lineIterator.hasNext()) {
-				// not at the end of file
-				this.lineIterator.previous();
-				this.currentLineNum--;
-				// this.lineIterator, this.currentLineNum: before next paradigm header
-			}
-
-			// this.lineIterator, this.currentLineNum: before next paradigm header, or at last line
-			return paradigmLines;
 		}
 		
 		private static boolean lineHasContent (String line) {

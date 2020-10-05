@@ -62,31 +62,32 @@ public class WordProcessor {
 	public void setPatternProcessor (PatternProcessor patternProcessor) { this.patternProcessor = patternProcessor; }
 	public void setVerbProcessor (VerbProcessor verbProcessor) { this.verbProcessor = verbProcessor; }
 
-	public WordEntry processWord (String ethiopicOrtho) throws ConfigParseException {
+	public WordEntry processWord (String inputWord) {
+		ArrayList<WordAnalysis> analysisList = new ArrayList<>();
 		try {
-			String romanisedOrtho = this.transliterator.romanise(ethiopicOrtho);
+			String romanisedOrtho = this.transliterator.romanise(inputWord);
 			ArrayList<String> geminatedOrthos = this.geminator.geminate(romanisedOrtho);
-			ArrayList<WordAnalysis> analysisList = new ArrayList<>();
 			for (String geminatedOrtho : geminatedOrthos) {
 				analysisList.addAll(this.analyseGeminatedOrtho(geminatedOrtho));
 			}
 			analysisList = removeDuplicates(analysisList);
 			Collections.sort(analysisList, Collections.reverseOrder(new WordAnalysisComparator()));
-	
-			return new WordEntry(ethiopicOrtho, analysisList);
 		} catch (NotEthiopicScriptException e) {
-			return constructWithEmptyAnalysis(ethiopicOrtho);
+			// do nothing; analysisList remains empty
 		}
+		return new WordEntry(inputWord, analysisList);
 	}
 
+	/*
 	private static WordEntry constructWithEmptyAnalysis (String inputWord) {
 		WordAnalysis analysis = WordAnalysis.createWithEmptyAnalysis(inputWord);
 		ArrayList<WordAnalysis> analysisList = new ArrayList<>();
 		analysisList.add(analysis);
 		return new WordEntry(inputWord, analysisList);
 	}
+	*/
 
-	private ArrayList<WordAnalysis> analyseGeminatedOrtho (String geminatedOrtho) throws ConfigParseException {
+	private ArrayList<WordAnalysis> analyseGeminatedOrtho (String geminatedOrtho) {
 		ArrayList<WordAnalysis> analysisList = this.patternProcessor.processWord(geminatedOrtho); 
 		analysisList = this.parseVerbsInList(analysisList);
 		analysisList = removeEmptyAnalyses(analysisList);

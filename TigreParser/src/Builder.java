@@ -65,12 +65,12 @@ public class Builder {
 							.build();
 	}
 
-	public void processFile (String inputPath, String outputPath) throws IOException, ConfigParseException {
+	public void processFile (String inputPath, String outputPath) throws IOException {
 		// process silently (nothing sent to System.out)
 		this.processFile(inputPath, outputPath, false);
 	}
 
-	public void processFile (String inputPath, String outputPath, boolean printNotifications) throws IOException, ConfigParseException {
+	public void processFile (String inputPath, String outputPath, boolean printNotifications) throws IOException {
 		if (printNotifications) {
 			String message = String.format("Processing file: %s", inputPath);
 			System.out.println(message);
@@ -104,7 +104,7 @@ public class Builder {
 		}
 	}
 	
-	public String[][] analyseWord (String ethiopicWord) throws ConfigParseException {
+	public String[][] analyseWord (String ethiopicWord) {
 		/*
 		 * Returns a two-dimensional String array analysisArray[n][2] (with n analyses for this word).
 		 * For i-th analysis,
@@ -142,7 +142,7 @@ public class Builder {
 		writer.print(modeMessage);
 	}
 
-	private ArrayList<WordEntry> processLine (String ethiopicLine) throws ConfigParseException {
+	private ArrayList<WordEntry> processLine (String ethiopicLine) {
 		ArrayList<String> ethiopicWords = this.tokeniser.tokenise(ethiopicLine);
 		ArrayList<WordEntry> processedWordList = new ArrayList<>();
 		for (String ethiopicWord : ethiopicWords) {

@@ -45,6 +45,7 @@ class RootTemplate {
 
 	static RootTemplate parseAndBuild (String surface, String rootGrammemeGloss) throws ConfigParseException {
 		String exceptionMessage = String.format("Illegal root format: %s", surface);
+		ConfigParseException exception = new ConfigParseException(exceptionMessage);
 
 		if (!surface.matches("^.*_.*$")) {
 			throw new ConfigParseException(exceptionMessage);
@@ -59,7 +60,7 @@ class RootTemplate {
 		if (numVowelSlots < 2 || numVowelSlots > 4
 			|| numConsSlots < 3 || numConsSlots > 5
 			|| numVowelSlots != numConsSlots - 1) {
-			throw new ConfigParseException(exceptionMessage);
+			throw exception;
 		}
 
 		char[] vowelPattern = new char[numVowelSlots];
@@ -68,7 +69,7 @@ class RootTemplate {
 			if (LetterType.isVowel(vowel) || vowel == '0') {
 				vowelPattern[slotNum] = vowel;
 			} else {
-				throw new ConfigParseException(exceptionMessage);
+				throw exception;
 			}
 		}
 
@@ -78,7 +79,7 @@ class RootTemplate {
 			switch (gemIndicator) {
 				case '1': gemPattern[slotNum] = false; break;
 				case '2': gemPattern[slotNum] = true; break;
-				default: throw new ConfigParseException(exceptionMessage);
+				default: throw exception;
 			}
 		}
 		
