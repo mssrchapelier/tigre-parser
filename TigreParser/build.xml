@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<project default="run" basedir=".">
+	<property name="src.dir" location="src" />
+	<property name="build.dir" location="bin" />
+	<property name="lib.dir" location="lib" />
+	<property name="dist.jar" location="./tigre-parser-new.jar" />
+
+	<path id="build.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="makedir">
+		<mkdir dir="${build.dir}" />
+	</target>
+
+	<target name="compile" depends="clean, makedir">
+		<javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.dir}" classpathref="build.classpath">
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<manifestclasspath property="jar.classpath" jarfile="${dist.jar}">
+			<classpath refid="build.classpath"/>
+		</manifestclasspath>
+
+		<jar destfile="${dist.jar}" basedir="${build.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="StandaloneLauncher" />
+				<attribute name="Class-Path" value="${jar.classpath}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="run" depends="compile, jar">
+	</target>
+</project>
