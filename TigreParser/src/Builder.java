@@ -10,13 +10,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Builder {
+	private static final String DEFAULT_CONFIG_FILE_PATH = "config.json";
+	private static final int DEFAULT_MAX_ANALYSES = 0;
+	
+	ConfigurationBuilder configurationBuilder;
+
 	Tokeniser tokeniser;
 	WordProcessor wordProcessor;
 	
 	int maxAnalyses;
-
-	static String romanisationMapFilePath = "configs/romanization-map.file";
-	static String verbParadigmFilePath = "configs/verb-paradigm.txt";
 
 	// NB: The order of file names in patternFilePaths is NOT arbitrary (the levels generated are processed in this order).
 	private static String[] patternFilePaths = { "configs/patterns/pref-coord.json",
@@ -35,22 +37,36 @@ public class Builder {
 		this.maxAnalyses = maxAnalyses;
 	}
 
+	public Builder () throws IOException, ConfigParseException {
+		this(DEFAULT_MAX_ANALYSES, DEFAULT_CONFIG_FILE_PATH);
+	}
+
 	public Builder (int maxAnalyses) throws IOException, ConfigParseException {
+		this(maxAnalyses, DEFAULT_CONFIG_FILE_PATH);
+	}
+
+	public Builder (String configFilePath) throws IOException, ConfigParseException {
+		this(DEFAULT_MAX_ANALYSES, configFilePath);
+	}
+
+	public Builder (int maxAnalyses, String configFilePath) throws IOException, ConfigParseException {
 		if (maxAnalyses < 0) { throw new IllegalArgumentException("maxAnalyses must be a non-negative integer"); }
+
+		this.configurationBuilder = new ConfigurationBuilder().readConfig(configFilePath);
 		
 		this.setMaxAnalyses(maxAnalyses);
 		
 		this.tokeniser = new Tokeniser();
 		
-		Transliterator transliterator = new Transliterator(romanisationMapFilePath);
+		Transliterator transliterator = new Transliterator(this.configurationBuilder.getTransliterationMapFilePath());
 		Geminator geminator = new Geminator();
 
 		PatternProcessor patternProcessor = new PatternProcessor.PatternProcessorBuilder()
-								.readFrom(patternFilePaths)
+								.readFrom(this.configurationBuilder.getPatternFilePaths())
 								.build();
 		
 		VerbParadigm verbParadigm = new VerbParadigm.VerbParadigmBuilder()
-							.readFrom(verbParadigmFilePath)
+							.readFrom(this.configurationBuilder.getVerbParadigmFilePath())
 							.build();
 		Conjugator conjugator = new Conjugator(verbParadigm);
 		RootListGenerator rootListGenerator = new RootListGenerator();
