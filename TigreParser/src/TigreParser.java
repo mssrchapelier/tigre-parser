@@ -19,18 +19,6 @@ public class TigreParser {
 	WordProcessor wordProcessor;
 	
 	int maxAnalyses;
-
-	// NB: The order of file names in patternFilePaths is NOT arbitrary (the levels generated are processed in this order).
-	private static String[] patternFilePaths = { "configs/patterns/pref-coord.json",
-							"configs/patterns/pref-relz.json",
-							"configs/patterns/pref-neg.json",
-							"configs/patterns/pref-iobj.json",
-							"configs/patterns/suf-expl.json",
-							"configs/patterns/suf-pron.json",
-							"configs/patterns/pau_2.json",
-							"configs/patterns/pass-ptcp-deriv-pref.json",
-							"configs/patterns/nominal-stem.json",
-							"configs/patterns/lexicon.json" };
 	
 	public void setMaxAnalyses (int maxAnalyses) {
 		if (maxAnalyses < 0) { throw new IllegalArgumentException("maxAnalyses must be a non-negative integer"); }

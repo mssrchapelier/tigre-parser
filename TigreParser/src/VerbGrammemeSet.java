@@ -14,7 +14,7 @@ public class VerbGrammemeSet {
 	Gender gender;
 	Number number;
 
-	VerbGrammemeSet() {
+	VerbGrammemeSet () {
 		this.mood = Mood.UNKNOWN;
 		this.tense = Tense.UNKNOWN;
 		this.person = Person.UNKNOWN;

@@ -78,15 +78,6 @@ public class WordProcessor {
 		return new WordEntry(inputWord, analysisList);
 	}
 
-	/*
-	private static WordEntry constructWithEmptyAnalysis (String inputWord) {
-		WordAnalysis analysis = WordAnalysis.createWithEmptyAnalysis(inputWord);
-		ArrayList<WordAnalysis> analysisList = new ArrayList<>();
-		analysisList.add(analysis);
-		return new WordEntry(inputWord, analysisList);
-	}
-	*/
-
 	private ArrayList<WordAnalysis> analyseGeminatedOrtho (String geminatedOrtho) {
 		ArrayList<WordAnalysis> analysisList = this.patternProcessor.processWord(geminatedOrtho); 
 		analysisList = this.parseVerbsInList(analysisList);
