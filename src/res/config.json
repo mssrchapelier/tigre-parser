@@ -1,0 +1,16 @@
+{
+	"transliteration-map": "configs/transliteration-map.config",
+	"verb-paradigm": "configs/verb-paradigm.config",
+	"patterns": [
+		"configs/patterns/pref-coord.json",
+		"configs/patterns/pref-relz.json",
+		"configs/patterns/pref-neg.json",
+		"configs/patterns/pref-iobj.json",
+		"configs/patterns/suf-expl.json",
+		"configs/patterns/suf-pron.json",
+		"configs/patterns/pau_2.json",
+		"configs/patterns/pass-ptcp-deriv-pref.json",
+		"configs/patterns/nominal-stem.json",
+		"configs/patterns/lexicon.json"
+	]
+}

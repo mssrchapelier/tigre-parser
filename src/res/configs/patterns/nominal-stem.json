@@ -1,0 +1,1972 @@
+[
+    {
+        "comment": "broken plural: balas -> >aballs, naggal -> >anaggl",
+        "regex": "^(?<pref>>a)(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PL-${root}:\\(${C1}${C2cons}${C3}\\).PL"
+    },
+    {
+        "comment": "broken plural: bggu< -> >abAg<",
+        "regex": "^(?<pref>>a)(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PL-${root}:\\(${C1}${C2}${C3}\\).PL"
+    },
+    {
+        "comment": "broken plural, final laryngeal: kal< -> >akall<t, >akall<at",
+        "regex": "^(?<pref>>a)(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[hHX><]))(?<suf>a?t)$",
+        "replace": "${pref}:PL-${root}:\\(${C1}${C2cons}${C3}\\).PL-${suf}:PL"
+    },
+    {
+        "comment": "broken plural: CaCaC{1,2}C",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>(?<C3cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(\\k<C3cons>)?)(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${root}:\\(${C1}${C2}${C3cons}${C4}\\).PL"
+    },
+    {
+        "comment": "broken plural: CaCAC[iu]?C: qaSir -> qaSayr",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])([iu]?)(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${root}:\\(${C1}${C2}${C3}${C4}\\).PL"
+    },
+    {
+        "comment": "broken plural: CawaC{2}C",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])awa(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${root}:\\(${C1}${C2cons}${C3}\\).PL"
+    },
+    {
+        "comment": "broken plural: CawACC",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])awA(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${root}:\\(${C1}${C2}${C3}\\).PL"
+    },
+    {
+        "comment": "broken plural: CaCAyC",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${root}:\\(${C1}${C2}${C3}\\).PL"
+    },
+    {
+        "comment": "broken plural: CaCaC{2}it?; rora -> rawarri(t), manfat -> manAfit",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>(?<C3cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C3cons>))(?<suf>it?)$",
+        "replace": "${root}:\\(${C1}${C2}${C3}\\).PL-${suf}:PL"
+    },
+    {
+        "comment": "broken plural: CawaC{2}it? <- (CC).PL-PL",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])awa(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>))(?<suf>it?)$",
+        "replace": "${root}:\\(${C1}${C2}\\).PL-${suf}:PL"
+    },
+    {
+        "comment": "broken plural: CawACit? <- (CC).PL-PL",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])awA(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>it?)$",
+        "replace": "${root}:\\(${C1}${C2}\\).PL-${suf}:PL"
+    },
+    {
+        "comment": "broken plural: >aCCAC; qor -> >aqwAr, kis -> >akyAs",
+        "regex": "^(?<pref>>a)(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PL-${root}:\\(${C1}${C2}${C3}\\).PL"
+    },
+    {
+        "comment": "broken plural: >aCC[uA]?C (2nd consonant is not a laryngeal or a semivowel); dabr -> >adbr, daqal -> adqul, kalb -> >aklAb",
+        "regex": "^(?<pref>>a)(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpP])([uA]?)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PL-${root}:\\(${C1}${C2}${C3}\\).PL"
+    },
+    {
+        "comment": "broken plural: L[aA]C[uA]?C, L = laryngeal; Hlm -> HAlAm, >adg -> >adug",
+        "regex": "^(?<root>(?<C1>[hHX><])([aA])(?<C2>[lmrsxqbtnkzdGgTCSfcZpP])([uA]?)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${root}:\\(${C1}${C2}${C3}\\).PL"
+    },
+    {
+        "comment": "broken plural: >aCCACAt; mdr -> >amdArAt",
+        "regex": "^(?<pref>>a)(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>At)$",
+        "replace": "${pref}:PL-${root}:\\(${C1}${C2}${C3}\\).PL-${suf}:PL"
+    },
+    {
+        "comment": "broken plural: >aCCCat; luH -> >alwHAt, >alwaHAt",
+        "regex": "^(?<pref>>a)(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PL-${root}:\\(${C1}${C2}${C3}\\).PL-${suf}:PL"
+    },
+    {
+        "comment": "broken plural: CCaC; kuk -> kwak, Hilat -> Hyal",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${root}:\\(${C1}${C2}${C3}\\).PL"
+    },
+    {
+        "comment": "broken plural: CCAC, 2nd cons not a semivowel",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${root}:\\(${C1}${C2}${C3}\\).PL"
+    },
+    {
+        "comment": "broken plural: CaC[aA]C, 2nd cons not a semivowel",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])([aA]?)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${root}:\\(${C1}${C2}${C3}\\).PL"
+    },
+    {
+        "comment": "suffixed plural: -at (lomin -> lominat)",
+        "regex": "^(?<root>.+[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>at)$",
+        "replace": "\\[${root}\\]:#-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: -Ay",
+        "regex": "^(?<root>.+[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>Ay)$",
+        "replace": "\\[${root}\\]:#-${suf}:SG.M"
+    },
+    {
+        "comment": "suffixed singulative: -Ayt",
+        "regex": "^(?<root>.+[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>Ayt)$",
+        "replace": "\\[${root}\\]:#-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: a-deletion (qaTaf -> qaTfat)",
+        "regex": "^(?<root>(?<g1>.+)(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(at))$",
+        "replace": "${root}:${g1}a${C}-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: a-deletion",
+        "regex": "^(?<root>(?<g1>.+)(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(Ay))$",
+        "replace": "${root}:${g1}a${C}-${suf}:SG.M"
+    },
+    {
+        "comment": "suffixed singulative: a-deletion",
+        "regex": "^(?<root>(?<g1>.+)(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(Ayt))$",
+        "replace": "${root}:${g1}a${C}-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: A-deletion (GlAb -> Glbat)",
+        "regex": "^(?<root>(?<g1>.+)(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(at))$",
+        "replace": "${root}:${g1}A${C}-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: A-deletion",
+        "regex": "^(?<root>(?<g1>.+)(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(Ay))$",
+        "replace": "${root}:${g1}A${C}-${suf}:SG.M"
+    },
+    {
+        "comment": "suffixed singulative: A-deletion",
+        "regex": "^(?<root>(?<g1>.+)(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(Ayt))$",
+        "replace": "${root}:${g1}A${C}-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: t-insertion, final vowel (wagre -> wagretat)",
+        "regex": "^(?<root>.+[ieAuo])(?<suf>t(at))$",
+        "replace": "\\[${root}\\]:#-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: t-insertion",
+        "regex": "^(?<root>.+[ieAuo])(?<suf>t(Ay))$",
+        "replace": "\\[${root}\\]:#-${suf}:SG.M"
+    },
+    {
+        "comment": "suffixed singulative: t-insertion",
+        "regex": "^(?<root>.+[ieAuo])(?<suf>t(Ayt))$",
+        "replace": "\\[${root}\\]:#-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: final a deletion (Cewa -> Cewat)",
+        "regex": "^(?<root>.+[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>(at))$",
+        "replace": "\\[${root}\\a]:#-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: final a deletion",
+        "regex": "^(?<root>.+[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>(Ay))$",
+        "replace": "\\[${root}\\a]:#-${suf}:SG.M"
+    },
+    {
+        "comment": "suffixed singulative: final a deletion",
+        "regex": "^(?<root>.+[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>(Ay))$",
+        "replace": "\\[${root}\\a]:#-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: -Ay 0 -> e (kstAn -> kstenAy, kstenAyt)",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(Ay))$",
+        "replace": "${root}:${g1}${C}-${suf}:SG.M"
+    },
+    {
+        "comment": "suffixed singulative: -Ay a -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(Ay))$",
+        "replace": "${root}:${g1}a${C}-${suf}:SG.M"
+    },
+    {
+        "comment": "suffixed singulative: -Ay A -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(Ay))$",
+        "replace": "${root}:${g1}A${C}-${suf}:SG.M"
+    },
+    {
+        "comment": "suffixed singulative: -Ayt 0 -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(Ayt))$",
+        "replace": "${root}:${g1}${C}-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: -Ayt a -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(Ayt))$",
+        "replace": "${root}:${g1}a${C}-${suf}:SG.F"
+    },
+    {
+        "comment": "suffixed singulative: -Ayt A -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>(Ayt))$",
+        "replace": "${root}:${g1}A${C}-${suf}:SG.F"
+    },
+    {
+        "comment": "-At plural: ...CAC+At // dAr -> dArAt, >akAn -> >akAnAt",
+        "regex": "^(?<root>.+[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]A[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>At)$",
+        "replace": "\\[${root}\\]:#-${suf}:PL"
+    },
+    {
+        "comment": "-At plural: t-insertion after final vowel// masanqo -> masanqotAt",
+        "regex": "^(?<root>.+[ieaAuo])(?<suf>tAt)$",
+        "replace": "\\[${root}\\]:#-${suf}:PL"
+    },
+    {
+        "comment": "-At plural: CVCet -> CaCyAt // xawet -> xawyAt",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])y)(?<suf>At)$",
+        "replace": "${root}:${C1}\\(V\\)${C2}et-${suf}:PL"
+    },
+    {
+        "comment": "-At plural: CVCot -> CaCyAt // rkot -> rakwAt",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])w)(?<suf>At)$",
+        "replace": "${root}:${C1}\\(V\\)${C2}ot-${suf}:PL"
+    },
+    {
+        "comment": "-At plural: ..at -> ..At // xAkat -> xAkAt",
+        "regex": "^(?<root>.+)(?<suf>At)$",
+        "replace": "\\[${root}\\]:#-${suf}:PL"
+    },
+    {
+        "comment": "-otAt plural: ..at -> ..otAt // sadAyat -> sadAyotAt",
+        "regex": "^(?<root>.+)(?<suf>otAt)$",
+        "replace": "\\[${root}\\]:#-${suf}:PL"
+    },
+    {
+        "comment": "-otAt plural: CACC+otAt // >Anf -> >AnfotAt",
+        "regex": "^(?<root>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]A[lmrsxqbtnkzdGgTCSfcZpPwyhHX><][lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>otAt)$",
+        "replace": "\\[${root}\\]:#-${suf}:PL"
+    },
+    {
+        "comment": "-otAt plural: CVC -> CVC{2}+otAt // >ad -> >addotAt",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<V>[ieaAuo])(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<suf>otAt)$",
+        "replace": "${root}:${C1}${V}${C2cons}-${suf}:PL"
+    },
+    {
+        "comment": "-otAt plural: semivowel metathesis: ..Ce -> ..yC+otat // zamAte -> zamAytotAt",
+        "regex": "^(?<root>(?<g1>.+)y(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>otAt)$",
+        "replace": "${root}:${g1}${C}e-${suf}:PL"
+    },
+    {
+        "comment": "-otAt plural: semivowel metathesis: ..Ci -> ..yC+otat",
+        "regex": "^(?<root>(?<g1>.+)y(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>otAt)$",
+        "replace": "${root}:${g1}${C}i-${suf}:PL"
+    },
+    {
+        "comment": "-otAt plural: semivowel metathesis: ..Co -> ..wC+otat",
+        "regex": "^(?<root>(?<g1>.+)w(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>otAt)$",
+        "replace": "${root}:${g1}${C}o-${suf}:PL"
+    },
+    {
+        "comment": "-otAt plural: semivowel metathesis: ..Cu -> ..wC+otat",
+        "regex": "^(?<root>(?<g1>.+)w(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>otAt)$",
+        "replace": "${root}:${g1}${C}u-${suf}:PL"
+    },
+    {
+        "comment": "diminutive: -Ay (MASC): .+[iuo]CAy; ..eCAy handled below; ..[Cons,a,A]CAy do not occur (e insertion)",
+        "regex": "^(?<root>.+[iuo][lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>Ay)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.M"
+    },
+    {
+        "comment": "diminutive: -at (FEM): .{2,}[iuo]Cat; ..eCat handled below; ..[Cons,a,A]Cat do not occur (e insertion); NB: *C[iuo]C-at (formed with -atit, see below)",
+        "regex": "^(?<root>.{2,}[iuo][lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>at)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.F"
+    },
+    {
+        "comment": "diminutive: -Ay (MASC): .+[iuo]tAy, t-insertion after vowel",
+        "regex": "^(?<root>.+[iuo])(?<suf>tAy)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.M"
+    },
+    {
+        "comment": "diminutive: -at (FEM): .+[iuo]tat, t-insertion after vowel",
+        "regex": "^(?<root>.+[iuo])(?<suf>tat)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.F"
+    },
+    {
+        "comment": "diminutive: -Ay: ..eCAy, 0 -> e; NB: *CACeCAy <- CACC (formed with -etAy)",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<![lmrsxqbtnkzdGgTCSfcZpPwyhHX><]A[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]e[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>Ay)$",
+        "replace": "${root}:${g1}${C}-${suf}:DIM.M"
+    },
+    {
+        "comment": "diminutive: -at: ..eCat, 0 -> e; NB: *CACeCat <- CACC (formed with -atit)",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<![lmrsxqbtnkzdGgTCSfcZpPwyhHX><]A[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]e[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>at)$",
+        "replace": "${root}:${g1}${C}-${suf}:DIM.F"
+    },
+    {
+        "comment": "diminutive: -Ay: ..etAy, 0 -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tAy)$",
+        "replace": "${root}:${g1}-${suf}:DIM.M"
+    },
+    {
+        "comment": "diminutive: -at: ..etat, 0 -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tat)$",
+        "replace": "${root}:${g1}-${suf}:DIM.F"
+    },
+    {
+        "comment": "diminutive: -Ay: ..eCAy, a -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${root}:${g1}a${C}-${suf}:DIM.M"
+    },
+    {
+        "comment": "diminutive: -at: ..eCat, a -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${root}:${g1}a${C}-${suf}:DIM.F"
+    },
+    {
+        "comment": "diminutive: -Ay: ..etAy, a -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tAy)$",
+        "replace": "${root}:${g1}a-${suf}:DIM.M"
+    },
+    {
+        "comment": "diminutive: -at: ..etat, a -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tat)$",
+        "replace": "${root}:${g1}a-${suf}:DIM.F"
+    },
+    {
+        "comment": "diminutive: -Ay: ..eCAy, A -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${root}:${g1}A${C}-${suf}:DIM.M"
+    },
+    {
+        "comment": "diminutive: -at: ..eCat, A -> e; NB: *CeC-at <- CAC (formed with -atit)",
+        "regex": "^(?<root>(?<g1>.{2,})e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${root}:${g1}A${C}-${suf}:DIM.F"
+    },
+    {
+        "comment": "diminutive: -Ay: ..etAy, A -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tAy)$",
+        "replace": "${root}:${g1}A-${suf}:DIM.M"
+    },
+    {
+        "comment": "diminutive: -at: ..etat, A -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tat)$",
+        "replace": "${root}:${g1}A-${suf}:DIM.F"
+    },
+    {
+        "comment": "diminutive: -Ay: ..eCAy, e -> e",
+        "regex": "^(?<root>.+e[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>Ay)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.M"
+    },
+    {
+        "comment": "diminutive: -at: ..eCat, e -> e; NB: *CeC-at <- CeC",
+        "regex": "^(?<root>.{2,}e[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>at)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.F"
+    },
+    {
+        "comment": "diminutive: -Ay: ..etAy, e -> e, t-insertion",
+        "regex": "^(?<root>.+e)(?<suf>tAy)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.M"
+    },
+    {
+        "comment": "diminutive: -at: ..etat, e -> e, t-insertion",
+        "regex": "^(?<root>.+e)(?<suf>tat)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.F"
+    },
+    {
+        "comment": "CCC -> CC{2}C + Ay (along with -> e) // flq -> flleqAy",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${root}:${C1}${C2cons}${C3}-${suf}:DIM.M"
+    },
+    {
+        "comment": "CCC -> CC{2}C + at (along with -> e)",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${root}:${C1}${C2cons}${C3}-${suf}:DIM.F"
+    },
+    {
+        "comment": "CaCaC -> CaC2aC + Ay (along with -> e) // zanab -> zannebAy",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${root}:${C1}a${C2cons}a${C3}-${suf}:DIM.M"
+    },
+    {
+        "comment": "CaCaC -> CaC2aC + at (along with -> e)",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${root}:${C1}a${C2cons}a${C3}-${suf}:DIM.F"
+    },
+    {
+        "comment": "CaCC -> CaC2C + Ay (along with -> e) // wakd -> wakkedat",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${root}:${C1}a${C2cons}${C3}-${suf}:DIM.M"
+    },
+    {
+        "comment": "CaCC -> CaC2C + at (along with -> e) // wakd -> wakkedat",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${root}:${C1}a${C2cons}${C3}-${suf}:DIM.F"
+    },
+    {
+        "comment": "-at:F-it:DIM.F // Galb-at-it",
+        "regex": "^(?<root>.+)(?<sufFem>at)(?<sufDim>it)$",
+        "replace": "\\[${root}\\]:#-${sufFem}:F-${sufDim}:DIM.F"
+    },
+    {
+        "comment": "-t:F-it:DIM.F // <adg-t-it",
+        "regex": "^(?<root>.+)(?<sufFem>t)(?<sufDim>it)$",
+        "replace": "\\[${root}\\]:#-${sufFem}:F-${sufDim}:DIM.F"
+    },
+    {
+        "comment": "-etAy diminutive // ktkt-etay <- (ktkt-tay)",
+        "regex": "^(?<root>.+)(?<suf>etAy)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.M"
+    },
+    {
+        "comment": "-etAy diminutive, Ca?C{2}etAy <- CVC // dss-etAy <- ds",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<V>a?)(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>))(?<suf>etAy)$",
+        "replace": "${root}:${C1}${V}${C2}-${suf}:DIM.M"
+    },
+    {
+        "comment": "-atit diminutive, Ca?C{2}atit <- CVC // >mm-atit <- >m",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<V>a?)(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>))(?<suf>atit)$",
+        "replace": "${root}:${C1}${V}${C2}-${suf}:DIM.F"
+    },
+    {
+        "comment": "-atit diminutive, C[Auieo]Catit <- CVC // bet-atit <- bet",
+        "regex": "^(?<root>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><][Auieo][lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>atit)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.F"
+    },
+    {
+        "comment": "-etAy diminutive, CACCetAy <- CACC",
+        "regex": "^(?<root>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]A[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>etAy)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.M"
+    },
+    {
+        "comment": "-atit diminutive, CACCatit <- CACC",
+        "regex": "^(?<root>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]A[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>atit)$",
+        "replace": "\\[${root}\\]:#-${suf}:DIM.F"
+    },
+    {
+        "comment": "paucative: -Am (MASC): .+[iuo]CAm; ..eCAm handled below; ..[Cons,a,A]CAm do not occur (e insertion)",
+        "regex": "^(?<root>.+[iuo][lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>Am)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.M"
+    },
+    {
+        "comment": "paucative: -At (FEM): .{2,}[iuo]CAt; ..eCAt handled below; ..[Cons,a,A]CAt do not occur (e insertion); NB: *C[iuo]C-At (formed with -etAt, see below)",
+        "regex": "^(?<root>.{2,}[iuo][lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>At)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.F"
+    },
+    {
+        "comment": "paucative: -Am (MASC): .+[iuo]tAm, t-insertion after vowel",
+        "regex": "^(?<root>.+[iuo])(?<suf>tAm)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.M"
+    },
+    {
+        "comment": "paucative: -At (FEM): .+[iuo]tAt, t-insertion after vowel",
+        "regex": "^(?<root>.+[iuo])(?<suf>tAt)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.F"
+    },
+    {
+        "comment": "paucative: -Am: ..eCAm, 0 -> e; NB: *CACeCAm <- CACC (formed with -etAm)",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<![lmrsxqbtnkzdGgTCSfcZpPwyhHX><]A[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]e[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>Am)$",
+        "replace": "${root}:${g1}${C}-${suf}:PAU.M"
+    },
+    {
+        "comment": "paucative: -At: ..eCAt, 0 -> e; NB: *CACeCAt <- CACC (formed with -etAt)",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<![lmrsxqbtnkzdGgTCSfcZpPwyhHX><]A[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]e[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>At)$",
+        "replace": "${root}:${g1}${C}-${suf}:PAU.F"
+    },
+    {
+        "comment": "paucative: -Am: ..etAm, 0 -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tAm)$",
+        "replace": "${root}:${g1}-${suf}:PAU.M"
+    },
+    {
+        "comment": "paucative: -At: ..etAt, 0 -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tAt)$",
+        "replace": "${root}:${g1}-${suf}:PAU.F"
+    },
+    {
+        "comment": "paucative: -Am: ..eCAm, a -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Am)$",
+        "replace": "${root}:${g1}a${C}-${suf}:PAU.M"
+    },
+    {
+        "comment": "paucative: -At: ..eCAt, a -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>At)$",
+        "replace": "${root}:${g1}a${C}-${suf}:PAU.F"
+    },
+    {
+        "comment": "paucative: -Am: ..etAm, a -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tAm)$",
+        "replace": "${root}:${g1}a-${suf}:PAU.M"
+    },
+    {
+        "comment": "paucative: -At: ..etAt, a -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tAt)$",
+        "replace": "${root}:${g1}a-${suf}:PAU.F"
+    },
+    {
+        "comment": "paucative: -Am: ..eCAm, A -> e",
+        "regex": "^(?<root>(?<g1>.+)e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Am)$",
+        "replace": "${root}:${g1}A${C}-${suf}:PAU.M"
+    },
+    {
+        "comment": "paucative: -At: ..eCAt, A -> e; NB: *CeC-At <- CAC (formed with -etAt)",
+        "regex": "^(?<root>(?<g1>.{2,})e(?<C>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>At)$",
+        "replace": "${root}:${g1}A${C}-${suf}:PAU.F"
+    },
+    {
+        "comment": "paucative: -Am: ..etAm, A -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tAm)$",
+        "replace": "${root}:${g1}A-${suf}:PAU.M"
+    },
+    {
+        "comment": "paucative: -At: ..etAt, A -> e, t-insertion",
+        "regex": "^(?<root>(?<g1>.+)e)(?<suf>tAt)$",
+        "replace": "${root}:${g1}A-${suf}:PAU.F"
+    },
+    {
+        "comment": "paucative: -Am: ..eCAm, e -> e",
+        "regex": "^(?<root>.+e[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>Am)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.M"
+    },
+    {
+        "comment": "paucative: -At: ..eCAt, e -> e; NB: *CeC-At <- CeC",
+        "regex": "^(?<root>.{2,}e[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>At)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.F"
+    },
+    {
+        "comment": "paucative: -Am: ..etAm, e -> e, t-insertion",
+        "regex": "^(?<root>.+e)(?<suf>tAm)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.M"
+    },
+    {
+        "comment": "paucative: -At: ..etAt, e -> e, t-insertion",
+        "regex": "^(?<root>.+e)(?<suf>tAt)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.F"
+    },
+    {
+        "comment": "CCC -> CC{2}C + Am (along with -> e)",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Am)$",
+        "replace": "${root}:${C1}${C2cons}${C3}-${suf}:PAU.M"
+    },
+    {
+        "comment": "CCC -> CC{2}C + At (along with -> e)",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>At)$",
+        "replace": "${root}:${C1}${C2cons}${C3}-${suf}:PAU.F"
+    },
+    {
+        "comment": "CaCaC -> CaC2aC + Am (along with -> e)",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Am)$",
+        "replace": "${root}:${C1}a${C2cons}a${C3}-${suf}:PAU.M"
+    },
+    {
+        "comment": "CaCaC -> CaC2aC + At (along with -> e)",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>At)$",
+        "replace": "${root}:${C1}a${C2cons}a${C3}-${suf}:PAU.F"
+    },
+    {
+        "comment": "CaCC -> CaC2C + Am (along with -> e)",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Am)$",
+        "replace": "${root}:${C1}a${C2cons}${C3}-${suf}:PAU.M"
+    },
+    {
+        "comment": "CaCC -> CaC2C + At (along with -> e)",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)e(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>At)$",
+        "replace": "${root}:${C1}a${C2cons}${C3}-${suf}:PAU.F"
+    },
+    {
+        "comment": "-At:F-it:PAU.F",
+        "regex": "^(?<root>.+)(?<sufFem>At)(?<sufDim>it)$",
+        "replace": "\\[${root}\\]:#-${sufFem}:F-${sufDim}:PAU.F"
+    },
+    {
+        "comment": "-t:F-it:PAU.F",
+        "regex": "^(?<root>.+)(?<sufFem>t)(?<sufDim>it)$",
+        "replace": "\\[${root}\\]:#-${sufFem}:F-${sufDim}:PAU.F"
+    },
+    {
+        "comment": "-etAm paucative",
+        "regex": "^(?<root>.+)(?<suf>etAm)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.M"
+    },
+    {
+        "comment": "-etAm paucative, Ca?C{2}etAm <- CVC",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<V>a?)(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>))(?<suf>etAm)$",
+        "replace": "${root}:${C1}${V}${C2}-${suf}:PAU.M"
+    },
+    {
+        "comment": "-etAt paucative, Ca?C{2}etAt <- CVC",
+        "regex": "^(?<root>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<V>a?)(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>))(?<suf>etAt)$",
+        "replace": "${root}:${C1}${V}${C2}-${suf}:PAU.F"
+    },
+    {
+        "comment": "-etAt paucative, C[Auieo]CetAt <- CVC",
+        "regex": "^(?<root>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><][Auieo][lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>etAt)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.F"
+    },
+    {
+        "comment": "-etAm paucative, CACCetAm <- CACC",
+        "regex": "^(?<root>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]A[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>etAm)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.M"
+    },
+    {
+        "comment": "-etAt paucative, CACCetAt <- CACC",
+        "regex": "^(?<root>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]A[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<suf>etAt)$",
+        "replace": "\\[${root}\\]:#-${suf}:PAU.F"
+    },
+    {
+        "comment": "3-radical type A active participle, m. sg., CC{-L}C{-SV} (2nd not a laryngeal, 3rd not a semivowel) // qAtl",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwy])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.ACT.M.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, f. sg., CC{-L}C{-SV} // qAtl-at",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwy])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.ACT-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, m. pl., CC{-L}C{-SV} // qAtl-Am",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwy])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.ACT-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, f. pl., CC{-L}C{-SV} // qAtl-At",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwy])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.ACT-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, m. sg., CC{+L}C{-SV}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.ACT.M.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, f. sg., CC{+L}C{-SV}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.ACT-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, m. pl., CC{+L}C{-SV}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.ACT-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, f. pl., CC{+L}C{-SV}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.ACT-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, m. sg., CC{-L}y // qly -> qAli",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT.M.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, f. sg., CC{-L}y // qly -> qAly-at",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, f. sg., CC{-L}y; 2nd-3rd rad transposition // qly -> qAyl-at",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, m. pl., CC{-L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, m. pl., CC{-L}y; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, f. pl., CC{-L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, f. pl., CC{-L}y; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, m. sg., CC{-L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT.M.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, f. sg., CC{-L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, f. sg., CC{-L}w; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, m. pl., CC{-L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, m. pl., CC{-L}w; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, f. pl., CC{-L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, f. pl., CC{-L}w; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, m. sg., CC{+L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT.M.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, f. sg., CC{+L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, m. pl., CC{+L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, m. pl., CC{+L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.ACT-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, m. sg., CC{+L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT.M.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, f. sg., CC{+L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A active participle, m. pl., CC{+L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A active participle, m. pl., CC{+L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.ACT-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type B active participle, m. sg. // >m(2)r -> ma->amr-Ay",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}\\(2\\)${C3}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type B active participle, m. sg., no suffix // >m(2)r -> ma->ammr",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\).M.SG"
+    },
+    {
+        "comment": "3-radical type B active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}\\(2\\)${C3}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type B active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}\\(2\\)${C3}\\)-${suf}:PL"
+    },
+    {
+        "comment": "3-radical type C active participle, m. sg. // l(A)Sy -> ma-lASy-Ay",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}\\(A\\)${C2}${C3}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type C active participle, m. sg., no suffix // l(A)Sy -> ma-lASy",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}\\(A\\)${C2}${C3}\\).M.SG"
+    },
+    {
+        "comment": "3-radical type C active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}\\(A\\)${C2}${C3}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type C active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}\\(A\\)${C2}${C3}\\)-${suf}:PL"
+    },
+    {
+        "comment": "3-radical type A/B (from A) passive (t-) participle, m. sg. // ma-t-kabbt-Ay",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2cons}${C3}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type A/B (from A) passive (t-) participle, m. sg., no suffix // ma-t-kabbt",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2cons}${C3}\\).M.SG"
+    },
+    {
+        "comment": "3-radical type A/B (from A) passive (t-) participle, f. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2cons}${C3}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A/B (from A) passive (t-) participle, f. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2cons}${C3}\\)-${suf}:PL"
+    },
+    {
+        "comment": "3-radical type A/B (from B) passive (t-) participle, m. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type A/B (from B) passive (t-) participle, m. sg., no suffix",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\).M.SG"
+    },
+    {
+        "comment": "3-radical type A/B (from B) passive (t-) participle, f. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A/B (from B) passive (t-) participle, pl.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\)-${suf}:PL"
+    },
+    {
+        "comment": "3-radical type C passive (t-) participle, m. sg. // ma-t-gAmr-Ay",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}\\(A\\)${C2cons}${C3}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type C passive (t-) participle, m. sg., no suffix // ma-t-gAmr",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}\\(A\\)${C2cons}${C3}\\).M.SG"
+    },
+    {
+        "comment": "3-radical type C passive (t-) participle, f. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}\\(A\\)${C2cons}${C3}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type C passive (t-) participle, pl.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}\\(A\\)${C2cons}${C3}\\)-${suf}:PL"
+    },
+    {
+        "comment": "3-radical type >a-A active participle, m. sg. // ma-wld-Ay",
+        "regex": "^(?<pref>ma)(?<stem>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]{3})(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${stem}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type >a-A active participle, m. sg., no suffix // ma-wld",
+        "regex": "^(?<pref>ma)(?<stem>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]{3})$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${stem}\\).M.SG"
+    },
+    {
+        "comment": "3-radical type >a-A active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]{3})(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${stem}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type >a-A active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]{3})(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${stem}\\)-${suf}:PL"
+    },
+    {
+        "comment": "3-radical type >a-B active participle, m. sg.; identical to B active ptcp",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}${C2}\\(2\\)${C3}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type >a-B active participle, m. sg., no suffix",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}${C2}\\(2\\)${C3}\\).M.SG"
+    },
+    {
+        "comment": "3-radical type >a-B active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}${C2}\\(2\\)${C3}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type >a-B active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}${C2}\\(2\\)${C3}\\)-${suf}:PL"
+    },
+    {
+        "comment": "3-radical type >a-C active participle, m. sg.; identical to C active ptcp",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}\\(A\\)${C2}${C3}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type >a-C active participle, m. sg., no suffix",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}\\(A\\)${C2}${C3}\\).M.SG"
+    },
+    {
+        "comment": "3-radical type >a-C active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}\\(A\\)${C2}${C3}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type >a-C active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}\\(A\\)${C2}${C3}\\)-${suf}:PL"
+    },
+    {
+        "comment": "3-radical type >at-C active participle, m. sg.; identical to C passive (t-) ptcp",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${prefPtcp}:PTCP.ACT-${prefCaus}:CAUS-${stem}:\\(${C1}\\(A\\)${C2cons}${C3}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type >at-C active participle, m. sg., no suffix",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefPtcp}:PTCP.ACT-${prefCaus}:CAUS-${stem}:\\(${C1}\\(A\\)${C2cons}${C3}\\).M.SG"
+    },
+    {
+        "comment": "3-radical type >at-C active participle, f. sg.",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${prefPtcp}:PTCP.ACT-${prefCaus}:CAUS-${stem}:\\(${C1}\\(A\\)${C2cons}${C3}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type >at-C active participle, pl.",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${prefPtcp}:PTCP.ACT-${prefCaus}:CAUS-${stem}:\\(${C1}\\(A\\)${C2cons}${C3}\\)-${suf}:PL"
+    },
+    {
+        "comment": "3-radical type A passive participle, m. sg. // qtul. NB: *CCuw (CCw -> CCuy), etc. for all other forms",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "3-radical type A passive participle, f. sg., 3rd not y, no suffix // qtl",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${stem}\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "3-radical type A passive participle, f. sg., 3rd not y, with suffix // qtl-t",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>t)$",
+        "replace": "${stem}:\\(${stem}\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A passive participle, m. pl., CCC{-L} // qtul-Am",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A passive participle, f. pl., CCC{-L} // qtul-At",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A passive participle, m. sg., CCuy <- CCw // qtul. NB: *CCuw (CCw -> CCuy), etc. for all other forms",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "3-radical type A passive participle, f. sg., CCi <- CCy, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "3-radical type A passive participle, f. sg., CCi-t <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A passive participle, f. sg., CCi <- CCw, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "3-radical type A passive participle, f. sg., CCi-t <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A passive participle, m. pl., CCuy-Am <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A passive participle, f. pl., CCuy-At <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A passive participle, m. pl., CCC{+L} // bzH-Am",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[hHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A passive participle, f. pl., CCC{+L} // bzH-At",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[hHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type B passive participle, m. sg.",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "3-radical type B passive participle, f. sg., 3rd not y, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "3-radical type B passive participle, f. sg., 3rd not y, with suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type B passive participle, m. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type B passive participle, f. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type B passive participle, m. sg., CCuy <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)uy)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)w\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "3-radical type B passive participle, f. sg., CCi <- CCy, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)i)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)y\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "3-radical type B passive participle, f. sg., CCi-t <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)y\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type B passive participle, f. sg., CCi <- CCw, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)i)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)w\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "3-radical type B passive participle, f. sg., CCi-t <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)w\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type B passive participle, m. pl., CCuy-Am <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)uy)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)w\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type B passive participle, f. pl., CCuy-At <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)uy)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)w\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type B passive participle, m. pl., CCC{+L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)(?<C3>[hHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type B passive participle, f. pl., CCC{+L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>(?<C2cons>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2cons>)(?<C3>[hHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2cons}\\(2\\)${C3}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type C passive participle, m. sg.",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}${C3}\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "3-radical type C passive participle, f. sg., 3rd not y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}${C3}\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type C passive participle, m. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}${C3}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type C passive participle, f. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}${C3}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type C passive participle, m. sg., CuCuy <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}w\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "3-radical type C passive participle, f. sg., CuCi-t <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}y\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type C passive participle, f. sg., CuCi-t <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}w\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type C passive participle, m. pl., CuCuy-Am <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}w\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type C passive participle, f. pl., CuCuy-At <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}w\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type C passive participle, m. pl., CCC{+L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[hHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}${C3}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type C passive participle, f. pl., CCC{+L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[hHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}\\(A\\)${C2}${C3}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "4-radical type A active participle, m. sg. // xnkl -> ma-xankl-Ay",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}${C4}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "4-radical type A active participle, m. sg., no suffix // ma-xankl",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}${C4}\\).M.SG"
+    },
+    {
+        "comment": "4-radical type A active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}${C4}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type A active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}${C4}\\)-${suf}:PL"
+    },
+    {
+        "comment": "4-radical type C active participle, m. sg. // l(A)Sy -> ma-lASy-Ay",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "4-radical type C active participle, m. sg., no suffix // l(A)Sy -> ma-lASy",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\).M.SG"
+    },
+    {
+        "comment": "4-radical type C active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type C active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:PL"
+    },
+    {
+        "comment": "4-radical type A passive (t-) participle, m. sg. // ma-t-kabbt-Ay",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C3}${C4}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "4-radical type A passive (t-) participle, m. sg., no suffix // ma-t-kabbt",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C3}${C4}\\).M.SG"
+    },
+    {
+        "comment": "4-radical type A passive (t-) participle, f. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C3}${C4}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type A passive (t-) participle, f. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C3}${C4}\\)-${suf}:PL"
+    },
+    {
+        "comment": "4-radical type C passive (t-) participle, m. sg. // ma-t-gAmr-Ay",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "4-radical type C passive (t-) participle, m. sg., no suffix // ma-t-gAmr",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\).M.SG"
+    },
+    {
+        "comment": "4-radical type C passive (t-) participle, f. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type C passive (t-) participle, pl.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:PL"
+    },
+    {
+        "comment": "4-radical type >a-A active participle, m. sg. // ma-wld-Ay",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}${C2}${C3}${C4}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "4-radical type >a-A active participle, m. sg., no suffix // ma-wld",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}${C2}${C3}${C4}\\).M.SG"
+    },
+    {
+        "comment": "4-radical type >a-A active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}${C2}${C3}${C4}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type >a-A active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}${C2}${C3}${C4}\\)-${suf}:PL"
+    },
+    {
+        "comment": "4-radical type >a-C active participle, m. sg.; identical to C active ptcp",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}\\(A\\)${C3}${C4}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "4-radical type >a-C active participle, m. sg., no suffix",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}\\(A\\)${C3}${C4}\\).M.SG"
+    },
+    {
+        "comment": "4-radical type >a-C active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type >a-C active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT.CAUS-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:PL"
+    },
+    {
+        "comment": "4-radical type >at-C active participle, m. sg.; identical to C passive (t-) ptcp",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${prefPtcp}:PTCP.ACT-${prefCaus}:CAUS-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "4-radical type >at-C active participle, m. sg., no suffix",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefPtcp}:PTCP.ACT-${prefCaus}:CAUS-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\).M.SG"
+    },
+    {
+        "comment": "4-radical type >at-C active participle, f. sg.",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${prefPtcp}:PTCP.ACT-${prefCaus}:CAUS-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type >at-C active participle, pl.",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${prefPtcp}:PTCP.ACT-${prefCaus}:CAUS-${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\)-${suf}:PL"
+    },
+    {
+        "comment": "4-radical type D active participle, m. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C4}\\).FREQ-${suf}:M.SG"
+    },
+    {
+        "comment": "4-radical type D active participle, m. sg., no suffix",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C4}\\).FREQ.M.SG"
+    },
+    {
+        "comment": "4-radical type D active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C4}\\).FREQ-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type D active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C4}\\).FREQ-${suf}:PL"
+    },
+    {
+        "comment": "4-radical type t-D passive participle, m. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C4}\\).FREQ-${suf}:M.SG"
+    },
+    {
+        "comment": "4-radical type t-D passive participle, m. sg., no suffix",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C4}\\).FREQ.M.SG"
+    },
+    {
+        "comment": "4-radical type t-D passive participle, f. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C4}\\).FREQ-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type t-D passive participle, pl.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C4}\\).FREQ-${suf}:PL"
+    },
+    {
+        "comment": "4-radical type t-D passive participle, m. sg.",
+        "regex": "^(?<prefPtcp>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${prefPtcp}:PTCP-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C4}\\).FREQ-${suf}:M.SG"
+    },
+    {
+        "comment": "4-radical type >at-D active participle, m. sg., no suffix",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefPtcp}:PTCP.ACT-${stem}:\\(${C1}${C2}${C4}\\).FREQ.M.SG"
+    },
+    {
+        "comment": "4-radical type >at-D active participle, f. sg.",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${prefPtcp}:PTCP.ACT-${stem}:\\(${C1}${C2}${C4}\\).FREQ-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type >at-D active participle, pl.",
+        "regex": "^(?<prefPtcp>m)(?<prefCaus>at)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${prefPtcp}:PTCP.ACT-${stem}:\\(${C1}${C2}${C4}\\).FREQ-${suf}:PL"
+    },
+    {
+        "comment": "4-radical type A passive participle, m. sg.",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "4-radical type A passive participle, f. sg., 3rd not y, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${stem}\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "4-radical type A passive participle, f. sg., 3rd not y, with suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>t)$",
+        "replace": "${stem}:\\(${stem}\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type A passive participle, m. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "4-radical type A passive participle, f. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "4-radical type A passive participle, m. sg., CCuy <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}w\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "4-radical type A passive participle, f. sg., CCi <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}y\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "4-radical type A passive participle, f. sg., CCi-t <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}y\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type A passive participle, f. sg., CCi <- CCw, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}w\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "4-radical type A passive participle, f. sg., CCi-t <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}w\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type A passive participle, m. pl., CCuy-Am <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}w\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "4-radical type A passive participle, f. pl., CCuy-At <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}w\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "4-radical type A passive participle, m. pl., CCC{+L} // bzH-Am",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[hHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "4-radical type A passive participle, f. pl., CCC{+L} // bzH-At",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[hHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "4-radical type C passive participle, m. sg.",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "4-radical type C passive participle, f. sg., 3rd not y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type C passive participle, m. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "4-radical type C passive participle, f. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "4-radical type C passive participle, m. sg., CuCuy <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}w\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "4-radical type C passive participle, f. sg., CuCi-t <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}y\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type C passive participle, f. sg., CuCi-t <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}w\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type C passive participle, m. pl., CuCuy-Am <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}w\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "4-radical type C passive participle, f. pl., CuCuy-At <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}w\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "4-radical type C passive participle, m. pl., CCC{+L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[hHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "4-radical type C passive participle, f. pl., CCC{+L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[hHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(A\\)${C3}${C4}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "4-radical type D passive participle, m. sg.",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2}${C4}\\).FREQ.PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "4-radical type D passive participle, f. sg., 3rd not y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>(?<C4>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}${C4}\\).FREQ.PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type D passive participle, m. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C4}\\).FREQ.PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "4-radical type D passive participle, f. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C4}\\).FREQ.PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "4-radical type D passive participle, m. sg., CuCuy <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>uy)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).FREQ.PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "4-radical type D passive participle, f. sg., CuCi-t <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).FREQ.PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type D passive participle, f. sg., CuCi-t <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).FREQ.PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "4-radical type D passive participle, m. pl., CuCuy-Am <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>uy)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).FREQ.PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "4-radical type D passive participle, f. pl., CuCuy-At <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>uy)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\).FREQ.PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "4-radical type D passive participle, m. pl., CCC{+L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>(?<C4>[hHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C4}\\).FREQ.PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "4-radical type D passive participle, f. pl., CCC{+L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u\\k<C2>(?<C4>[hHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C4}\\).FREQ.PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "5-radical type A active participle, m. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C5>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}${C4}${C5}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "5-radical type A active participle, m. sg., no suffix",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C5>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}${C4}${C5}\\).M.SG"
+    },
+    {
+        "comment": "5-radical type A active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C5>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}${C4}${C5}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "5-radical type A active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C5>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}${C4}${C5}\\)-${suf}:PL"
+    },
+    {
+        "comment": "5-radical type A passive participle, m. sg.",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C5>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${C2}${C3}${C4}${C5}\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "5-radical type A passive participle, f. sg., 3rd not y, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${stem}\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "5-radical type A passive participle, f. sg., 3rd not y, with suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>t)$",
+        "replace": "${stem}:\\(${stem}\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "5-radical type A passive participle, m. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C5>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}${C5}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "5-radical type A passive participle, f. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C5>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}${C5}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "5-radical type A passive participle, m. sg., CCuy <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}w\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "5-radical type A passive participle, f. sg., CCi <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}y\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "5-radical type A passive participle, f. sg., CCi-t <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}y\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "5-radical type A passive participle, f. sg., CCi <- CCw, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}w\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "5-radical type A passive participle, f. sg., CCi-t <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}w\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "5-radical type A passive participle, m. pl., CCuy-Am <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}w\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "5-radical type A passive participle, f. pl., CCuy-At <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}w\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "5-radical type A passive participle, m. pl., CCC{+L} // bzH-Am",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[hHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}${C5}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "5-radical type A passive participle, f. pl., CCC{+L} // bzH-At",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[hHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}${C5}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "5-radical type C active participle, m. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ay)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}${C5}\\)-${suf}:M.SG"
+    },
+    {
+        "comment": "5-radical type C active participle, m. sg., no suffix",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}${C5}\\).M.SG"
+    },
+    {
+        "comment": "5-radical type C active participle, f. sg.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Ayt)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}${C5}\\)-${suf}:F.SG"
+    },
+    {
+        "comment": "5-radical type C active participle, pl.",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${pref}:PTCP.ACT-${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}${C5}\\)-${suf}:PL"
+    },
+    {
+        "comment": "5-radical type C passive participle, m. sg.",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C5>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${C2}${C3}\\(A\\)${C4}${C5}\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "5-radical type C passive participle, f. sg., 3rd not y, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[lmrsxqbtnkzdGgTCSfcZpPyhHX><]))$",
+        "replace": "${stem}:\\(${stem}\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "5-radical type C passive participle, f. sg., 3rd not y, with suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>t)$",
+        "replace": "${stem}:\\(${stem}\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "5-radical type C passive participle, m. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C5>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}${C5}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "5-radical type C passive participle, f. pl., CCC{-L}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C5>[lmrsxqbtnkzdGgTCSfcZpPy]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}${C5}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "5-radical type C passive participle, m. sg., CCuy <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}w\\).PTCP.PASS.M.SG"
+    },
+    {
+        "comment": "5-radical type C passive participle, f. sg., CCi <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}y\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "5-radical type C passive participle, f. sg., CCi-t <- CCy",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}y\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "5-radical type C passive participle, f. sg., CCi <- CCw, no suffix",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}w\\).PTCP.PASS.F.SG"
+    },
+    {
+        "comment": "5-radical type C passive participle, f. sg., CCi-t <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)(?<suf>t)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}w\\).PTCP.PASS-${suf}:F.SG"
+    },
+    {
+        "comment": "5-radical type C passive participle, m. pl., CCuy-Am <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}w\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "5-radical type C passive participle, f. pl., CCuy-At <- CCw",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])uy)(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}w\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "5-radical type C passive participle, m. pl., CCC{+L} // bzH-Am",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[hHX><]))(?<suf>Am)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}${C5}\\).PTCP.PASS-${suf}:M.PL"
+    },
+    {
+        "comment": "5-radical type C passive participle, f. pl., CCC{+L} // bzH-At",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])u(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C5>[hHX><]))(?<suf>At)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}${C5}\\).PTCP.PASS-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A agentive noun, f. sg., CC{-L}C{-SV} // qAtl-Ayt",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwy])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Ayt)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\)-${suf}:AGNZ.M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, pl., CC{-L}C{-SV} // qAtl-at",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwy])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\)-${suf}:AGNZ.PL"
+    },
+    {
+        "comment": "3-radical type A agentive noun, m. sg., CC{-L}C{-SV} // qAtl-Ay",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwy])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Ay)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\)-${suf}:AGNZ.M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, f. sg., CC{+L}C{-SV}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Ayt)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\)-${suf}:AGNZ.F.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, pl., CC{+L}C{-SV}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\)-${suf}:AGNZ.PL"
+    },
+    {
+        "comment": "3-radical type A agentive noun, m. sg., CC{+L}C{-SV}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Ay)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\)-${suf}:AGNZ.M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, f. sg., CC{-L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>Ayt)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\)-${suf}:AGNZ.F.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, f. sg., CC{-L}y; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Ayt)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\)-${suf}:AGNZ.F.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, pl., CC{-L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\)-${suf}:AGNZ.PL"
+    },
+    {
+        "comment": "3-radical type A agentive noun, pl., CC{-L}y; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\)-${suf}:AGNZ.PL"
+    },
+    {
+        "comment": "3-radical type A agentive noun, m. sg., CC{-L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>Ay)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\)-${suf}:AGNZ.M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, m. sg., CC{-L}y; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Ay)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\)-${suf}:AGNZ.M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, f. sg., CC{-L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>Ayt)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\)-${suf}:AGNZ.F.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, f. sg., CC{-L}w; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Ayt)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\)-${suf}:AGNZ.F.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, pl., CC{-L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\)-${suf}:AGNZ.PL"
+    },
+    {
+        "comment": "3-radical type A agentive noun, pl., CC{-L}w; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\)-${suf}:AGNZ.PL"
+    },
+    {
+        "comment": "3-radical type A agentive noun, m. sg., CC{-L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><])y)(?<suf>Ay)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\)-${suf}:AGNZ.M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, m. sg., CC{-L}w; 2nd-3rd rad transposition",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])Ay(?<C2>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>Ay)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\)-${suf}:AGNZ.M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, f. sg., CC{+L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>Ayt)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\)-${suf}:AGNZ.F.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, pl., CC{+L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\)-${suf}:AGNZ.PL"
+    },
+    {
+        "comment": "3-radical type A agentive noun, pl., CC{+L}w",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>Ay)$",
+        "replace": "${stem}:\\(${C1}${C2}w\\)-${suf}:AGNZ.M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, f. sg., CC{+L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>Ayt)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\)-${suf}:AGNZ.F.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, pl., CC{+L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\)-${suf}:AGNZ.PL"
+    },
+    {
+        "comment": "3-radical type A agentive noun, pl., CC{+L}y",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])y)(?<suf>Ay)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\)-${suf}:AGNZ.M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, m. sg. // qatAl",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).AGNZ.M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, m. sg. // qatAl-i",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>i)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).AGNZ-${suf}:M.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, f. sg. // qatAl-it",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>it)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).AGNZ-${suf}:F.SG"
+    },
+    {
+        "comment": "3-radical type A agentive noun, m. pl. // qatAl-yAm",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>yAm)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).AGNZ-${suf}:M.PL"
+    },
+    {
+        "comment": "3-radical type A agentive noun, f. pl. // qatAl-yAt",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>yAt)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).AGNZ-${suf}:F.PL"
+    },
+    {
+        "comment": "3-radical type A infinitive: CaC{-L}i?C",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwy])i?(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).INF"
+    },
+    {
+        "comment": "3-radical type A infinitive: CC{+L}i?C{-SV}",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])i?(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).INF"
+    },
+    {
+        "comment": "3-radical type A infinitive: CC{+L}i (i <- y)",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[hHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).INF"
+    },
+    {
+        "comment": "3-radical type A infinitive: CCCat",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>at)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\)-${suf}:INF"
+    },
+    {
+        "comment": "3-radical type A infinitive: CCCAn",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>An)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\)-${suf}:INF"
+    },
+    {
+        "comment": "3-radical type A infinitive: CCCo",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>o)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\)-${suf}:INF"
+    },
+    {
+        "comment": "3-radical type A infinitive: mCCCAl",
+        "regex": "^(?<pref>m)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>Al)$",
+        "replace": "${pref}:INF-${stem}:\\(${C1}${C2}${C3}\\)-${suf}:INF"
+    },
+    {
+        "comment": "3-radical type A infinitive: CCCe",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>e)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\)-${suf}:INF"
+    },
+    {
+        "comment": "3-radical type A infinitive: CaCi (i <- y)",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])i)$",
+        "replace": "${stem}:\\(${C1}${C2}y\\).INF"
+    },
+    {
+        "comment": "3-radical type B -ot infinitive",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpP])\\k<C2>(?<C3>[lmrsxqbtnkzdGgTCSfcZpPhHX><]))(?<suf>ot)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(2\\)${C3}\\)-${suf}:INF"
+    },
+    {
+        "comment": "3-radical type B -ot infinitive, C2 lar/SV",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[wyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpwyPhHX><]))(?<suf>ot)$",
+        "replace": "${stem}:\\(${C1}${C2}\\(2\\)${C3}\\)-${suf}:INF"
+    },
+    {
+        "comment": "3,4,5-radical type C -ot infinitive",
+        "regex": "^(?<stem>(?<syl1>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a)?(?<syl2>(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a)?(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C5>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>ot)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\(A\\)${C4}${C5}\\)-${suf}:INF"
+    },
+    {
+        "comment": "4-radical type A -ot infinitive",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>ot)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}\\)-${suf}:INF"
+    },
+    {
+        "comment": "4-radical type D -ot infinitive",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>ot)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).FREQ-${suf}:INF"
+    },
+    {
+        "comment": "5-radical type A -ot infinitive",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2>a\\k<C3>)(?<suf>ot)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C2}${C3}\\)-${suf}:INF"
+    },
+    {
+        "comment": "3-radical t-A infinitive // ma-t-qallA<",
+        "regex": "^(?<prefInf>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2>A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefInf}:INF-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C3}\\).INF"
+    },
+    {
+        "comment": "3-radical t-B infinitive // ma-t-qallA<",
+        "regex": "^(?<prefInf>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2>A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefInf}:INF-${prefPass}:PASS-${stem}:\\(${C1}${C2}\\(2\\)${C3}\\).INF"
+    },
+    {
+        "comment": "3,4,5-radical t-C infinitive",
+        "regex": "^(?<prefInf>ma)(?<prefPass>t)(?<stem>(?<syl1>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a)?(?<syl2>(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a)?(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C5>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefInf}:INF-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C3}${C4}${C5}\\).INF"
+    },
+    {
+        "comment": "4-radical t-D infinitive",
+        "regex": "^(?<prefInf>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A\\k<C2>A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefInf}:INF-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C3}\\).FREQ.INF"
+    },
+    {
+        "comment": "4-radical t-A infinitive",
+        "regex": "^(?<prefInf>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${prefInf}:INF-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C3}${C4}\\).INF"
+    },
+    {
+        "comment": "5-radical t-A infinitive",
+        "regex": "^(?<prefInf>ma)(?<prefPass>t)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2>A\\k<C3>)$",
+        "replace": "${prefInf}:INF-${prefPass}:PASS-${stem}:\\(${C1}${C2}${C3}${C2}${C3}\\).INF"
+    },
+    {
+        "comment": "4-radical t-A infinitive: CCCACe",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])A(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>e)$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}${C4}\\).INF-${suf}:INF"
+    },
+    {
+        "comment": "3-radical A instrument nominalizer // ma-Ca?Ca?C-i",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(\\k<C2>)?a?(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>i)$",
+        "replace": "${pref}:INSNZ-${stem}:\\(${C1}${C2}${C3}\\).INSNZ-${suf}:INSNZ"
+    },
+    {
+        "comment": "4-radical A instrument nominalizer // ma-Ca?CCa?C-i",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a?(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(\\k<C3>)?a?(?<C4>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>i)$",
+        "replace": "${pref}:INSNZ-${stem}:\\(${C1}${C2}${C3}${C4}\\).INSNZ-${suf}:INSNZ"
+    },
+    {
+        "comment": "5-radical A instrument nominalizer // ma-CCaCCaC-i",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2>a\\k<C3>)(?<suf>i)$",
+        "replace": "${pref}:INSNZ-${stem}:\\(${C1}${C2}${C3}${C2}${C3}\\).INSNZ-${suf}:INSNZ"
+    },
+    {
+        "comment": "3-radical B instrument nominalizer // ma-saddaq-i",
+        "regex": "^(?<pref>ma)(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])a(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2>a(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))(?<suf>i)$",
+        "replace": "${pref}:INSNZ-${stem}:\\(${C1}${C2}\\(2\\)${C3}\\).INSNZ-${suf}:INSNZ"
+    },
+    {
+        "comment": "result nominalizer // CC{2}AC",
+        "regex": "^(?<stem>(?<C1>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])(?<C2>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><])\\k<C2>A(?<C3>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]))$",
+        "replace": "${stem}:\\(${C1}${C2}${C3}\\).RESNZ"
+    },
+    {
+        "comment": "abstractivizer // CCCC?-nnat?",
+        "regex": "^(?<stem>[lmrsxqbtnkzdGgTCSfcZpPwyhHX><]{3,4})(?<suf>nnat?)$",
+        "replace": "${stem}:\\(${stem}\\)-${suf}:ABSZ"
+    }
+]

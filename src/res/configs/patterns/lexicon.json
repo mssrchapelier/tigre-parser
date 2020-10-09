@@ -1,0 +1,1262 @@
+[
+    {
+        "comment": "personal pronoun: 1c sg",
+        "regex": "^(?<stem>>ana)$",
+        "replace": "${stem}:PRON.1.SG"
+    },
+    {
+        "comment": "personal pronoun: 2m sg",
+        "regex": "^(?<stem>>nta)$",
+        "replace": "${stem}:PRON.2.M.SG"
+    },
+    {
+        "comment": "personal pronoun: 2f sg",
+        "regex": "^(?<stem>>nti)$",
+        "replace": "${stem}:PRON.2.F.SG"
+    },
+    {
+        "comment": "personal pronoun: 3m sg",
+        "regex": "^(?<stem>htu)$",
+        "replace": "${stem}:PRON.3.M.SG"
+    },
+    {
+        "comment": "personal pronoun: 3f sg",
+        "regex": "^(?<stem>hta)$",
+        "replace": "${stem}:PRON.3.F.SG"
+    },
+    {
+        "comment": "personal pronoun: 1c pl",
+        "regex": "^(?<stem>hna)$",
+        "replace": "${stem}:PRON.1.PL"
+    },
+    {
+        "comment": "personal pronoun: 2m pl",
+        "regex": "^(?<stem>>ntum)$",
+        "replace": "${stem}:PRON.2.M.PL"
+    },
+    {
+        "comment": "personal pronoun: 2f pl",
+        "regex": "^(?<stem>>ntn)$",
+        "replace": "${stem}:PRON.2.F.PL"
+    },
+    {
+        "comment": "personal pronoun: 3m pl",
+        "regex": "^(?<stem>htom)$",
+        "replace": "${stem}:PRON.3.M.PL"
+    },
+    {
+        "comment": "personal pronoun: 3f pl",
+        "regex": "^(?<stem>htan)$",
+        "replace": "${stem}:PRON.3.F.PL"
+    },
+    {
+        "comment": "reflexive nos",
+        "regex": "^(?<stem>nos)$",
+        "replace": "${stem}:REFL"
+    },
+    {
+        "comment": "reflexive nos",
+        "regex": "^(?<stem>nos)$",
+        "replace": "${stem}:REFL"
+    },
+    {
+        "comment": "reciprocal nosnos (pl)",
+        "regex": "^(?<stem>nosnos)$",
+        "replace": "${stem}:RECP"
+    },
+    {
+        "comment": "reflexive nafs // in New Testament",
+        "regex": "^(?<stem>nafs)$",
+        "replace": "${stem}:REFL"
+    },
+    {
+        "comment": "reflexive ra>as",
+        "regex": "^(?<stem>ra>as)$",
+        "replace": "${stem}:REFL"
+    },
+    {
+        "comment": "reciprocal Hd",
+        "regex": "^(?<stem>Hd)$",
+        "replace": "${stem}:RECP"
+    },
+    {
+        "comment": "possessive nAy",
+        "regex": "^(?<stem>nAy)$",
+        "replace": "${stem}:POSS"
+    },
+    {
+        "comment": "what",
+        "regex": "^(?<stem>mi)$",
+        "replace": "${stem}:what"
+    },
+    {
+        "comment": "who",
+        "regex": "^(?<stem>man)$",
+        "replace": "${stem}:who"
+    },
+    {
+        "comment": "which",
+        "regex": "^(?<stem>>ay)(?<suf>i)$",
+        "replace": "${stem}:which-${suf}:M.SG"
+    },
+    {
+        "comment": "which",
+        "regex": "^(?<stem>>ay)(?<suf>a)$",
+        "replace": "${stem}:which-${suf}:F.SG"
+    },
+    {
+        "comment": "which",
+        "regex": "^(?<stem>>ay)(?<suf>om)$",
+        "replace": "${stem}:which-${suf}:M.PL"
+    },
+    {
+        "comment": "which",
+        "regex": "^(?<stem>>ay)(?<suf>an)$",
+        "replace": "${stem}:which-${suf}:F.PL"
+    },
+    {
+        "comment": "someone",
+        "regex": "^(?<stem>worot?)$",
+        "replace": "${stem}:someone.M.SG"
+    },
+    {
+        "comment": "someone",
+        "regex": "^(?<stem>Hatte)$",
+        "replace": "${stem}:someone.F.SG"
+    },
+    {
+        "comment": "(a) certain",
+        "regex": "^(?<stem>>gale)$",
+        "replace": "${stem}:such and such.ANIM"
+    },
+    {
+        "comment": "(a) certain",
+        "regex": "^(?<stem>>gale)(?<suf>tAy)$",
+        "replace": "${stem}:such and such.ANIM-${suf}:M.SG"
+    },
+    {
+        "comment": "(a) certain",
+        "regex": "^(?<stem>>gale)(?<suf>tat)$",
+        "replace": "${stem}:such and such.ANIM-${suf}:F.SG"
+    },
+    {
+        "comment": "(a) certain",
+        "regex": "^(?<stem>flAn)$",
+        "replace": "${stem}:such and such.INANIM"
+    },
+    {
+        "comment": "some, something",
+        "regex": "^(?<stem>gale)$",
+        "replace": "${stem}:some"
+    },
+    {
+        "comment": "something",
+        "regex": "^(?<stem1>gale)(?<stem2>gAr)$",
+        "replace": "${stem1}:some-${stem2}:thing"
+    },
+    {
+        "comment": "that which happened... / in the expression of -what/whoever-",
+        "regex": "^(?<relz>la)(?<stem>ga?>)(?<suf>a)$",
+        "replace": "${relz}:REL-${stem}:happen.PERF-${suf}:3.M.SG"
+    },
+    {
+        "comment": "...shall happen / in the expression of -what/whoever-",
+        "regex": "^(?<suf>l)(?<stem>gba>)$",
+        "replace": "${suf}:3.M.SG-${stem}:happen.JUSS"
+    },
+    {
+        "comment": "whatever, whoever, any",
+        "regex": "^(?<stem>dla)$",
+        "replace": "${stem}:any"
+    },
+    {
+        "comment": "nothing",
+        "regex": "^(?<stem>sema)$",
+        "replace": "${stem}:nothing"
+    },
+    {
+        "comment": "this, m.",
+        "regex": "^(?<stem>>ll)(?<suf>i)$",
+        "replace": "${stem}:DEM.PROX-${suf}:M.SG"
+    },
+    {
+        "comment": "this, f.",
+        "regex": "^(?<stem>>ll)(?<suf>a)$",
+        "replace": "${stem}:DEM.PROX-${suf}:F.SG"
+    },
+    {
+        "comment": "these, m.",
+        "regex": "^(?<stem>>ll)(?<suf>om)$",
+        "replace": "${stem}:DEM.PROX-${suf}:M.PL"
+    },
+    {
+        "comment": "these, f.",
+        "regex": "^(?<stem>>ll)(?<suf>an)$",
+        "replace": "${stem}:DEM.PROX-${suf}:F.PL"
+    },
+    {
+        "comment": "that, m.",
+        "regex": "^(?<stem>l[aoe]h)(?<suf>ay)$",
+        "replace": "${stem}:DEM.DIST-${suf}:M.SG"
+    },
+    {
+        "comment": "that, f.",
+        "regex": "^(?<stem>l[aoe]h)(?<suf>a)$",
+        "replace": "${stem}:DEM.DIST-${suf}:F.SG"
+    },
+    {
+        "comment": "those, m.",
+        "regex": "^(?<stem>l[aoe]h)(?<suf>om)$",
+        "replace": "${stem}:DEM.DIST-${suf}:M.PL"
+    },
+    {
+        "comment": "those, f.",
+        "regex": "^(?<stem>l[aoe]h)(?<suf>an)$",
+        "replace": "${stem}:DEM.DIST-${suf}:F.PL"
+    },
+    {
+        "comment": "copula: 1c sg",
+        "regex": "^(?<stem>>ana)$",
+        "replace": "${stem}:COP.1.SG"
+    },
+    {
+        "comment": "copula: 2m sg",
+        "regex": "^(?<stem>>nta)$",
+        "replace": "${stem}:COP.2.M.SG"
+    },
+    {
+        "comment": "copula: 2f sg",
+        "regex": "^(?<stem>>nti)$",
+        "replace": "${stem}:COP.2.F.SG"
+    },
+    {
+        "comment": "copula: 3m sg",
+        "regex": "^(?<stem>tu)$",
+        "replace": "${stem}:COP.3.M.SG"
+    },
+    {
+        "comment": "copula: 3f sg",
+        "regex": "^(?<stem>ta)$",
+        "replace": "${stem}:COP.3.F.SG"
+    },
+    {
+        "comment": "copula: 1c pl",
+        "regex": "^(?<stem>hna)$",
+        "replace": "${stem}:COP.1.PL"
+    },
+    {
+        "comment": "copula: 2m pl",
+        "regex": "^(?<stem>>ntum)$",
+        "replace": "${stem}:COP.2.M.PL"
+    },
+    {
+        "comment": "copula: 2f pl",
+        "regex": "^(?<stem>>ntn)$",
+        "replace": "${stem}:COP.2.F.PL"
+    },
+    {
+        "comment": "copula: 3m pl",
+        "regex": "^(?<stem>tom)$",
+        "replace": "${stem}:COP.3.M.PL"
+    },
+    {
+        "comment": "copula: 3f pl",
+        "regex": "^(?<stem>tan)$",
+        "replace": "${stem}:COP.3.F.PL"
+    },
+    {
+        "comment": "negative copula 3 m sg (fossilized)",
+        "regex": "^(?<stem>>ikon)$",
+        "replace": "${stem}:COP.3.F.PL.NEG"
+    },
+    {
+        "comment": "<ala-copula (past)",
+        "regex": "^(?<root><al)(?<suf>ko)$",
+        "replace": "${root}:COP.PST-${suf}:1.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root><al)(?<suf>ka)$",
+        "replace": "${root}:COP.PST-${suf}:2.M.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root><al)(?<suf>ki)$",
+        "replace": "${root}:COP.PST-${suf}:2.F.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root><al)(?<suf>a)$",
+        "replace": "${root}:COP.PST-${suf}:3.M.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root><al)(?<suf>at)$",
+        "replace": "${root}:COP.PST-${suf}:3.F.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root><al)(?<suf>na)$",
+        "replace": "${root}:COP.PST-${suf}:1.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root><al)(?<suf>kum)$",
+        "replace": "${root}:COP.PST-${suf}:2.M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root><al)(?<suf>kn)$",
+        "replace": "${root}:COP.PST-${suf}:2.F.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root><al)(?<suf>aw)$",
+        "replace": "${root}:COP.PST-${suf}:2.M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root><al)(?<suf>aya)$",
+        "replace": "${root}:COP.PST-${suf}:2.F.PL"
+    },
+    {
+        "comment": "gab>a copula (non-past)",
+        "regex": "^(?<pref>>)(?<root>gabb>?)$",
+        "replace": "${pref}:1.SG-${root}:COP.NPST"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gabb>?)$",
+        "replace": "${pref}:2.M.SG-${root}:COP.NPST"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gabbi>?)$",
+        "replace": "${pref}:2.F.SG-${root}:COP.NPST"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gabb>)(?<suf>i)$",
+        "replace": "${pref}:2-${root}:COP.NPST-${suf}:F.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>l)(?<root>gabb>?)$",
+        "replace": "${pref}:3.M.SG-${root}:COP.NPST"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gabb>?)$",
+        "replace": "${pref}:3.F.SG-${root}:COP.NPST"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>>n)(?<root>gabb>?)$",
+        "replace": "${pref}:1.PL-${root}:COP.NPST"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gabbu>?)$",
+        "replace": "${pref}:2-${root}:COP.NPST.M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gabb>)(?<suf>u)$",
+        "replace": "${pref}:2-${root}:COP.NPST-${suf}:M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gabba>?)$",
+        "replace": "${pref}:2-${root}:COP.NPST.F.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gabb>)(?<suf>a)$",
+        "replace": "${pref}:2-${root}:COP.NPST-${suf}:F.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>l)(?<root>gabbu>?)$",
+        "replace": "${pref}:3-${root}:COP.NPST.M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>l)(?<root>gabb>)(?<suf>u)$",
+        "replace": "${pref}:3-${root}:COP.NPST-${suf}:M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>l)(?<root>gabba>?)$",
+        "replace": "${pref}:3-${root}:COP.NPST.F.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>l)(?<root>gabb>)(?<suf>a)$",
+        "replace": "${pref}:3-${root}:COP.NPST-${suf}:F.PL"
+    },
+    {
+        "comment": "gab>a copula (non-past), jussive",
+        "regex": "^(?<pref>>)(?<root>gba>?)$",
+        "replace": "${pref}:1.SG-${root}:COP.JUSS"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gba>?)",
+        "replace": "${pref}:2.M.SG-${root}:COP.JUSS"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gbi?>?)",
+        "replace": "${pref}:2.F.SG-${root}:COP.JUSS"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>l)(?<root>gba>?)",
+        "replace": "${pref}:3.M.SG-${root}:COP.JUSS"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gba>?)",
+        "replace": "${pref}:3.F.SG-${root}:COP.JUSS"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>n)(?<root>gba>?)$",
+        "replace": "${pref}:1.PL-${root}:COP.JUSS"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gbu>?)",
+        "replace": "${pref}:2-${root}:COP.JUSS.M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gb>)(?<suf>u)$",
+        "replace": "${pref}:2-${root}:COP.JUSS-${suf}:M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gb>)(?<suf>a)$",
+        "replace": "${pref}:2-${root}:COP.JUSS-${suf}:F.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>t)(?<root>gb>)(?<suf>u)$",
+        "replace": "${pref}:2-${root}:COP.JUSS-${suf}:F.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>l)(?<root>gbu>?)$",
+        "replace": "${pref}:3-${root}:COP.JUSS.M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>l)(?<root>gb>)(?<suf>u)$",
+        "replace": "${pref}:3-${root}:COP.JUSS-${suf}:M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<pref>l)(?<root>gb>)(?<suf>a)$",
+        "replace": "${pref}:3-${root}:COP.JUSS-${suf}:F.PL"
+    },
+    {
+        "comment": "gab>a copula (non-past), imperative",
+        "regex": "^(?<root>gba>)$",
+        "replace": "${root}:COP.IMP.M.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>gb>)(?<suf>i)$",
+        "replace": "${root}:COP.IMP-${suf}:F.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>gbi>)$",
+        "replace": "${root}:COP.IMP.F.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>gb>)(?<suf>u)$",
+        "replace": "${root}:COP.IMP-${suf}:M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>gbu>)$",
+        "replace": "${root}:COP.IMP.M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>gb>)(?<suf>a)$",
+        "replace": "${root}:COP.IMP-${suf}:F.PL"
+    },
+    {
+        "comment": "ttu (subordinating copula)",
+        "regex": "^(?<pref>t)(?<part>tu)$",
+        "replace": "${pref}:SUBORD-${part}:COP.3.SG"
+    },
+    {
+        "comment": "halla existential (prf forms, npst meaning)",
+        "regex": "^(?<root>halle)(?<suf>ko)$",
+        "replace": "${root}:EXIST-${suf}:1.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>halle)(?<suf>ka)$",
+        "replace": "${root}:EXIST-${suf}:2.M.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>halle)(?<suf>ki)$",
+        "replace": "${root}:EXIST-${suf}:2.F.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>hall)(?<suf>a)$",
+        "replace": "${root}:EXIST-${suf}:3.M.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>halle)(?<suf>t)$",
+        "replace": "${root}:EXIST-${suf}:3.F.SG"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>halle)(?<suf>na)$",
+        "replace": "${root}:EXIST-${suf}:1.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>halle)(?<suf>kum)$",
+        "replace": "${root}:EXIST-${suf}:2.M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>halle)(?<suf>kn)$",
+        "replace": "${root}:EXIST-${suf}:2.F.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>hall)(?<suf>aw)$",
+        "replace": "${root}:EXIST-${suf}:2.M.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<root>hall)(?<suf>aya)$",
+        "replace": "${root}:EXIST-${suf}:2.F.PL"
+    },
+    {
+        "comment": "negation of existential (there isn't), suppletive",
+        "regex": "^(?<stem>>alabu)$",
+        "replace": "${stem}:EXIST.3.M.SG.NEG"
+    },
+    {
+        "comment": "when",
+        "regex": "^(?<stem>>t)$",
+        "replace": "${stem}:when"
+    },
+    {
+        "comment": "when",
+        "regex": "^(?<stem>dib)$",
+        "replace": "${stem}:when"
+    },
+    {
+        "comment": "if",
+        "regex": "^(?<stem>mn)$",
+        "replace": "${stem}:if"
+    },
+    {
+        "comment": "have (b + possessive suffixes)",
+        "regex": "^(?<stem>b)$",
+        "replace": "${stem}:have"
+    },
+    {
+        "comment": "have (b + possessive suffixes)",
+        "regex": "^(?<stem>bdib)$",
+        "replace": "${stem}:have"
+    },
+    {
+        "comment": ">gl subordinator",
+        "regex": "^(?<stem>>gl)$",
+        "replace": "${stem}:SUBORD"
+    },
+    {
+        "comment": ">gl to",
+        "regex": "^(?<stem>>gl)$",
+        "replace": "${stem}:to"
+    },
+    {
+        "comment": "numerals",
+        "regex": "^(?<stem>worot?)$",
+        "replace": "${stem}:one.M"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>worworot)$",
+        "replace": "${stem}:one.M.DISTR"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>Hatte)$",
+        "replace": "${stem}:one.F"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>salas)$",
+        "replace": "${stem}:three"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>arba<)$",
+        "replace": "${stem}:four"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>Hams)$",
+        "replace": "${stem}:five"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>ss)$",
+        "replace": "${stem}:six"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>sabu<)$",
+        "replace": "${stem}:seven"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>samAn)$",
+        "replace": "${stem}:eight"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>s<)$",
+        "replace": "${stem}:nine"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem><asr)$",
+        "replace": "${stem}:ten"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem><sra)$",
+        "replace": "${stem}:twenty"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>salAsa)$",
+        "replace": "${stem}:thirty"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>arb<a)$",
+        "replace": "${stem}:forty"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>Hmsa)$",
+        "replace": "${stem}:fifty"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>ssa)$",
+        "replace": "${stem}:sixty"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>sab<a)$",
+        "replace": "${stem}:seventy"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>samAnya)$",
+        "replace": "${stem}:eighty"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>sa<a)$",
+        "replace": "${stem}:ninety"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>tas<a)$",
+        "replace": "${stem}:ninety"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>m>t)$",
+        "replace": "${stem}:hundred"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>am>At)$",
+        "replace": "${stem}:hundred.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>xH)$",
+        "replace": "${stem}:thousand"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>axHat)$",
+        "replace": "${stem}:thousand.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>alf)$",
+        "replace": "${stem}:thousand"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>AlAf)$",
+        "replace": "${stem}:thousand.PL"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>lf)$",
+        "replace": "${stem}:ten thousand"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>lf)$",
+        "replace": "${stem}:a great many"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>AlAf)$",
+        "replace": "${stem}:tens of thousands"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>AlAf)$",
+        "replace": "${stem}:a great many"
+    },
+    {
+        "comment": "Had (around, about)",
+        "regex": "^(?<stem>Had)$",
+        "replace": "${stem}:APPROX"
+    },
+    {
+        "comment": "<adad: number",
+        "regex": "^(?<stem><adad)$",
+        "replace": "${stem}:number"
+    },
+    {
+        "comment": "<adad: with aggregate numerals",
+        "regex": "^(?<stem><adad)$",
+        "replace": "${stem}:AGGR"
+    },
+    {
+        "comment": "nafar appellative (this -one-)",
+        "regex": "^(?<stem>nafar)$",
+        "replace": "${stem}:APPEL.ANIM"
+    },
+    {
+        "comment": "nafar appellative (this -one-)",
+        "regex": "^(?<stem>>anfAr)$",
+        "replace": "${stem}:APPEL.ANIM.PL"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>kAl>)$",
+        "replace": "${stem}:second.MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>kAl>)(?<suf>Ay)$",
+        "replace": "${stem}:second-${suf}:MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>kAl>)(?<suf>Ayt)$",
+        "replace": "${stem}:second-${suf}:FEM"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAls)$",
+        "replace": "${stem}:third.MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAls)(?<suf>Ay)$",
+        "replace": "${stem}:third-${suf}:MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAls)(?<suf>Ayt)$",
+        "replace": "${stem}:third-${suf}:FEM"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>>Arb)$",
+        "replace": "${stem}:fourth.MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>>Arb)(?<suf>Ay)$",
+        "replace": "${stem}:fourth-${suf}:MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>>Arb)(?<suf>Ayt)$",
+        "replace": "${stem}:fourth-${suf}:FEM"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAls)$",
+        "replace": "${stem}:fifth.MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAls)(?<suf>Ay)$",
+        "replace": "${stem}:fifth-${suf}:MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAls)(?<suf>Ayt)$",
+        "replace": "${stem}:fifth-${suf}:FEM"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAds)$",
+        "replace": "${stem}:sixth.MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAds)(?<suf>Ay)$",
+        "replace": "${stem}:sixth-${suf}:MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAds)(?<suf>Ayt)$",
+        "replace": "${stem}:sixth-${suf}:FEM"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAb>)$",
+        "replace": "${stem}:seventh.MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAb>)(?<suf>Ay)$",
+        "replace": "${stem}:seventh-${suf}:MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAb>)(?<suf>Ayt)$",
+        "replace": "${stem}:seventh-${suf}:FEM"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAmn)$",
+        "replace": "${stem}:eighth.MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAmn)(?<suf>Ay)$",
+        "replace": "${stem}:eighth-${suf}:MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>sAmn)(?<suf>Ayt)$",
+        "replace": "${stem}:eighth-${suf}:FEM"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>tAs<)$",
+        "replace": "${stem}:ninth.MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>tAs<)(?<suf>Ay)$",
+        "replace": "${stem}:ninth-${suf}:MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem>tAs<)(?<suf>Ayt)$",
+        "replace": "${stem}:ninth-${suf}:FEM"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem><Asr)$",
+        "replace": "${stem}:tenth.MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem><Asr)(?<suf>Ay)$",
+        "replace": "${stem}:tenth-${suf}:MASC"
+    },
+    {
+        "comment": "ordinals",
+        "regex": "^(?<stem><Asr)(?<suf>Ayt)$",
+        "replace": "${stem}:tenth-${suf}:FEM"
+    },
+    {
+        "comment": "half",
+        "regex": "^(?<stem>sar)$",
+        "replace": "${stem}:half"
+    },
+    {
+        "comment": "one third",
+        "regex": "^(?<stem>masallas)$",
+        "replace": "${stem}:third part"
+    },
+    {
+        "comment": "one fourth",
+        "regex": "^(?<stem>rb<a?)$",
+        "replace": "${stem}:fourth part"
+    },
+    {
+        "comment": "after",
+        "regex": "^(?<stem>Haqo)$",
+        "replace": "${stem}:after"
+    },
+    {
+        "comment": "under",
+        "regex": "^(?<stem>Han(te)?)$",
+        "replace": "${stem}:after"
+    },
+    {
+        "comment": "with",
+        "regex": "^(?<stem>msl)$",
+        "replace": "${stem}:COM"
+    },
+    {
+        "comment": "above, over",
+        "regex": "^(?<stem>maxanqal)$",
+        "replace": "${stem}:above"
+    },
+    {
+        "comment": "near",
+        "regex": "^(?<stem>maTor)$",
+        "replace": "${stem}:near"
+    },
+    {
+        "comment": "for the sake of",
+        "regex": "^(?<stem>matAn)$",
+        "replace": "${stem}:for the sake of"
+    },
+    {
+        "comment": "than (in comparison)",
+        "regex": "^(?<stem>mn)$",
+        "replace": "${stem}:than"
+    },
+    {
+        "comment": "head",
+        "regex": "^(?<stem>ra>as)$",
+        "replace": "${stem}:head"
+    },
+    {
+        "comment": "at",
+        "regex": "^(?<stem>>t)$",
+        "replace": "${stem}:LOC"
+    },
+    {
+        "comment": "because of",
+        "regex": "^(?<stem>sabbat)$",
+        "replace": "${stem}:because of"
+    },
+    {
+        "comment": "towards",
+        "regex": "^(?<stem>xan(kat|nak))$",
+        "replace": "${stem}:towards"
+    },
+    {
+        "comment": "side",
+        "regex": "^(?<stem>smT)$",
+        "replace": "${stem}:side"
+    },
+    {
+        "comment": "back",
+        "regex": "^(?<stem>raHar)$",
+        "replace": "${stem}:back"
+    },
+    {
+        "comment": "midst",
+        "regex": "^(?<stem>mgb)$",
+        "replace": "${stem}:midst"
+    },
+    {
+        "comment": "front",
+        "regex": "^(?<stem>qAbl)$",
+        "replace": "${stem}:front"
+    },
+    {
+        "comment": "front",
+        "regex": "^(?<stem>qbl)(?<suf>At)$",
+        "replace": "${stem}:midst-${suf}:F.SG"
+    },
+    {
+        "comment": "without, except",
+        "regex": "^(?<stem>>mbal)$",
+        "replace": "${stem}:without"
+    },
+    {
+        "comment": "near",
+        "regex": "^(?<stem>>raf)$",
+        "replace": "${stem}:near"
+    },
+    {
+        "comment": "after",
+        "regex": "^(?<stem>>sar)$",
+        "replace": "${stem}:after"
+    },
+    {
+        "comment": "towards",
+        "regex": "^(?<stem>>ask)$",
+        "replace": "${stem}:towards"
+    },
+    {
+        "comment": "in; about, with...",
+        "regex": "^(?<stem>>b)$",
+        "replace": "${stem}:in"
+    },
+    {
+        "comment": "have",
+        "regex": "^(?<stem>b>tt?)$",
+        "replace": "${stem}:have"
+    },
+    {
+        "comment": "in, etc.",
+        "regex": "^(?<stem>>?tt?)$",
+        "replace": "${stem}:in"
+    },
+    {
+        "comment": "as (in comparison)",
+        "regex": "^(?<stem>>akl)$",
+        "replace": "${stem}:as"
+    },
+    {
+        "comment": "place",
+        "regex": "^(?<stem>>akAn)$",
+        "replace": "${stem}:place"
+    },
+    {
+        "comment": "place",
+        "regex": "^(?<stem>>zAm)$",
+        "replace": "${stem}:place"
+    },
+    {
+        "comment": "mouth",
+        "regex": "^(?<stem>>af)$",
+        "replace": "${stem}:mouth"
+    },
+    {
+        "comment": "as",
+        "regex": "^(?<stem>km)$",
+        "replace": "${stem}:as"
+    },
+    {
+        "comment": "as",
+        "regex": "^(?<stem>kmsal)$",
+        "replace": "${stem}:as"
+    },
+    {
+        "comment": "such as",
+        "regex": "^(?<stem>kara)$",
+        "replace": "${stem}:such as"
+    },
+    {
+        "comment": "inside",
+        "regex": "^(?<stem>kabd)$",
+        "replace": "${stem}:inside"
+    },
+    {
+        "comment": "according to",
+        "regex": "^(?<stem><adad)$",
+        "replace": "${stem}:according to"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>darb)$",
+        "replace": "${stem}:behind"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>dib)$",
+        "replace": "${stem}:to"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>dwAr)$",
+        "replace": "${stem}:surroundings"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>GallAb)$",
+        "replace": "${stem}:for sake"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>fza)$",
+        "replace": "${stem}:for sake"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>grra)$",
+        "replace": "${stem}:back"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>gor?)$",
+        "replace": "${stem}:with"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>gdor)$",
+        "replace": "${stem}:with"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>gabay)$",
+        "replace": "${stem}:way"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>[fm]nge)$",
+        "replace": "${stem}:between"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>ndo)$",
+        "replace": "${stem}:while"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>ha?ye)$",
+        "replace": "${stem}:also"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>lAma)$",
+        "replace": "${stem}:also"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>lAta)$",
+        "replace": "${stem}:but"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>leTa)$",
+        "replace": "${stem}:but"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>m?dol)$",
+        "replace": "${stem}:when"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>ma>aze)$",
+        "replace": "${stem}:when"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>ttaya)$",
+        "replace": "${stem}:where"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>aya)$",
+        "replace": "${stem}:where"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>xw)$",
+        "replace": "${stem}:where"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>ka>afo)$",
+        "replace": "${stem}:how"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>kam)$",
+        "replace": "${stem}:how much"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>afo)$",
+        "replace": "${stem}:yes"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>Abe)$",
+        "replace": "${stem}:yes"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>ifAlu)$",
+        "replace": "${stem}:no"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>ma)$",
+        "replace": "${stem}:or"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>wok)$",
+        "replace": "${stem}:or"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>da>am)$",
+        "replace": "${stem}:but"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>da?>ikon)$",
+        "replace": "${stem}:but"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>bmi)$",
+        "replace": "${stem}:because"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>glmi)$",
+        "replace": "${stem}:because"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>mn)$",
+        "replace": "${stem}:since"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>sabbat)$",
+        "replace": "${stem}:because"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>ndo)$",
+        "replace": "${stem}:after"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>nday)$",
+        "replace": "${stem}:before"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>>wAn)$",
+        "replace": "${stem}:when"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>km)$",
+        "replace": "${stem}:when"
+    },
+    {
+        "comment": "",
+        "regex": "^(?<stem>wakd)$",
+        "replace": "${stem}:when"
+    }
+]

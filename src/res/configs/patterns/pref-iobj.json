@@ -1,0 +1,7 @@
+[
+    {
+        "comment": "to, for (indirect object)",
+        "regex": "^(?<art>>l)(?<stem>.+)$",
+        "replace": "${art}:IO-\\[${stem}\\]:#"
+    }
+]
