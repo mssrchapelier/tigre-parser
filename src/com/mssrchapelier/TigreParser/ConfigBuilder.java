@@ -13,7 +13,8 @@ import com.mssrchapelier.TigreParser.components.VerbProcessor.VerbProcessor;
 import com.mssrchapelier.TigreParser.components.utils.misc.ConfigParseException;
 
 class ConfigBuilder {
-	private final static String DEFAULT_CONFIG_FILE_PATH = "/res/config.json";
+	private final static String DEFAULT_CONFIG_FILE_PATH_JAR = "/res/config.json";
+	private final static String DEFAULT_CONFIG_FILE_PATH_FILESYSTEM = "res/config.json";
 	
 	// If true, this object should be reading resources using resource-based methods.
 	// If false, this object should be reading resources using File-based methods.
@@ -31,8 +32,14 @@ class ConfigBuilder {
 	}
 	
 	ConfigBuilder () throws IOException {
-		this.isReadingResources = true;
-		this.configFilePath = DEFAULT_CONFIG_FILE_PATH;
+		boolean resourceExists = (this.getClass().getResource(DEFAULT_CONFIG_FILE_PATH_JAR) != null);
+		if (resourceExists) {
+			this.isReadingResources = true;
+			this.configFilePath = DEFAULT_CONFIG_FILE_PATH_JAR;
+		} else {
+			this.isReadingResources = false;
+			this.configFilePath = new File(DEFAULT_CONFIG_FILE_PATH_FILESYSTEM).getPath();
+		}
 		this.readConfig();
 	}
 	
