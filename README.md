@@ -115,9 +115,9 @@ import com.mssrchapelier.TigreParser.TigreParser;
 
 ```java
 TigreParser parser = TigreParser.builder()
-								.setMaxAnalyses(5) // optional
-								.setConfigFilePath("path/to/custom/config.json") // optional
-								.build();
+				.setMaxAnalyses(5) // optional
+				.setConfigFilePath("path/to/custom/config.json") // optional
+				.build();
 ```
 
 7. Three methods to process text, which you can call on the constructed `TigreParser` instance, are now available:
