@@ -151,10 +151,10 @@ For more details, refer to the application's javadoc (attached [here](doc/tigrep
 
 ## Suggested improvements
 
-Do feel absolutely free to make any changes to this application. My suggestion would be to concentrate efforts on developing a more efficient algorithm for generating geminated variants of words (the class `TigreParser.Geminator`), as the current approach to this stage of analysis (which essentially consists in searching through all possible combinations of geminable consonants with few constraints imposed) appears to be the main reason for the massive overgeneration of analyses, particularly incomplete ones. The pattern files and the verb paradigm file do seem to mostly cover the contents of Raz's grammar[^1] (which served as the primary basis for composing the rules described in these files) and are of somewhat lesser concern, but their coverage of the language's grammar also appears to still be far from ideal, and refinements are, of course, always in order.
+Do feel absolutely free to make any changes to this application. My suggestion would be to concentrate efforts on developing a more efficient algorithm for generating geminated variants of words (the class `TigreParser.Geminator`), as the current approach to this stage of analysis (which essentially consists in searching through all possible combinations of geminable consonants with few constraints imposed) appears to be the main reason for the (admittedly!) massive overgeneration of analyses, particularly incomplete ones. The pattern files and the verb paradigm file do seem to mostly cover the contents of Raz's grammar[^1] (which served as the primary basis for composing the rules described in these files) and are of somewhat lesser concern, but their coverage of the language's grammar also appears to still be far from ideal, and refinements are, of course, always in order.
 
 ## Licencing
 
-This version of TigreParser is licenced under the terms of the Apache License 2.0; the main requirement is that distributors keep the licence file and preserve the copyright notice. See [the licence](LICENSE.TXT) and [the notice](NOTICE.TXT) for details.
+This version of TigreParser is licenced under the terms of the Apache License 2.0; the main requirement is that distributors keep the licence file and preserve the copyright notice. See [the licence](./LICENSE.TXT) and [the notice](./NOTICE.TXT) for details.
 
 [^1]: Raz, S. *Tigre Grammar and Texts.* Malibu, California, USA: Undena Publications, 1983.
