@@ -2,11 +2,11 @@ package com.mssrchapelier.TigreParser;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.validators.PositiveInteger;
-import com.mssrchapelier.TigreParser.components.utils.misc.ConfigParseException;
 
 /**
  * 
@@ -85,7 +85,7 @@ public class TigreParserCliLauncher {
 				System.out.println("Failed to process file");
 				e.printStackTrace();
 			}
-		} catch (IOException | ConfigParseException e) {
+		} catch (IOException | ParseException e) {
 			System.out.println("Failed to configure the parser");
 			e.printStackTrace();
 		}

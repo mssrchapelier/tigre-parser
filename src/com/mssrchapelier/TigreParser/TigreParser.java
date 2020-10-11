@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -19,40 +20,54 @@ import com.mssrchapelier.TigreParser.components.utils.word.WordEntry;
  * </p>
  * 
  * <p>
- * To perform morphological analysis, client code should instantiate the {@code TigreParser} class.
- * The <strong>maximum number of analyses</strong> to return for each word (when calling the {@link #processFile}, {@link #analyseLine} or {@link #analyseWord} methods)
- * and the path to a <strong>configuration file</strong> may be specified, although both are optional.
- * If the maximum number of analyses is not specified, all non-empty analyses will be returned by the methods mentioned above.
- * If the path to the configuration file is not specified, the default value ({@link #DEFAULT_CONFIG_FILE_PATH},
- * which is {@code res/config.json}) will be used.
- * </p>
- * 
- * <p>
- * The maximum number of analyses to show for each word may be changed after instantiating the class by calling the {@link com.mssrchapelier.TigreParser.TigreParser#setMaxAnalyses(int) setMaxAnalyses} method on the instance.
- * </p>
- * 
+ * To perform morphological analysis, client code should first instantiate the {@code TigreParser} class by calling the static method {@link #builder() builder()}. Two parameters may then be specified (both are optional):
  * <ul>
  * <li>
- * To perform morphological analysis on a <strong>single word</strong>, call {@link #analyseWord}, passing the word as the method's {@code String} argument.
- * A two-dimensional {@code String} array will be returned: {@code String[k_i][2]}, where {@code k_i} is the number of analyses produced for the {@code i}-th token,
- * the individual analysis being a {@code String[2]}, with the zeroth element representing the <em>surface form</em> of the word
- * and the first element representing the corresponding <em>gloss</em> (both with morpheme boundaries marked as {@code "-"}). If some part of the word was not analysed
- * in the {@code k_i}-th analysis, the corresponding part will be enclosed in square brackets ({@code [...]}) in the surface form and represented as {@code "#"} in the gloss.
+ * To specify the <strong>maximum number of analyses</strong> to return for each word (when calling the {@code TigreParser} instance's {@link #processFile(String, String) processFile}, {@link #analyseLine(String) analyseLine}
+ * or {@link #analyseWord(String) analyseWord} methods), call the builder object's {@link TigreParserBuilder#setMaxAnalyses(int) setMaxAnalyses(int)} method.
+ * If the maximum number of analyses is not specified, all non-empty analyses will be returned by the methods mentioned above.
  * </li>
- * 
  * <li>
- * To tokenise and perform analysis on a {@code String} containing a sequence of Tigre words (i. e. a <strong>sentence</strong> or another text fragment), call {@link #analyseLine},
- * passing the {@code String} as the method's argument. A three-dimensional {@code String} array will be returned: {@code String[n][k_i][2]}, where {@code n} is
- * the number of tokens that the input {@code String} was split into, and the {@code n}-th element being an array of analyses for the {@code i}-th word as described above.
- * </li>
- * 
- * <li>
- * To process a <strong>text file</strong> (i. e. tokenise it into words and perform analysis on all of them), call {@link #processFile}{@code (inputFilePath, outputFilePath)}.
+ * To specify the path to a <strong>configuration file</strong>, call the {@link TigreParserBuilder#setConfigFilePath(String) setConfigFilePath(String)} method on the builder instance.
+ * If the path to the configuration file is not specified, the default value, which equals {@code /res/config.json} (the resource inside the {@code .jar} file) or {@code res/config.json}
+ * (if the resource is not present in the {@code .jar} file), will be used.
  * </li>
  * </ul>
+ * To build the {@code TigreParser} instance, call {@link TigreParserBuilder#build() build()} on the builder object. This method throws an {@link java.io.IOException IOException} if one of the required configuration files could not be found,
+ * or a {@link java.text.ParseException ParseException} if one of the files is malformed (see the exception's stack trace for details about where this occurred).
+ * </p>
  * 
  * <p>
- * All of the mentioned methods and constructors perform null checks on their respective {@code String} arguments using {@link Objects.requireNonNull}. Passing a null {@code String} to these methods
+ * The maximum number of analyses to show for each word may be changed after instantiating the class by calling the {@link #setMaxAnalyses(int) setMaxAnalyses(int)} method on the instance.
+ * The argument must be a non-negative integer; if set to 0, all non-empty analyses will be returned for each token.
+ * </p>
+ * 
+ * <p>
+ * Three public methods are available for morphological processing:
+ * <ul>
+ * <li>
+ * To perform morphological analysis on a <strong>single word</strong>, call {@link #analyseWord(String) analyseWord(String)}, passing the word as the method's argument.
+ * A two-dimensional {@code String} array will be returned: {@code String[k][2]}, where {@code k} is the number of analyses produced,
+ * the individual analysis being a {@code String[2]}, with the zeroth element representing the <em>surface form</em> of the word
+ * and the first element representing the corresponding <em>gloss</em> (both with morpheme boundaries marked as {@code "-"}). If some part of the word was not analysed
+ * in an analysis, the corresponding part will be enclosed in square brackets ({@code [...]}) in the surface form and represented as {@code "#"} in the gloss.
+ * </li>
+ * 
+ * <li>
+ * To tokenise and perform analysis on a {@code String} containing a sequence of Tigre words (i. e. a <strong>sentence</strong> or another text fragment), call {@link #analyseLine(String) analyseLine(String)},
+ * passing the {@code String} as the method's argument. A three-dimensional {@code String} array will be returned: {@code String[n][k_i][2]}, where {@code n} is
+ * the number of tokens that the input {@code String} was split into, each element being an array of analyses for the corresponding word as described above.
+ * </li>
+ * 
+ * <li>
+ * To process a <strong>text file</strong> (i. e. tokenise it into words and perform analysis on all of them), call {@link #processFile(String, String) processFile(String, String)},
+ * passing the path to the <em>input file</em> as the first argument and the path to the <em>output file</em> as the second argument. This method may throw an {@link java.io.IOException IOException}.
+ * </li>
+ * </ul>
+ * </p>
+ * 
+ * <p>
+ * All of the mentioned methods perform null checks on their respective {@code String} arguments using {@link Objects#requireNonNull(Object) Objects.requireNonNull}. Passing a null {@code String} to these methods
  * will thus result in a {@code NullPointerException} being thrown, which must then be handled by the calling code.
  * </p>
  * 
@@ -66,10 +81,10 @@ import com.mssrchapelier.TigreParser.components.utils.word.WordEntry;
 public class TigreParser {
 	private static final int DEFAULT_MAX_ANALYSES = 0;
 	
-	ConfigBuilder configBuilder;
+	private ConfigBuilder configBuilder;
 
-	Tokeniser tokeniser;
-	WordProcessor wordProcessor;
+	private Tokeniser tokeniser;
+	private WordProcessor wordProcessor;
 	
 	int maxAnalyses;
 	
@@ -85,7 +100,7 @@ public class TigreParser {
 		}
 	}
 
-	private TigreParser () throws IOException, ConfigParseException {}
+	private TigreParser () {}
 
 	public void processFile (String inputPath, String outputPath) throws IOException {
 		// process silently (nothing sent to System.out)
@@ -155,8 +170,17 @@ public class TigreParser {
 		 */
 		Objects.requireNonNull(ethiopicWord);
  
-		return this.wordProcessor.processWord(ethiopicWord)
-					.getAnalysesAsStringArrays();
+		WordEntry wordEntry = this.wordProcessor.processWord(ethiopicWord);
+		int cutoff = this.getNumAnalysesInOutput(wordEntry);
+		String[][] outputArray = new String[cutoff][];
+		for (int i = 0; i < cutoff; i++) {
+			WordAnalysis analysis = wordEntry.getAnalysis(i);
+			outputArray[i] = analysis.exportWithMarkup();
+			if (outputArray[i].length != 2) {
+				throw new IllegalArgumentException("Illegal object returned by WordAnalysis.exportWithMarkup: String[2] expected");
+			}
+		}
+		return outputArray;
 	}
 
 	private ArrayList<String> readInputLines (String inputFilePath) throws IOException {
@@ -200,7 +224,7 @@ public class TigreParser {
 						+ "Word: %s"
 						+ "%n%n", entry.getEthiopicOrtho());
 		
-			int numAnalysesToPrint = this.getNumAnalysesToPrint(entry);
+			int numAnalysesToPrint = this.getNumAnalysesInOutput(entry);
 			for (int i = 0; i < numAnalysesToPrint; i++) {
 				WordAnalysis analysis = entry.getAnalysis(i);
 				String[] exportedAnalysis = analysis.exportWithMarkup();
@@ -213,7 +237,7 @@ public class TigreParser {
 		}
 	}
 
-	private int getNumAnalysesToPrint (WordEntry wordEntry) {
+	private int getNumAnalysesInOutput (WordEntry wordEntry) {
 		int numToPrint;
 		int maxNum = this.maxAnalyses;
 		int listSize = wordEntry.getNumAnalyses();
@@ -244,7 +268,7 @@ public class TigreParser {
 			return this;
 		}
 		
-		public TigreParser build () throws IOException, ConfigParseException {
+		public TigreParser build () throws IOException, ParseException {
 			TigreParser parser = new TigreParser();
 			if (this.configFilePath != null) {
 				parser.configBuilder = new ConfigBuilder(configFilePath);	
@@ -254,7 +278,13 @@ public class TigreParser {
 			
 			parser.setMaxAnalyses(maxAnalyses);
 			parser.tokeniser = new Tokeniser();
-			parser.wordProcessor = parser.configBuilder.constructWordProcessor();
+			
+			try {
+				parser.wordProcessor = parser.configBuilder.constructWordProcessor();
+			} catch (ConfigParseException e) {
+				String message = "Failed to parse one of the configuration files (see stack trace for details)";
+				throw new ParseException(message, 0);
+			}
 			
 			return parser;
 		}

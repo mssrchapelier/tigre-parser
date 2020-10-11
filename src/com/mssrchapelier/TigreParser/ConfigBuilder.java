@@ -38,7 +38,11 @@ class ConfigBuilder {
 			this.configFilePath = DEFAULT_CONFIG_FILE_PATH_JAR;
 		} else {
 			this.isReadingResources = false;
-			this.configFilePath = new File(DEFAULT_CONFIG_FILE_PATH_FILESYSTEM).getPath();
+			File configFile = new File(DEFAULT_CONFIG_FILE_PATH_FILESYSTEM);
+			if (!configFile.exists()) {
+				throw new IOException("Failed to locate the configuration file");
+			}
+			this.configFilePath = configFile.getPath();
 		}
 		this.readConfig();
 	}
