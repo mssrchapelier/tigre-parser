@@ -97,7 +97,7 @@ Each analysis consists of two lines: the first is a transliterated and geminated
 - Also in finite verb forms, `(2)` after a root consonant stands for morphologically significant gemination of that consonant, `(A)` - for the presence of the long `[a:]` vowel phoneme in certain verb forms (these are the dictionary features of any specific root).
 - The unanalysed portion of the word is enclosed in square brackets `[...]` in the surface line and represented by `#` in the gloss line.
 
-## Java API
+## API
 
 The parser comes with a small API that allows you to incorporate morphological analysis of Tigre words and text fragments into your Java applications.
 
