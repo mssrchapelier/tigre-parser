@@ -2,7 +2,7 @@
 
 TigreParser is a morphological analyser of the [Tigre language](https://en.wikipedia.org/wiki/Tigre_language) (an Ethiosemitic language spoken by around 1 million people, most of whom live in Eritrea), written in Java.
 
-This analyser was first developed in 2019 as part of an undergraduate thesis at Lomonosov Moscow State University, Russia ([Department of Theoretical and Applied Linguistics](http://tipl.philol.msu.ru/), Faculty of Philology). The thesis itself, which describes the first version of the application, is available [here](misc/diplom_bak_Karpenko.pdf) (in Russian only). The architecture has since been changed to quite a drastic extent, mainly to allow for greater modularity, but the basic algorithm has stayed the same.
+This analyser was first developed in 2019 as part of an undergraduate thesis at (Lomonosov) Moscow State University, Russia ([Department of Theoretical and Applied Linguistics](http://tipl.philol.msu.ru/), Faculty of Philology). The thesis itself, which describes the first version of the application, is available [here](misc/diplom_bak_Karpenko.pdf) (in Russian only). The architecture has since been changed to quite a drastic extent, mainly to allow for greater modularity, but the basic algorithm has stayed the same.
 
 ## How to use
 
@@ -45,8 +45,8 @@ java -jar tigreparser-bundle.jar input_file -o output_file -n 5
 
 The parser consists of a few modules, two of which can be customised through the use of **configuration files**:
 
-- ~~the transliteration map~~ - *users are asked **not** to change this, as some of the application's internal logic depends on comparing input against specific characters;*
-- the **pairs of regex patterns and replacement strings**, organised in successive levels against which the unanalysed part from each previous level is compared, contained in `res/configs/patterns` (in a separate `.json` file for each level); and
+- ~~the transliteration map~~ - *users are asked **not** to change this, as some of the application's internal logic depends on comparing input against specific characters*;
+- **pairs of regex patterns and replacement strings**, organised in levels against which the unanalysed part from each previous level is successively compared; these are contained in `res/configs/patterns` (in a separate `.json` file for each level);
 - the **finite verb form paradigm**, contained in `res/configs/verb-paradigm.config`.
 
 If you want to customise these files, download the file `tigreparser-lean.jar` and the folders `res` and `lib` and place them all in one folder. You can then change the files in the `res/configs` folder and use the application just as described above for the `bundle` version.
@@ -57,7 +57,7 @@ You can change the location of configuration files by specifying the paths to th
 java -jar tigreparser-lean.jar input_file -c new_path_to_config_json
 ```
 
-Note that you can use this flag (and, consequently, specify the configuration files to be used) with any of the `.jar` versions of the application (`bundle`, `nolib` or `lean`). However, `bundle` and `nolib` contain the default version of the configuration files inside them, and you **must** call the application with the `-c` argument, otherwise those default files will be used even if a `res` folder is present next to the `.jar` file. The `lean` version does not contain the default files and always searches for them outside of the `.jar`.
+Note that you can use this flag (and, consequently, specify the configuration files to be used) with any of the `.jar` versions of the application (`bundle`, `nolib` or `lean`). However, `bundle` and `nolib` contain the default version of the configuration files inside them, and you **must** call the application with the `-c` argument, otherwise those default files will be used even if a `res` folder is present next to the `.jar` file. The `lean` version does not contain the default files and always searches for the configuration files outside of the `.jar`.
 
 Please do not change the location of the `lib` folder or delete any of the files in it when using the `lean` or `nolib` versions (the `lib` folder contains libraries that the application uses in these two cases).
 
@@ -155,6 +155,6 @@ Do feel absolutely free to make any changes to this application. My suggestion w
 
 ## Licencing
 
-This version of TigreParser is licenced under the terms of the Apache License 2.0; the main requirement is that distributors keep the licence file and preserve the copyright notice. See [the licence](./LICENSE.TXT) and [the notice](./NOTICE.TXT) for details.
+This version of TigreParser is licenced under the terms of the Apache License 2.0; the main requirement is that distributors keep the licence file and preserve the copyright notice. See [the licence](./LICENSE.txt) and [the notice](./NOTICE.txt) for details.
 
 [1] Raz, S. *Tigre Grammar and Texts.* Malibu, California, USA: Undena Publications, 1983.
