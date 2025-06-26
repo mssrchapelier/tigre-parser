@@ -2,14 +2,14 @@
 
 TigreParser is a morphological analyser of the [Tigre language](https://en.wikipedia.org/wiki/Tigre_language) (an Ethiosemitic language spoken by around 1 million people, most of whom live in Eritrea), written in Java.
 
-This analyser was first developed in 2019 as part of an undergraduate thesis at (Lomonosov) Moscow State University, Russia ([Department of Theoretical and Applied Linguistics](http://tipl.philol.msu.ru/), Faculty of Philology). The thesis itself, which describes the first version of the application, is available [here](misc/diplom_bak_Karpenko.pdf) (in Russian only). The architecture has since been changed to quite a drastic extent, mainly to allow for greater modularity, but the basic algorithm has stayed the same.
+This analyser was first developed in 2019 as part of a bachelor's thesis at (Lomonosov) Moscow State University, Russia ([Department of Theoretical and Applied Linguistics](http://tipl.philol.msu.ru/), Faculty of Philology). The thesis itself, which describes the first version of the application, is available [here](misc/diplom_bak_Karpenko.pdf) (in Russian only). The architecture has since been changed to quite a drastic extent, mainly to allow for greater modularity, but the basic algorithm has stayed the same.
 
 ## How to use
 
 ### Trying out / using without customisation
 
 1. [Download](https://www.java.com/en/download/) and install the Java Runtime Environment for your operating system.
-2. Download `tigreparser-bundle.jar` and run it like this:
+2. Download `tigreparser-bundle.jar` and run it as follows:
 
 ```
 java -jar tigreparser-bundle.jar input_file
@@ -25,7 +25,7 @@ or
 java -jar tigreparser-bundle.jar input_file --output output_file
 ```
 
-By default, the output will include both complete (if any) and incomplete analyses; complete analyses are shown first, then the incomplete ones (the more morphemes, the closer to the top of the list). This may make for an excessive number of analyses to be put into the output file; you can set a **cutoff value** (a positive integer) with the `-n` / `--numanalyses` flag so that no more than this number of analyses will be returned for each word:
+By default, the output will include both complete (if any) and incomplete analyses; complete analyses are shown first, then the incomplete ones (the more morphemes, the closer to the top of the list). This may make for an excessive number of analyses to be put into the output file; you can set a **cutoff value** (a positive integer) with the `-n` / `--numanalyses` flag to set the maximum number of analyses that will be returned for each word:
 ```
 java -jar tigreparser-bundle.jar input_file -n 5
 ```
@@ -43,15 +43,15 @@ java -jar tigreparser-bundle.jar input_file -o output_file -n 5
 
 ### Using with custom configuration files
 
-The parser consists of a few modules, two of which can be customised through the use of **configuration files**:
+The parser consists of several modules, two of which can be customised through the use of **configuration files**:
 
-- ~~the transliteration map~~ - *users are asked **not** to change this, as some of the application's internal logic depends on comparing input against specific characters*;
+- ~~the transliteration map~~ - *the users are asked **not** to change this, as some of the application's internal logic depends on comparing input against specific characters*;
 - **pairs of regex patterns and replacement strings**, organised in levels against which the unanalysed part from each previous level is successively compared; these are contained in `res/configs/patterns` (in a separate `.json` file for each level);
 - the **finite verb form paradigm**, contained in `res/configs/verb-paradigm.config`.
 
-If you want to customise these files, download the file `tigreparser-lean.jar` and the folders `res` and `lib` and place them all in one folder. You can then change the files in the `res/configs` folder and use the application just as described above for the `bundle` version.
+If you want to customise these files, download the file `tigreparser-lean.jar` and the folders `res` and `lib` and place them all in one folder. You can then change the files in the `res/configs` folder and use the application as described above for the `bundle` version.
 
-You can change the location of configuration files by specifying the paths to them in the master `config.json` file (in the folder `res` by default). The paths should be relative to the location of `config.json`. You can also **change the location** of `config.json` itself by passing the new path to it as an argument with the flag `-c` / `--config`:
+You can change the location of configuration files by specifying the paths to them in the master `config.json` file (in the folder `res` by default). The paths must be relative to the location of `config.json`. You can also **change the location** of `config.json` itself by passing the new path to it as an argument with the flag `-c` / `--config`:
 
 ```
 java -jar tigreparser-lean.jar input_file -c new_path_to_config_json
@@ -103,7 +103,7 @@ The parser comes with a small API that allows you to incorporate morphological a
 
 1. Download either `tigreparser-nolib.jar` (recommended; comes with configuration files as resources inside the `.jar` file) or `tigreparser-lean.jar` (if you intend to modify the configuration files).
 2. Download the `.jar` libraries from the `lib` directory.
-3. If using the `lean` version: download the `res` folder and put it in the user working directory (i. e. the one that your application will be run from; or alternatively anywhere else and specify the location of `config.json` through the builder's `setConfigFilePath` method, see below).
+3. If using the `lean` version: download the `res` folder and put it in the working directory (i. e. the one that your application will be run from; or alternatively anywhere else and specify the location of `config.json` through the builder's `setConfigFilePath` method, see below).
 4. Put the application's and the libraries' `.jar` files on the classpath.
 5. Import `com.mssrchapelier.TigreParser.TigreParser`:
 
